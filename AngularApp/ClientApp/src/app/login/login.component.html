@@ -1,0 +1,56 @@
+<form [formGroup]="loginForm"
+      (ngSubmit)="loginForm.valid &amp;&amp; onSubmit()"
+      class="login100-form validate-form">
+  <span class="login100-form-logo">
+    <img alt="" src="/assets/img/logo.png">
+  </span>
+  <span class="login100-form-title p-b-34 p-t-27">
+    Log in
+  </span>
+  <div class="wrap-input100 validate-input" data-validate="Enter username">
+    <input formControlName="usernameControl" class="input100" type="text" name="username" placeholder="Username">
+    <span class="focus-input100"></span>
+  </div>
+  <div class="form-text text-danger"
+       *ngIf="UsernameControl.errors?.['required'] && (UsernameControl.dirty || UsernameControl.touched)">
+    * Vui lòng nhập username
+  </div>
+  <div class="form-text text-danger"
+       *ngIf="UsernameControl.errors?.['minlength'] || UsernameControl.errors?.['maxlength'] && (UsernameControl.dirty || UsernameControl.touched)">
+    * Vui lòng nhập username có chiều dài từ 3-20 ký tự
+  </div>
+
+  <div class="wrap-input100 validate-input" data-validate="Enter password">
+    <input formControlName="passwordControl" class="input100" type="password" name="pass" placeholder="Password">
+    <span class="focus-input100"></span>
+  </div>
+  <div class="form-text text-danger"
+       *ngIf="PasswordControl.errors?.['required'] && (PasswordControl.dirty || PasswordControl.touched)">
+    * Vui lòng nhập mật khẩu
+  </div>
+  <div class="form-text text-danger"
+       *ngIf="PasswordControl.errors?.['minlength'] || PasswordControl.errors?.['maxlength'] && (PasswordControl.dirty || PasswordControl.touched)">
+    * Vui lòng nhập mật khẩu có chiều dài từ 3-20 ký tự
+  </div>
+
+  <div class="contact100-form-checkbox">
+    <input formControlName="rememberPasswordControl" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+    <label class="label-checkbox100" for="ckb1">
+      Nhớ mật khẩu
+    </label>
+  </div>
+  <div class="container-login100-form-btn">
+    <button class="login100-form-btn" [disabled]="loginForm.invalid">
+      Đăng nhập
+    </button>
+  </div>
+  <div class="form-text text-danger"
+       *ngIf="isLoginFailed">
+    * Tài khoản không hợp lệ, vui lòng kiểm tra lại
+  </div>
+  <div class="text-center p-t-30">
+    <a class="txt1" href="/forgot-password">
+      Quên mật khẩu?
+    </a>
+  </div>
+</form>

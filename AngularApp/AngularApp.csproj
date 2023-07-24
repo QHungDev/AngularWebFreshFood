@@ -1,0 +1,2442 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <SpaProxyServerUrl>https://localhost:44464</SpaProxyServerUrl>
+    <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\assets\app.js" />
+    <None Remove="ClientApp\src\assets\bundles\amcharts4\animated.js" />
+    <None Remove="ClientApp\src\assets\bundles\amcharts4\charts.js" />
+    <None Remove="ClientApp\src\assets\bundles\amcharts4\core.js" />
+    <None Remove="ClientApp\src\assets\bundles\amcharts4\maps.js" />
+    <None Remove="ClientApp\src\assets\bundles\amcharts4\worldLow.js" />
+    <None Remove="ClientApp\src\assets\bundles\apexcharts\apexcharts.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\alpha.png" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\hue.png" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\saturation.png" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\js\bootstrap-colorpicker-init.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-datetimepicker\js\bootstrap-datetimepicker.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-editable\bootstrap-editable\css\bootstrap-editable.css" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-editable\bootstrap-editable\img\clear.png" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-editable\bootstrap-editable\img\loading.gif" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-editable\inputs-ext\address\address.css" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-inputmask\bootstrap-inputmask.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-switch\js\bootstrap-switch.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-tabdrop\js\bootstrap-tabdrop.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap-treeview\bootstrap-treeview.js" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap\css\bootstrap.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\bootstrap\js\bootstrap.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\chart-js\Chart.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\chart-js\utils.js" />
+    <None Remove="ClientApp\src\assets\bundles\counterup\jquery.counterup.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\counterup\jquery.waypoints.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\buttons.dataTables.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\buttons.flash.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\buttons.html5.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\buttons.print.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\dataTables.buttons.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\jszip.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\pdfmake.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\export\vfs_fonts.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\jquery.dataTables.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\plugins\bootstrap\dataTables.bootstrap4.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\datatables\plugins\bootstrap\dataTables.bootstrap4.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\dropzone\dropzone-call.js" />
+    <None Remove="ClientApp\src\assets\bundles\dropzone\dropzone.css" />
+    <None Remove="ClientApp\src\assets\bundles\dropzone\dropzone.js" />
+    <None Remove="ClientApp\src\assets\bundles\echarts\echarts.js" />
+    <None Remove="ClientApp\src\assets\bundles\flatpicker\css\flatpickr.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\flatpicker\js\flatpicker.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\float\jquery.flot.js" />
+    <None Remove="ClientApp\src\assets\bundles\float\jquery.flot.resize.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\fullcalendar\packages\core\main.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\fullcalendar\packages\core\main.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\fullcalendar\packages\daygrid\main.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\fullcalendar\packages\daygrid\main.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\fullcalendar\packages\interaction\main.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\fullcalendar\packages\timegrid\main.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\fullcalendar\packages\timegrid\main.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\gmaps\gmaps.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\iconic\css\material-design-iconic-font.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-blockUI\jquery.blockui.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-file-upload\blueimp-gallery\blueimp-gallery.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-file-upload\css\jquery.fileupload-ui.css" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-file-upload\css\jquery.fileupload.css" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-file-upload\img\loading.gif" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-file-upload\img\progressbar.gif" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-tags-input\jquery-tags-input.css" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-tags-input\jquery-tags-input.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-toast\dist\jquery.toast.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-toast\dist\jquery.toast.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-toast\dist\toast.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-ui\jquery-ui.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-validation\js\additional-methods.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery-validation\js\jquery.validate.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery.slimscroll\jquery.slimscroll.js" />
+    <None Remove="ClientApp\src\assets\bundles\jquery\jquery.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\data\jquery.vmap.sampledata.js" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\jquery.vmap.js" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\jqvmap.css" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.europe.js" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.germany.js" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.russia.js" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.usa.js" />
+    <None Remove="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.world.js" />
+    <None Remove="ClientApp\src\assets\bundles\material\material.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\material\material.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\moment\moment.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\morris\morris.css" />
+    <None Remove="ClientApp\src\assets\bundles\morris\morris.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\morris\raphael-min.js" />
+    <None Remove="ClientApp\src\assets\bundles\owl-carousel\owl.carousel.css" />
+    <None Remove="ClientApp\src\assets\bundles\owl-carousel\owl.carousel.js" />
+    <None Remove="ClientApp\src\assets\bundles\owl-carousel\owl.theme.css" />
+    <None Remove="ClientApp\src\assets\bundles\popper\popper.js" />
+    <None Remove="ClientApp\src\assets\bundles\select2\css\select2-bootstrap.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\select2\css\select2.css" />
+    <None Remove="ClientApp\src\assets\bundles\select2\js\select2.js" />
+    <None Remove="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.eot" />
+    <None Remove="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.svg" />
+    <None Remove="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.ttf" />
+    <None Remove="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.woff" />
+    <None Remove="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.woff2" />
+    <None Remove="ClientApp\src\assets\bundles\simple-line-icons\simple-line-icons.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\sparkline\jquery.sparkline.js" />
+    <None Remove="ClientApp\src\assets\bundles\sparkline\jquery.sparkline.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\steps\jquery.steps.js" />
+    <None Remove="ClientApp\src\assets\bundles\steps\steps.css" />
+    <None Remove="ClientApp\src\assets\bundles\summernote\font\summernote.eot" />
+    <None Remove="ClientApp\src\assets\bundles\summernote\font\summernote.ttf" />
+    <None Remove="ClientApp\src\assets\bundles\summernote\font\summernote.woff" />
+    <None Remove="ClientApp\src\assets\bundles\summernote\font\summernote.woff2" />
+    <None Remove="ClientApp\src\assets\bundles\summernote\font\summernoted41d.eot" />
+    <None Remove="ClientApp\src\assets\bundles\summernote\summernote.css" />
+    <None Remove="ClientApp\src\assets\bundles\summernote\summernote.js" />
+    <None Remove="ClientApp\src\assets\bundles\sweet-alert\sweetalert2.all.min.js" />
+    <None Remove="ClientApp\src\assets\bundles\sweet-alert\sweetalert2.min.css" />
+    <None Remove="ClientApp\src\assets\bundles\sweet-alert\sweetalert2.min.js" />
+    <None Remove="ClientApp\src\assets\css\extra_pages.css" />
+    <None Remove="ClientApp\src\assets\css\font-awesome.min.css" />
+    <None Remove="ClientApp\src\assets\css\formlayout.css" />
+    <None Remove="ClientApp\src\assets\css\fullcalendar.css" />
+    <None Remove="ClientApp\src\assets\css\inbox.min.css" />
+    <None Remove="ClientApp\src\assets\css\jquery.mCustomScrollbar.css" />
+    <None Remove="ClientApp\src\assets\css\material_style.css" />
+    <None Remove="ClientApp\src\assets\css\plugins.min.css" />
+    <None Remove="ClientApp\src\assets\css\responsive.css" />
+    <None Remove="ClientApp\src\assets\css\style.css" />
+    <None Remove="ClientApp\src\assets\css\theme-color.css" />
+    <None Remove="ClientApp\src\assets\css\theme_style.css" />
+    <None Remove="ClientApp\src\assets\css\typography.css" />
+    <None Remove="ClientApp\src\assets\data\amchart-data.js" />
+    <None Remove="ClientApp\src\assets\data\apex-home.js" />
+    <None Remove="ClientApp\src\assets\data\apex-home2.js" />
+    <None Remove="ClientApp\src\assets\data\apexcharts.data.js" />
+    <None Remove="ClientApp\src\assets\data\bootstrap-datetimepicker-init.js" />
+    <None Remove="ClientApp\src\assets\data\calendar-data.js" />
+    <None Remove="ClientApp\src\assets\data\chartjs-data.js" />
+    <None Remove="ClientApp\src\assets\data\date-time.init.js" />
+    <None Remove="ClientApp\src\assets\data\echart-data.js" />
+    <None Remove="ClientApp\src\assets\data\float-ecg-data.js" />
+    <None Remove="ClientApp\src\assets\data\form-validation.js" />
+    <None Remove="ClientApp\src\assets\data\getmdl-select.js" />
+    <None Remove="ClientApp\src\assets\data\google-maps-data.js" />
+    <None Remove="ClientApp\src\assets\data\home3-echart-data.js" />
+    <None Remove="ClientApp\src\assets\data\jquery-tags-input-init.js" />
+    <None Remove="ClientApp\src\assets\data\login-data.js" />
+    <None Remove="ClientApp\src\assets\data\morris-chart-data.js" />
+    <None Remove="ClientApp\src\assets\data\owl-carousel-data.js" />
+    <None Remove="ClientApp\src\assets\data\profile-data.js" />
+    <None Remove="ClientApp\src\assets\data\select2-data.js" />
+    <None Remove="ClientApp\src\assets\data\sparkline-data.js" />
+    <None Remove="ClientApp\src\assets\data\steps-data.js" />
+    <None Remove="ClientApp\src\assets\data\summernote-data.js" />
+    <None Remove="ClientApp\src\assets\data\sweet-alert-data.js" />
+    <None Remove="ClientApp\src\assets\data\table-data.js" />
+    <None Remove="ClientApp\src\assets\data\vector-data.js" />
+    <None Remove="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.eot" />
+    <None Remove="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.svg" />
+    <None Remove="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.ttf" />
+    <None Remove="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.woff" />
+    <None Remove="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.woff2" />
+    <None Remove="ClientApp\src\assets\fonts\fontawesome-webfontd41d.eot" />
+    <None Remove="ClientApp\src\assets\fonts\Material-Design-Iconic-Font.ttf" />
+    <None Remove="ClientApp\src\assets\fonts\Material-Design-Iconic-Font.woff" />
+    <None Remove="ClientApp\src\assets\fonts\Material-Design-Iconic-Font.woff2" />
+    <None Remove="ClientApp\src\assets\img\accordion-plusminus.png" />
+    <None Remove="ClientApp\src\assets\img\arrow-down.png" />
+    <None Remove="ClientApp\src\assets\img\avatar.png" />
+    <None Remove="ClientApp\src\assets\img\bg-01.jpg" />
+    <None Remove="ClientApp\src\assets\img\bg.jpg" />
+    <None Remove="ClientApp\src\assets\img\blog\blog1.jpg" />
+    <None Remove="ClientApp\src\assets\img\blog\blog2.jpg" />
+    <None Remove="ClientApp\src\assets\img\blog\blog3.jpg" />
+    <None Remove="ClientApp\src\assets\img\blog\blog4.jpg" />
+    <None Remove="ClientApp\src\assets\img\details_close.png" />
+    <None Remove="ClientApp\src\assets\img\details_open.png" />
+    <None Remove="ClientApp\src\assets\img\doc\doc1.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc10.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc2.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc3.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc4.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc5.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc6.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc7.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc8.jpg" />
+    <None Remove="ClientApp\src\assets\img\doc\doc9.jpg" />
+    <None Remove="ClientApp\src\assets\img\dp.jpg" />
+    <None Remove="ClientApp\src\assets\img\favicon.ico" />
+    <None Remove="ClientApp\src\assets\img\flags\ad.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ae.png" />
+    <None Remove="ClientApp\src\assets\img\flags\af.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ag.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ai.png" />
+    <None Remove="ClientApp\src\assets\img\flags\al.png" />
+    <None Remove="ClientApp\src\assets\img\flags\am.png" />
+    <None Remove="ClientApp\src\assets\img\flags\an.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ao.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ar.png" />
+    <None Remove="ClientApp\src\assets\img\flags\as.png" />
+    <None Remove="ClientApp\src\assets\img\flags\at.png" />
+    <None Remove="ClientApp\src\assets\img\flags\au.png" />
+    <None Remove="ClientApp\src\assets\img\flags\aw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ax.png" />
+    <None Remove="ClientApp\src\assets\img\flags\az.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ba.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bb.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bd.png" />
+    <None Remove="ClientApp\src\assets\img\flags\be.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bf.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bh.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bi.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bj.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bo.png" />
+    <None Remove="ClientApp\src\assets\img\flags\br.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bs.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bt.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bv.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\by.png" />
+    <None Remove="ClientApp\src\assets\img\flags\bz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ca.png" />
+    <None Remove="ClientApp\src\assets\img\flags\catalonia.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cc.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cd.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cf.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ch.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ci.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ck.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cl.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\co.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cs.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cu.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cv.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cx.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cy.png" />
+    <None Remove="ClientApp\src\assets\img\flags\cz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\de.png" />
+    <None Remove="ClientApp\src\assets\img\flags\dj.png" />
+    <None Remove="ClientApp\src\assets\img\flags\dk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\dm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\do.png" />
+    <None Remove="ClientApp\src\assets\img\flags\dz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ec.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ee.png" />
+    <None Remove="ClientApp\src\assets\img\flags\eg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\eh.png" />
+    <None Remove="ClientApp\src\assets\img\flags\england.png" />
+    <None Remove="ClientApp\src\assets\img\flags\er.png" />
+    <None Remove="ClientApp\src\assets\img\flags\es.png" />
+    <None Remove="ClientApp\src\assets\img\flags\et.png" />
+    <None Remove="ClientApp\src\assets\img\flags\europeanunion.png" />
+    <None Remove="ClientApp\src\assets\img\flags\fam.png" />
+    <None Remove="ClientApp\src\assets\img\flags\fi.png" />
+    <None Remove="ClientApp\src\assets\img\flags\fj.png" />
+    <None Remove="ClientApp\src\assets\img\flags\fk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\fm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\fo.png" />
+    <None Remove="ClientApp\src\assets\img\flags\fr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\french_flag.jpg" />
+    <None Remove="ClientApp\src\assets\img\flags\ga.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gb.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gd.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ge.png" />
+    <None Remove="ClientApp\src\assets\img\flags\germany_flag.jpg" />
+    <None Remove="ClientApp\src\assets\img\flags\gf.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gh.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gi.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gl.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gp.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gq.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gs.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gt.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gu.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\gy.png" />
+    <None Remove="ClientApp\src\assets\img\flags\hk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\hm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\hn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\hr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ht.png" />
+    <None Remove="ClientApp\src\assets\img\flags\hu.png" />
+    <None Remove="ClientApp\src\assets\img\flags\id.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ie.png" />
+    <None Remove="ClientApp\src\assets\img\flags\il.png" />
+    <None Remove="ClientApp\src\assets\img\flags\in.png" />
+    <None Remove="ClientApp\src\assets\img\flags\io.png" />
+    <None Remove="ClientApp\src\assets\img\flags\iq.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ir.png" />
+    <None Remove="ClientApp\src\assets\img\flags\is.png" />
+    <None Remove="ClientApp\src\assets\img\flags\it.png" />
+    <None Remove="ClientApp\src\assets\img\flags\italy_flag.jpg" />
+    <None Remove="ClientApp\src\assets\img\flags\jm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\jo.png" />
+    <None Remove="ClientApp\src\assets\img\flags\jp.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ke.png" />
+    <None Remove="ClientApp\src\assets\img\flags\kg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\kh.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ki.png" />
+    <None Remove="ClientApp\src\assets\img\flags\km.png" />
+    <None Remove="ClientApp\src\assets\img\flags\kn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\kp.png" />
+    <None Remove="ClientApp\src\assets\img\flags\kr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\kw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ky.png" />
+    <None Remove="ClientApp\src\assets\img\flags\kz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\la.png" />
+    <None Remove="ClientApp\src\assets\img\flags\lb.png" />
+    <None Remove="ClientApp\src\assets\img\flags\lc.png" />
+    <None Remove="ClientApp\src\assets\img\flags\li.png" />
+    <None Remove="ClientApp\src\assets\img\flags\lk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\lr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ls.png" />
+    <None Remove="ClientApp\src\assets\img\flags\lt.png" />
+    <None Remove="ClientApp\src\assets\img\flags\lu.png" />
+    <None Remove="ClientApp\src\assets\img\flags\lv.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ly.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ma.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mc.png" />
+    <None Remove="ClientApp\src\assets\img\flags\md.png" />
+    <None Remove="ClientApp\src\assets\img\flags\me.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mh.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ml.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mo.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mp.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mq.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ms.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mt.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mu.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mv.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mx.png" />
+    <None Remove="ClientApp\src\assets\img\flags\my.png" />
+    <None Remove="ClientApp\src\assets\img\flags\mz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\na.png" />
+    <None Remove="ClientApp\src\assets\img\flags\nc.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ne.png" />
+    <None Remove="ClientApp\src\assets\img\flags\nf.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ng.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ni.png" />
+    <None Remove="ClientApp\src\assets\img\flags\nl.png" />
+    <None Remove="ClientApp\src\assets\img\flags\no.png" />
+    <None Remove="ClientApp\src\assets\img\flags\np.png" />
+    <None Remove="ClientApp\src\assets\img\flags\nr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\nu.png" />
+    <None Remove="ClientApp\src\assets\img\flags\nz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\om.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pa.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pe.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pf.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ph.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pl.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ps.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pt.png" />
+    <None Remove="ClientApp\src\assets\img\flags\pw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\py.png" />
+    <None Remove="ClientApp\src\assets\img\flags\qa.png" />
+    <None Remove="ClientApp\src\assets\img\flags\re.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ro.png" />
+    <None Remove="ClientApp\src\assets\img\flags\rs.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ru.png" />
+    <None Remove="ClientApp\src\assets\img\flags\russia_flag.jpg" />
+    <None Remove="ClientApp\src\assets\img\flags\rw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sa.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sb.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sc.png" />
+    <None Remove="ClientApp\src\assets\img\flags\scotland.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sd.png" />
+    <None Remove="ClientApp\src\assets\img\flags\se.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sh.png" />
+    <None Remove="ClientApp\src\assets\img\flags\si.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sj.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sl.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\so.png" />
+    <None Remove="ClientApp\src\assets\img\flags\spain_flag.jpg" />
+    <None Remove="ClientApp\src\assets\img\flags\sr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\st.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sv.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sy.png" />
+    <None Remove="ClientApp\src\assets\img\flags\sz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tc.png" />
+    <None Remove="ClientApp\src\assets\img\flags\td.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tf.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\th.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tj.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tk.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tl.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\to.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tr.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tt.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tv.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tw.png" />
+    <None Remove="ClientApp\src\assets\img\flags\tz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ua.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ug.png" />
+    <None Remove="ClientApp\src\assets\img\flags\um.png" />
+    <None Remove="ClientApp\src\assets\img\flags\us.png" />
+    <None Remove="ClientApp\src\assets\img\flags\usa_flag.jpg" />
+    <None Remove="ClientApp\src\assets\img\flags\uy.png" />
+    <None Remove="ClientApp\src\assets\img\flags\uz.png" />
+    <None Remove="ClientApp\src\assets\img\flags\va.png" />
+    <None Remove="ClientApp\src\assets\img\flags\vc.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ve.png" />
+    <None Remove="ClientApp\src\assets\img\flags\vg.png" />
+    <None Remove="ClientApp\src\assets\img\flags\vi.png" />
+    <None Remove="ClientApp\src\assets\img\flags\vn.png" />
+    <None Remove="ClientApp\src\assets\img\flags\vu.png" />
+    <None Remove="ClientApp\src\assets\img\flags\wales.png" />
+    <None Remove="ClientApp\src\assets\img\flags\wf.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ws.png" />
+    <None Remove="ClientApp\src\assets\img\flags\ye.png" />
+    <None Remove="ClientApp\src\assets\img\flags\yt.png" />
+    <None Remove="ClientApp\src\assets\img\flags\za.png" />
+    <None Remove="ClientApp\src\assets\img\flags\zm.png" />
+    <None Remove="ClientApp\src\assets\img\flags\zw.png" />
+    <None Remove="ClientApp\src\assets\img\hospital.png" />
+    <None Remove="ClientApp\src\assets\img\invoice_logo.png" />
+    <None Remove="ClientApp\src\assets\img\loading.gif" />
+    <None Remove="ClientApp\src\assets\img\logo.png" />
+    <None Remove="ClientApp\src\assets\img\mega-img1.jpg" />
+    <None Remove="ClientApp\src\assets\img\mega-img2.jpg" />
+    <None Remove="ClientApp\src\assets\img\mega-img3.jpg" />
+    <None Remove="ClientApp\src\assets\img\menu-toggler.png" />
+    <None Remove="ClientApp\src\assets\img\patient1.jpg" />
+    <None Remove="ClientApp\src\assets\img\remove-icon-small.png" />
+    <None Remove="ClientApp\src\assets\img\slider\fullimage1.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\fullimage2.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\fullimage3.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl1.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl2.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl3.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl4.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl5.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl6.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl7.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\owl8.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\slider1.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\slider2.jpg" />
+    <None Remove="ClientApp\src\assets\img\slider\slider3.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user1.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user10.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user2.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user3.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user4.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user5.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user6.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user7.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user8.jpg" />
+    <None Remove="ClientApp\src\assets\img\user\user9.jpg" />
+    <None Remove="ClientApp\src\assets\layout.js" />
+    <None Remove="ClientApp\src\assets\theme-color.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\src\assets\app.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\amcharts4\animated.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\amcharts4\charts.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\amcharts4\core.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\amcharts4\maps.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\amcharts4\worldLow.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\apexcharts\apexcharts.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\css\bootstrap-colorpicker.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\alpha-horizontal.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\alpha.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\hue-horizontal.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\hue.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\img\bootstrap-colorpicker\saturation.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\js\bootstrap-colorpicker-init.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-colorpicker\js\bootstrap-colorpicker.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-datetimepicker\js\bootstrap-datetimepicker.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-editable\bootstrap-editable\css\bootstrap-editable.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-editable\bootstrap-editable\img\clear.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-editable\bootstrap-editable\img\loading.gif">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-editable\inputs-ext\address\address.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-inputmask\bootstrap-inputmask.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-switch\js\bootstrap-switch.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-tabdrop\js\bootstrap-tabdrop.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap-treeview\bootstrap-treeview.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap\css\bootstrap.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\bootstrap\js\bootstrap.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\chart-js\Chart.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\chart-js\utils.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\counterup\jquery.counterup.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\counterup\jquery.waypoints.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\buttons.dataTables.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\buttons.flash.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\buttons.html5.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\buttons.print.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\dataTables.buttons.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\jszip.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\pdfmake.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\export\vfs_fonts.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\jquery.dataTables.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\plugins\bootstrap\dataTables.bootstrap4.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\datatables\plugins\bootstrap\dataTables.bootstrap4.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\dropzone\dropzone-call.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\dropzone\dropzone.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\dropzone\dropzone.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\echarts\echarts.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\flatpicker\css\flatpickr.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\flatpicker\js\flatpicker.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\float\jquery.flot.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\float\jquery.flot.resize.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\fullcalendar\packages\core\main.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\fullcalendar\packages\core\main.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\fullcalendar\packages\daygrid\main.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\fullcalendar\packages\daygrid\main.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\fullcalendar\packages\interaction\main.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\fullcalendar\packages\timegrid\main.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\fullcalendar\packages\timegrid\main.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\gmaps\gmaps.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\iconic\css\material-design-iconic-font.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-blockUI\jquery.blockui.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-file-upload\blueimp-gallery\blueimp-gallery.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-file-upload\css\jquery.fileupload-ui.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-file-upload\css\jquery.fileupload.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-file-upload\img\loading.gif">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-file-upload\img\progressbar.gif">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-tags-input\jquery-tags-input.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-tags-input\jquery-tags-input.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-toast\dist\jquery.toast.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-toast\dist\jquery.toast.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-toast\dist\toast.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-ui\jquery-ui.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-validation\js\additional-methods.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery-validation\js\jquery.validate.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery.slimscroll\jquery.slimscroll.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jquery\jquery.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\data\jquery.vmap.sampledata.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\jquery.vmap.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\jqvmap.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.europe.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.germany.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.russia.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.usa.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\jqvmap\maps\jquery.vmap.world.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\material\material.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\material\material.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\moment\moment.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\morris\morris.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\morris\morris.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\morris\raphael-min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\owl-carousel\owl.carousel.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\owl-carousel\owl.carousel.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\owl-carousel\owl.theme.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\popper\popper.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\select2\css\select2-bootstrap.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\select2\css\select2.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\select2\js\select2.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\simple-line-icons\fonts\Simple-Line-Iconsb26c.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\simple-line-icons\simple-line-icons.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\sparkline\jquery.sparkline.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\sparkline\jquery.sparkline.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\steps\jquery.steps.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\steps\steps.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\summernote\font\summernote.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\summernote\font\summernote.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\summernote\font\summernote.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\summernote\font\summernote.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\summernote\font\summernoted41d.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\summernote\summernote.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\summernote\summernote.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\sweet-alert\sweetalert2.all.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\sweet-alert\sweetalert2.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\bundles\sweet-alert\sweetalert2.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\extra_pages.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\font-awesome.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\formlayout.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\fullcalendar.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\inbox.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\jquery.mCustomScrollbar.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\material_style.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\plugins.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\responsive.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\style.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\theme-color.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\theme_style.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\css\typography.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\amchart-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\apex-home.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\apex-home2.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\apexcharts.data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\bootstrap-datetimepicker-init.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\calendar-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\chartjs-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\date-time.init.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\echart-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\float-ecg-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\form-validation.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\getmdl-select.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\google-maps-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\home3-echart-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\jquery-tags-input-init.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\login-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\morris-chart-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\owl-carousel-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\profile-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\select2-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\sparkline-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\steps-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\summernote-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\sweet-alert-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\table-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\data\vector-data.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\fontawesome-webfont3e6e.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\fontawesome-webfontd41d.eot">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\Material-Design-Iconic-Font.ttf">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\Material-Design-Iconic-Font.woff">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\fonts\Material-Design-Iconic-Font.woff2">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\accordion-plusminus.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\arrow-down.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\avatar.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\bg-01.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\bg.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\blog\blog1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\blog\blog2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\blog\blog3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\blog\blog4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\details_close.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\details_open.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc10.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc7.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\doc\doc9.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\dp.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\favicon.ico">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ad.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ae.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\af.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ag.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ai.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\al.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\am.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\an.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ao.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ar.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\as.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\at.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\au.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\aw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ax.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\az.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ba.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bb.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bd.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\be.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bf.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bh.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bi.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bj.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\br.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bt.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bv.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\by.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\bz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ca.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\catalonia.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cc.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cd.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cf.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ch.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ci.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ck.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cl.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\co.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cu.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cv.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cx.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cy.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\cz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\de.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\dj.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\dk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\dm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\do.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\dz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ec.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ee.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\eg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\eh.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\england.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\er.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\es.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\et.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\europeanunion.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\fam.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\fi.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\fj.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\fk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\fm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\fo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\fr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\french_flag.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ga.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gb.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gd.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ge.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\germany_flag.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gf.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gh.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gi.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gl.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gp.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gq.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gt.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gu.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\gy.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\hk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\hm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\hn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\hr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ht.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\hu.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\id.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ie.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\il.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\in.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\io.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\iq.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ir.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\is.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\it.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\italy_flag.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\jm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\jo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\jp.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ke.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\kg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\kh.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ki.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\km.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\kn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\kp.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\kr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\kw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ky.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\kz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\la.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\lb.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\lc.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\li.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\lk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\lr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ls.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\lt.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\lu.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\lv.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ly.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ma.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mc.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\md.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\me.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mh.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ml.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mp.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mq.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ms.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mt.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mu.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mv.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mx.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\my.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\mz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\na.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\nc.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ne.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\nf.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ng.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ni.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\nl.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\no.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\np.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\nr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\nu.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\nz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\om.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pa.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pe.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pf.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ph.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pl.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ps.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pt.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\pw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\py.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\qa.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\re.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ro.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\rs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ru.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\russia_flag.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\rw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sa.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sb.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sc.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\scotland.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sd.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\se.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sh.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\si.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sj.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sl.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\so.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\spain_flag.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\st.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sv.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sy.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\sz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tc.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\td.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tf.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\th.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tj.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tk.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tl.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\to.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tr.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tt.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tv.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\tz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ua.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ug.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\um.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\us.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\usa_flag.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\uy.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\uz.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\va.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\vc.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ve.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\vg.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\vi.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\vn.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\vu.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\wales.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\wf.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ws.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\ye.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\yt.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\za.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\zm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\flags\zw.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\hospital.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\invoice_logo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\loading.gif">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\logo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\mega-img1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\mega-img2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\mega-img3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\menu-toggler.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\patient1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\remove-icon-small.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\fullimage1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\fullimage2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\fullimage3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl7.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\owl8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\slider1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\slider2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\slider\slider3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user10.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user7.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\img\user\user9.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\layout.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\src\assets\theme-color.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\_component\" />
+    <Folder Include="ClientApp\src\app\_layout\" />
+    <Folder Include="ClientApp\src\assets\bundles\bootstrap-datepicker\js\" />
+    <Folder Include="ClientApp\src\assets\css\images\" />
+  </ItemGroup>
+
+    <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+  
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+</Project>

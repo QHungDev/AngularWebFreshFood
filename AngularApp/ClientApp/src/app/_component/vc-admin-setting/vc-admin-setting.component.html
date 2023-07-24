@@ -1,0 +1,31 @@
+<!-- start header menu -->
+<div class="top-menu">
+  <ul class="nav navbar-nav pull-right">
+    <!-- start manage user dropdown -->
+    <li class="dropdown dropdown-user">
+      <a class="dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"
+         data-close-others="true">
+        <img alt="" class="img-circle " src="/assets/img/dp.jpg" />
+        <span class="username username-hide-on-mobile"> {{loginUsername}} </span>
+        <i class="fa fa-angle-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-default">
+        <li>
+          <a [routerLink]="['/account']">
+            <i class="icon-user"></i> Tài khoản
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon-lock"></i> Đổi mật khẩu
+          </a>
+        </li>
+        <li>
+          <a (click)="logout($event)" >
+            <i class="icon-logout"></i> Đăng xuất
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

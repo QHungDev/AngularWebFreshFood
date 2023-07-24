@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="card card-box">
+      <div class="card-head">
+        <header>Thông tin tài khoản</header>
+      </div>
+      <div class="card-body" id="bar-parent">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+          <div class="form-body">
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Danh mục
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <select class="form-control input-height" formControlName="accountCategoryID" [ngModel]="signupRequest.accountCategoryID">
+                  <option selected value="">.: Chọn 1 danh mục :.</option>
+                  <option *ngFor="let item of accountCategories" [ngValue]="item.accountCategoryID">
+                    {{item.title}}
+                  </option>
+                </select>
+              </div>
+
+              <label class="control-label col-md-2">
+                Username
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" value="{{signupRequest.username}}" formControlName="username" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Password
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="password" class="form-control input-height" value='{{signupRequest.password}}' formControlName="password" />
+              </div>
+              <label class="control-label col-md-2">
+                Nhập lại password
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="password" class="form-control input-height" formControlName="repassword" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Họ tên
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="signupRequest.fullName" value='{{signupRequest.fullName}}' formControlName="fullname" />
+              </div>
+              <label class="control-label col-md-2">
+                Hình đại diện
+              </label>
+              <div class="col-md-4">
+                <div class="mb-1">
+                  <img alt="Hình đại diện" width="100" src='{{signupRequest.avatar}}' />
+                </div>
+                <input type="file" class="default" (change)="uploadFile($event)" formControlName="avatar">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Email
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="signupRequest.email" value='{{signupRequest.email}}' formControlName="email" />
+              </div>
+              <label class="control-label col-md-2">
+                Số điện thoại
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" value='{{signupRequest.mobile}}' formControlName="mobile" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Địa chỉ
+              </label>
+              <div class="col-md-10">
+                <input type="text" class="form-control input-height" [ngModel]="signupRequest.address" value='{{signupRequest.address}}' formControlName="address" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Trạng thái
+              </label>
+              <div class="col-md-10 p-2">
+                <label class="switchToggle">
+                  <input type="checkbox" checked formControlName="status" value='{{signupRequest.status}}' />
+                  <span class="slider aqua round"></span>
+                </label>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="row">
+                <div class="offset-md-2 col-md-10">
+                  <button type="submit"
+                          class="btn btn-primary m-r-20">
+                    <i class="fa fa-save"></i>
+                    Lưu
+                  </button>
+                  <a [routerLink]="['/account']" class="btn btn-default">Quay về </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

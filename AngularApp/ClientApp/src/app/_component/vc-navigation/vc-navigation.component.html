@@ -1,0 +1,147 @@
+<!-- start sidebar menu -->
+<div class="sidebar-container">
+  <div class="sidemenu-container navbar-collapse collapse fixed-menu">
+    <div id="remove-scroll" class="left-sidemenu">
+      <ul class="sidemenu  page-header-fixed slimscroll-style" data-keep-expanded="false"
+          data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+        <li class="sidebar-toggler-wrapper hide">
+          <div class="sidebar-toggler">
+            <span></span>
+          </div>
+        </li>
+        <li class="sidebar-user-panel">
+          <app-vc-admin-info></app-vc-admin-info>
+        </li>
+
+        <!--Dashboard-->
+        <li class="nav-item start active open">
+          <a asp-route="AdminDefault" class="nav-link">
+            <i class="material-icons">dashboard</i>
+            <span class="title">Bàn làm việc</span>
+            <span class="selected"></span>
+          </a>
+        </li>
+
+        <!--Account-->
+        <li class="nav-item">
+          <a asp-route="AdminAccountIndex" class="nav-link nav-toggle">
+            <i class="material-icons">group</i>
+            <span class="title">Tài khoản</span>
+            <span class="arrow"></span>
+          </a>
+          <ul class="sub-menu">
+            <li class="nav-item">
+              <a [routerLink]="['/account']" class="nav-link ">
+                <i class="material-icons">group</i>
+                <span class="title">Danh sách tài khoản</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a asp-route="AdminAccountCategory" class="nav-link ">
+                <i class="material-icons">list</i>
+                <span class="title">Loại tài khoản</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a asp-route="AdminAccountDetail" class="nav-link ">
+                <i class="material-icons">add_box</i>
+                <span class="title">Thêm tài khoản</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!--Product-->
+        <li class="nav-item">
+          <a asp-route="AdminProductIndex" class="nav-link nav-toggle">
+            <i class="material-icons">group</i>
+            <span class="title">Sản phẩm</span>
+            <span class="arrow"></span>
+          </a>
+          <ul class="sub-menu">
+            <li class="nav-item">
+              <a [routerLink]="['/product']" class="nav-link ">
+                <i class="material-icons">group</i>
+                <span class="title">Danh sách sản phẩm</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a asp-route="AdminProductCategory" class="nav-link ">
+                <i class="material-icons">list</i>
+                <span class="title">Loại sản phẩm</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a asp-route="AdminProductDetail" class="nav-link ">
+                <i class="material-icons">add_box</i>
+                <span class="title">Thêm sản phẩm</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!--Article-->
+        <li class="nav-item">
+          <a asp-route="AdminArticleIndex" class="nav-link nav-toggle">
+            <i class="material-icons">group</i>
+            <span class="title">Tin tức</span>
+            <span class="arrow"></span>
+          </a>
+          <ul class="sub-menu">
+            <li class="nav-item">
+              <a asp-route="AdminArticleIndex" class="nav-link ">
+                <i class="material-icons">group</i>
+                <span class="title">Danh sách Tin tức</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a asp-route="AdminArticleCategory" class="nav-link ">
+                <i class="material-icons">list</i>
+                <span class="title">Loại Tin tức</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a asp-route="AdminArticleDetail" class="nav-link ">
+                <i class="material-icons">add_box</i>
+                <span class="title">Thêm Tin tức</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!--Contact-->
+        <li class="nav-item">
+          <a asp-route="AdminContactIndex" class="nav-link nav-toggle">
+            <i class="material-icons">mail</i>
+            <span class="title">Thư liên hệ</span>
+            <span class="arrow"></span>
+            <span class="label label-rouded label-menu">0</span>
+          </a>
+          <ul class="sub-menu">
+            <li class="nav-item">
+              <a asp-route="AdminContactIndex" class="nav-link ">
+                <i class="material-icons">mail</i>
+                <span class="title">Danh sách thư liên hệ</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a asp-route="AdminContactCategory" class="nav-link ">
+                <i class="material-icons">list</i>
+                <span class="title">Loại thư liên hệ</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!--Order-->
+        <li class="nav-item">
+          <a asp-route="AdminOrderIndex" class="nav-link">
+            <i class="material-icons">mail</i>
+            <span class="title">Đơn hàng</span>
+            <span class="label label-rouded label-menu">0</span>
+          </a>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>

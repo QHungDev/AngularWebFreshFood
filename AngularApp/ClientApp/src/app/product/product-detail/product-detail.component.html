@@ -1,0 +1,174 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="card card-box">
+        <div class="card-head">
+          <header>Thông tin tài khoản</header>
+        </div>
+        <div class="card-body" id="bar-parent">
+          <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+            <div class="form-body">
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Danh mục
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <select class="form-control input-height" formControlName="productCategoryID" [ngModel]="postProductRequest.productCategoryID">
+                    <option selected value="">.: Chọn 1 danh mục :.</option>
+                    <option *ngFor="let item of productCategories" [ngValue]="item.productCategoryID">
+                      {{item.title}}
+                    </option>
+                  </select>
+                </div>
+  
+                <label class="control-label col-md-2">
+                  ProductID
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" value="{{postProductRequest.productID}}" formControlName="productID" readonly />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Title
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.title" value='{{postProductRequest.title}}' formControlName="title" />
+                </div>
+                <label class="control-label col-md-2">
+                  Avatar
+                </label>
+                <div class="col-md-4">
+                  <img class="w-50" [src]="showImg(postProductRequest.avatar)" alt="">
+                  <input type="file" class="form-control input-height" (change)="onChangeUploadFile($event)" formControlName="avatar" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Description
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.description" value='{{postProductRequest.description}}' formControlName="description" />
+                </div>
+                <label class="control-label col-md-2">
+                  Specification
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.specification" value='{{postProductRequest.specification}}' formControlName="specification" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Content
+                  <span class="required"> * </span>
+                </label>
+                <div class="col">
+                  <editor type="text" [init]="editorConfig"  [(ngModel)]="postProductRequest.content" formControlName="content"></editor>
+                </div>
+                
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Warranty
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.warranty" value='{{postProductRequest.warranty}}' formControlName="warranty" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Price
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.price" value='{{postProductRequest.price}}' formControlName="price" />
+                </div>
+                <label class="control-label col-md-2">
+                  OldPrice
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.oldPrice" value='{{postProductRequest.oldPrice}}' formControlName="oldPrice" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Quantity
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.quantity" value='{{postProductRequest.quantity}}' formControlName="quantity" />
+                </div>
+                <label class="control-label col-md-2">
+                  ImageList
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.imageList" value='{{postProductRequest.imageList}}' formControlName="imageList" />
+                </div>
+                <label class="control-label col-md-2">
+                  Thumb
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.thumb" value='{{postProductRequest.thumb}}' formControlName="thumb" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Position
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.position" value='{{postProductRequest.position}}' formControlName="position" />
+                </div>
+                <label class="control-label col-md-2">
+                  Create Time
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.createTime" value='{{postProductRequest.createTime}}' formControlName="createTime" readonly />
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <label class="control-label col-md-2">
+                  Trạng thái
+                </label>
+                <div class="col-md-10 p-2">
+                  <label class="switchToggle">
+                    <input type="checkbox" checked formControlName="status" value='{{postProductRequest.status}}' />
+                    <span class="slider aqua round"></span>
+                  </label>
+                </div>
+                <label class="control-label col-md-2">
+                  Create By
+                  <span class="required"> * </span>
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductRequest.createBy" value='{{postProductRequest.createBy}}' formControlName="createBy" readonly />
+                </div>
+              </div>
+              <div class="form-actions">
+                <div class="row">
+                  <div class="offset-md-2 col-md-10">
+                    <button type="submit"
+                            class="btn btn-primary m-r-20">
+                      <i class="fa fa-save"></i>
+                      Lưu
+                    </button>
+                    <a [routerLink]="['/account']" class="btn btn-default">Quay về </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
