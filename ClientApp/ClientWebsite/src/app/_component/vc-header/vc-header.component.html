@@ -1,3 +1,55 @@
+<header class="sticky-top">
+	<nav id="main-menu" class="navbar navbar-expand-lg navbar-light bg-lightk">
+		<div class="container">
+			<div class="pull-left">
+				<a class="navbar-brand" href="/index.html">
+					<img src="../../../assets/img/logo/logo.png" />
+				</a>
+			</div>
+			<div class="search">
+				<form class="search-box" method="get" action="search.html">
+					<input class="form-control form-control-lg text-search" type="text" placeholder="Tên sản phẩm bạn cần tìm..." name="search_query">
+					<button class="btn" type="submit" name="submit_search" value="Tìm kiếm">
+						<i class="fa fa-search" style="font-size: 22px"></i>
+					</button>
+				</form>
+			</div>
+			<div class="collapse navbar-collapse pull-right" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto pull-right">
+					<li class="nav-item active">
+						<a class="nav-link">
+							Trang chủ
+						</a>
+					</li>
 
-<h4 class="pt-1 d-inline-block">Computing Admin Control Panel</h4>
+					<li class="nav-item">
+						<a class="nav-link">Bài viết</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link">
+							Liên hệ
+						</a>
+					</li>
+					<li class="nav-item icon">
+						<div class="menu-product">
+							<a class="nav-link" href="#">
+								<i class="fa fa-user-circle"></i>
+							</a>
+							<ul>
+									<li id="li_Login">
+										<a class="w-75" (click)="ClientLogin($event)" class="w-75">Đăng nhập</a>
+										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
+									</li>
+									<li id="li_Register">
+										<a class="w-75" href="login.aspx">Đăng ký</a>
+									</li>						
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+</header>
   

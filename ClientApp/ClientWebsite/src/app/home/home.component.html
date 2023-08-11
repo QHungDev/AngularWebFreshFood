@@ -1,1 +1,177 @@
-<p>home works!</p>
+<main>
+	<div class="first">
+		<div class="background-leaf"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<div class="banner">
+						<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<a href="#"><img src="../../assets/img/hinh-anh-trang-chu/banner/banner-1.png" class="d-block w-100" alt="..."></a>
+								</div>
+								<div class="carousel-item">
+									<a href="#"><img src="../../assets/img/hinh-anh-trang-chu/banner/banner-2.png" class="d-block w-100" alt="..."></a>
+								</div>
+								<div class="carousel-item">
+									<a href="#"><img src="../../assets/img/hinh-anh-trang-chu/banner/banner-3.jpg" class="d-block w-100" alt="..."></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="right">
+						<img class="my-3" src="../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+						<h5>
+							Sản phẩm có chất lượng tốt nhất
+						</h5>
+						<h1>
+							Cam kết vì sức khỏe cộng đồng
+						</h1>
+						<p>
+							Thực phẩm sạch. Có lợi cho sức khỏe. Không chất cấm.
+						</p>
+						<a href="detail.html" class="btn btn-success">
+							<i class="fa fa-cart-plus"></i>
+							Mua ngay
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row certificate">
+		<div class="col-2"></div>
+		<div class="col-2">
+			<div class="chungchi">
+				<i class="fa fa-truck"></i>
+				Giao hàng nhanh
+			</div>
+		</div>
+		<div class="col-2">
+			<div class="chungchi">
+				<i class="fa fa-address-book-o"></i>
+				Chứng chỉ hữu cơ
+			</div>
+		</div>
+		<div class="col-2">
+			<div class="chungchi">
+				<i class="fa fa-heart-o"></i>
+				Lợi cho sức khỏe
+			</div>
+		</div>
+		<div class="col-2">
+			<div class="chungchi">
+				<i class="fa fa-refresh"></i>
+				Xanh, Sạch
+			</div>
+		</div>
+		<div class="col-2"></div>
+	</div>
+
+	<div class="product container">
+		<div class="the-title">
+			<h2>
+				Mặt hàng mới nhất
+			</h2>
+			<img class="img-fluid" src="../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+		</div>
+		<div class="product-item" >
+				<ul>
+					<div >
+					<a>
+						<li *ngFor="let product of products; let i = index" class="item">
+						<a href="#"(click)="editProduct($event, product)" class="product-image">
+							<img class="img-fluid"  [src]="showImg(product.avatar)" />
+						</a>
+						<div class="info-box">
+							<p class="product-name mb-1">
+								<a href="#" (click)="editProduct($event, product)">{{product.title}}</a>
+							</p>
+							<div class="price-box">
+								<span class="old-price">
+									{{product.oldPrice}}
+                                </span>
+								<span class="price">
+									{{product.price}}
+								</span>
+								<span class="sale">Phantram</span>
+								<a  href="#" class="btn btn-success">
+									<i class="fa fa-shopping-cart"></i>
+									Thêm vào giỏ
+								</a>
+								
+							</div>
+						</div>
+					</li>
+					</a>
+					</div>
+				</ul>
+			</div>
+	</div>
+	
+	<div class="row preferential">
+		<div class="col-7">
+			<div class="pull-right">
+				Giảm 25% cho lần mua hàng đầu tiên!
+			</div>
+		</div>
+		<div class="col-5">
+			<a href="list-product.html" class="btn btn-secondary">
+				<i class="fa fa-shopping-cart"></i>
+				MUA NGAY
+			</a>
+		</div>
+		<div class="container">
+			<svg viewBox="0 0 700 10">
+				<path d="M350,10L340,0h20L350,10z"></path>
+			</svg>
+		</div>
+	</div>
+	<div class="for-registration">
+		<div class="text-center">
+			<a href="login.html">Đăng Ký Ngay Để Nhận Ưu Đãi.</a>
+		</div>
+	</div>
+
+	<div class="last">
+		<div class="background-leaf"></div>
+		<div class="product container">
+			<div class="the-title">
+				<h2>
+					Mặt hàng bắn chạy
+				</h2>
+				<img class="img-fluid" src="images/hinh-anh-trang-chu/logo-leaf.png" />
+			</div>
+			<div class="product-item">
+				<ul>
+					<li class="item">
+						<a href='#' class="product-image">
+							<img src='' />
+						</a>
+						<div class="info-box">
+							<p class="product-name mb-1">
+								<a href=''> </a>
+							</p>
+							<div class="price-box">
+								<span class="old-price">
+									OldPrice
+								</span>
+								<span class="price">
+									Price
+								</span>
+								<span class="sale">Phantram</span>
+								<a href='#' class="btn btn-success">
+									<i class="fa fa-shopping-cart"></i>
+									XEM NGAY
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</main>

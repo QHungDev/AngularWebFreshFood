@@ -1,0 +1,133 @@
+<div class="detail container">
+    <div class="row entry-summary">
+        <div class="col-5">
+            <div class="img-detail">
+                <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails img-box ">
+                    <a href="">
+                        <img width="350" height="350" [src]="showImg(postProductRequest.avatar)" />
+                    </a>
+                </div>
+
+                <ul class="thumbnails">
+                    <li>
+                        <a href=''>
+                            <img [src]="showImg(postProductRequest.thumb)" alt="" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="summary">
+                <div class="number-view-box">
+                    <span style="font-size: 14px" class="view-box">
+                        <i class="fa fa-eye-slash"></i>
+                        lượt view
+                    </span>
+                    <span class="view-box">
+                        <i class="fa fa-thumbs-o-up"></i>
+                        2 đánh giá
+                    </span>
+                    <span class="view-box">
+                        đã bán
+                    </span>
+                </div>
+                <div class="the-title">
+                    <h2 [ngModel]="postProductRequest.title"
+                        formControlName="title">
+                        {{postProductRequest.title}}
+                    </h2>
+                </div>
+                <div class="price-box">
+                    <label class="tittle">Giá: </label>
+                    <span style="text-decoration: line-through;" class="product-old-price">{{postProductRequest.oldPrice}}&nbsp;₫</span>
+                    <strong class="price-order">{{postProductRequest.price}}&nbsp;₫</strong>
+                </div>
+                <div class="transport-box">
+                    <label class="tittle">Vận Chuyển: </label>
+                    <span style="font-size: 14px" class="transport-truck">
+                        <img src="images/logo/truck.png" />
+                        Miễn Phí Vận Chuyển
+                    </span>
+                    <div class="ship-to">
+                        <i class="fa fa-truck"></i>
+                        Vận Chuyển Tới
+                        <span>
+                            Thủ Dầu Một, Bình Dương
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </div>
+                    <div class="ship-price">
+                        Phí Vận Chuyển
+                        <span>
+                            20.000 đ - 25.000 đ
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                    </div>
+                </div>
+
+                    <div class="number-box">
+                        <label class="mini-tittle">Số lượng: </label>
+                        <div class="group-quantity">
+                            <a OnClick="LinkButton_Down_Click" class="btn-down">
+                                <i class="fa fa-minus"></i>
+                            </a>
+                            <input readonly runat="server" id="input_Quantity" type="text" value="1" />
+                            <a ID="LinkButton_Up" OnClick="LinkButton_Up_Click" class="btn-up">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                        <span class="view-box">
+                            Còn {{postProductRequest.quantity}} sản phẩm
+                        </span>
+                    </div>
+                    <div class="discount-box">
+                        <label class="tittle">Mã Giảm Giá: </label>
+                        <span class="discount-code">
+                            Giảm 5k
+                        </span>
+                        <span class="discount-code">
+                            Giảm 2%
+                        </span>
+                    </div>
+                    <div class="button">
+                        <a class="btn btn-outline-success btn-text btn-add-cart" data-id="@Model.Product.Id" href="#"><i
+                                class="fa fa-cart-plus mr-2"></i>
+                            <label>Thêm vào giỏ hàng</label> <i class="icon-shopping-cart"></i>
+                        </a>
+                    </div>
+                    <div class="back-box">
+                        <span class="view-box">
+                            <i class="fa fa-repeat"></i>
+                            <span class="view-box">Đổi, trả sản phẩm trong 24 giờ</span>
+                            <a href="#">(Xem chi tiết)</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-box">
+            <div class="tab-description-review">
+                <ul>
+                    <li onclick="changeContent(this, 'p1')" class="li active">
+                        <span>Sản Phẩm</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <div class="description">
+                <div id="p1" class="input-login-register">
+                    <div class="the-title">
+                        <h4>
+                            Mô tả
+                        </h4>
+                        <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+                    </div>
+                    <p innerHTML="{{postProductRequest.content}}">
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>

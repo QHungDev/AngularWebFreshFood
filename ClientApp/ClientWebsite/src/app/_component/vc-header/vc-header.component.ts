@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-vc-header',
   templateUrl: './vc-header.component.html',
@@ -7,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VcHeaderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private router: Router,
+    private activeRoute: ActivatedRoute) { }
+  ClientLogin(e: Event) {
+    e.preventDefault();
+    this.router.navigate(['/login']);
+  }
   ngOnInit(): void {
   }
 }
