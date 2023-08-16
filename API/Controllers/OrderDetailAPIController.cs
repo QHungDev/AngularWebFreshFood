@@ -16,9 +16,19 @@ namespace API.Controllers
         }
 
         [HttpPost("post")]
-        public IActionResult Post(OrderDetail item)
+        public async Task<IActionResult> Post(OrderDetail item)
         {
-            return Ok();
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Insert(item);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
         }
 
         [HttpGet("get")]

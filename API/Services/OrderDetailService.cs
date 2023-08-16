@@ -69,6 +69,9 @@ namespace API.Services
             if (item == null)
                 return null;
 
+            var product = _context.Products.Where(x => x.ProductID == item.ProductID).FirstOrDefault();
+            item.Price = product.Price;
+            
             _context.OrderDetails.Add(item);
 
             try

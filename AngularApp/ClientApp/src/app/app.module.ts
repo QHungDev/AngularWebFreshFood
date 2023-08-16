@@ -25,7 +25,8 @@ import { AccountDetailComponent } from './account/account-detail/account-detail.
 import { AccountCategoryComponent } from './account/account-category/account-category.component';
 import { ProductIndexComponent } from './product/product-index/product-index.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
-
+import { OrderDetailComponent } from './order/order-detail/order-detail.component';
+import { OrderIndexComponent } from './order/order-index/order-index.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,8 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
     AccountCategoryComponent,
     ProductIndexComponent,
     ProductDetailComponent,
+    OrderIndexComponent,
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -82,6 +85,16 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
           { path: 'index/:username', component: AccountIndexComponent, canActivate: [AuthencationGuard] },
           { path: 'detail', component: AccountDetailComponent, canActivate: [AuthencationGuard] },
           { path: 'detail/:username', component: AccountDetailComponent, canActivate: [AuthencationGuard] },
+          { path: 'category', component: AccountCategoryComponent, canActivate: [AuthencationGuard] },
+        ]
+      },
+      {
+        path: 'order', component: SiteLayoutComponent, children: [
+          { path: '', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index/:username', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail', component: OrderDetailComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail/:username', component: OrderDetailComponent, canActivate: [AuthencationGuard] },
           { path: 'category', component: AccountCategoryComponent, canActivate: [AuthencationGuard] },
         ]
       },

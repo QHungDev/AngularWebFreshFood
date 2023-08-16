@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body ">
+          <div class="table-scrollable">
+            <!-- Filter -->
+            <div class="row p-4">
+              <div class="col-md-3">
+                <div class="btn-group mb-2">
+                  <!-- <a href="#" (click)="addProduct($event)"  class="btn btn-info">
+                    Add New <i class="fa fa-plus"></i>
+                  </a> -->
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="dataTables_filter mb-2">
+                  <label class="w-100">
+                    <!-- <input type="search" class="form-control form-control-sm"
+                           placeholder="Search..." aria-controls="example4"
+                           [(ngModel)]="keywords"
+                           (keyup.enter)="searchProduct($event)"> -->
+                  </label>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Content -->
+            <table class="table table-hover table-checkable order-column full-width">
+              <thead>
+                <tr>
+                  <th class="center">STT</th>
+                  <th class="center">OrderID</th>
+                  <th class="center">Full Name</th>
+                  <th class="center">Mobile</th>
+                  <th class="center">Address</th>
+                  <th class="center">Total</th>
+                  <th class="center">Bonus</th>
+                  <th class="center">Amount</th>
+                  <th class="center">Create Time</th>
+                  <th class="center">Order Status</th>
+                  <th class="center">Confirm Status</th>
+                  <!-- <th class="center">ChargeStatus</th> -->
+                  <th class="center">Deliver Status</th>
+                  <th class="center">Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd gradeX" *ngFor="let order of orders; let i = index">
+                  <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
+                  <td class="center">{{order.orderID}}</td>
+                  <td class="center">{{order.fullName}}</td>
+                  <td class="center">{{order.mobile}}</td>        
+                  <td class="center">{{order.address}}</td>
+                  <td class="center">{{order.total}}</td>
+                  <td class="center">{{order.bonus}}</td>
+                  <td class="center">{{order.amount}}</td>
+                  <td class="center">{{order.createTime}}</td>
+                  <td [style]="order.orderStatus == 1 ? 'color: darkgoldenrod;' : order.orderStatus == 2 ? 'color: green;' : 'color: red;'" class="center">
+                    {{order.orderStatus == 1 ? "Đang Xử Lý" : order.orderStatus == 2 ? "Đã Hoàn Tất" : "Đã Hủy"}}
+                  </td>
+                  <td class="center">
+                    <label class="switchToggle">
+                      <input (change)="changeConfirmStatus(order.orderID)" type="checkbox" [checked]="order.confirmStatus">
+                      <span class="slider aqua round"></span>
+                    </label>
+                  </td>
+                  <!-- <td class="center">
+                    <label class="switchToggle">
+                      <input type="checkbox" [checked]="order.chargeStatus">
+                      <span class="slider aqua round"></span>
+                    </label>
+                  </td> -->
+                  <td [style]="order.deliveStatus == 1 ? 'color: darkgoldenrod;' : order.deliveStatus == 2 ? 'color: blue;' : order.deliveStatus == 3 ? 'color: green;' : 'color: red;'" class="center">
+                    {{order.deliveStatus == 1 ? "Đang Đóng Gói" : order.deliveStatus == 2 ? "Đang Giao" : order.deliveStatus == 3 ? "Giao Hàng Thành Công" : "Đã Hủy"}}
+                  </td>
+                  <td class="center">
+                    <a href="#"
+                       
+                       class="btn btn-primary btn-xs">
+                      <i class="fa fa-pencil"></i> Edit
+                    </a>
+                    <!-- <a href="#"
+                       
+                       class="btn btn-danger btn-xs">
+                      <i class="fa fa-trash-o "></i> Delete
+                    </a> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+  
+            <!-- Pagging -->
+            <div class="pagging text-center">
+              <div>
+                <div class="dataTables_info" id="example4_info" role="status" aria-live="polite">Showing 1 to 10 of 18 entries</div>
+              </div>
+              <div>
+                <div class="dataTables_paginate paging_simple_numbers" id="example4_paginate">
+                  <ul class="pagination justify-content-center">
+                    <li class="paginate_button page-item previous disabled" id="example4_previous"><a href="#" aria-controls="example4" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                    <li class="paginate_button page-item active"><a href="#" aria-controls="example4" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="example4" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                    <li class="paginate_button page-item next" id="example4_next"><a href="#" aria-controls="example4" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

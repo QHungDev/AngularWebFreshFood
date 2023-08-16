@@ -16,4 +16,7 @@ export class ClientService {
   login(LoginRequest: LoginRequest): Observable<TokenResponse> {
     return this.httpClient.post<TokenResponse>(`${environment.apiUrl}/client/login`, LoginRequest);
   }
+  logout() {
+    return this.httpClient.post(`${environment.apiUrl}/client/logout`, null);
+  }
 }

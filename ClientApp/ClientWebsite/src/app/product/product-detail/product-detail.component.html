@@ -1,3 +1,4 @@
+<form [formGroup]="form" (ngSubmit)="addtoCart(postProductRequest)" novalidate class="form-horizontal">
 <div class="detail container">
     <div class="row entry-summary">
         <div class="col-5">
@@ -90,11 +91,17 @@
                             Giảm 2%
                         </span>
                     </div>
-                    <div class="button">
-                        <a class="btn btn-outline-success btn-text btn-add-cart" data-id="@Model.Product.Id" href="#"><i
+                    <div >
+                        <button  type="submit"
+                            class="btn btn-primary m-r-20">
+                      <i class="fa fa-save"></i> 
+                      Lưu
+                    </button>
+                        <!-- <button type="submit" class="btn btn-outline-success btn-text btn-add-cart"><i
                                 class="fa fa-cart-plus mr-2"></i>
                             <label>Thêm vào giỏ hàng</label> <i class="icon-shopping-cart"></i>
-                        </a>
+                            
+                        </button> -->
                     </div>
                     <div class="back-box">
                         <span class="view-box">
@@ -131,3 +138,4 @@
             </div>
         </div>
     </div>
+</form>

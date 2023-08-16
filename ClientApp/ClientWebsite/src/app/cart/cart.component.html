@@ -1,0 +1,39 @@
+<div class="container">
+    <div id="panel-cart">
+        <table id="tbl_cart" class="table table-bordered">
+            <thead>
+                <tr >
+                    <th>#</th>
+                    <th>Sản phẩm</th>
+                    <th>Hình ảnh</th>
+                    <th style="text-align:center">Số lượng</th>
+                    <th>Giá tiền</th>
+                    <th>Tổng cộng</th>
+                </tr>
+            </thead>
+            <tbody id="cart_body">
+                <tr *ngFor="let item of productData; let i = index">
+                    <td>{{(i+1).toString().padStart(2, "0")}}</td>
+                    <td>{{item.title}}</td>
+                    <td><img class="img-fluid" style="width: 120px;" [src]="showImg(item.avatar)" /></td>
+                    <td style="width: 12%;text-align:center">{{selectCount(item.productID)}}</td>
+                    <td style="width: 15%;">{{item.price|currency:'VND':''}} VND</td>
+                    <td style="width: 15%;">{{totalPrice(item.productID)|currency:'VND':''}} VND</td>
+                    
+                    <td>
+                        <button (click)="removeProduct(item.productID)" class="btn btn-danger"><i class="fas fa-trash-alt"></i>X</button>
+                        
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td style="text-align:left"><strong>Thành tiền =</strong></td>
+                    <td colspan="5" style="text-align:center"> <strong> <span id="lbl_total">{{needPay()|currency:'VND':''}} VND</span> </strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        <!-- <a href="/@culture/Cart/Checkout" class="btn btn-success">Tiếp theo <i class="icon-arrow-right"></i></a> -->
+        <button [disabled]="disabled" (click)="buy()" class="btn btn-success">Thanh Toán <i class="icon-arrow-right"></i></button>
+    </div>
+</div>

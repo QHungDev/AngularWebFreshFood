@@ -38,6 +38,8 @@ builder.Services.AddTransient<IContactService, ContactService>();
 builder.Services.AddTransient<IArticleService, ArticleService>();
 builder.Services.AddTransient<IPictureService, PictureService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IOrderDetailService, OrderDetailService>();
 builder.Services.AddTransient<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddTransient<IProductMainCategoryService, ProductMainCategoryService>();
 builder.Services.AddTransient<IArticleCategoryService, ArticleCategoryService>();

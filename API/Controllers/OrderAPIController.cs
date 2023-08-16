@@ -16,21 +16,42 @@ namespace API.Controllers
         }
 
         [HttpPost("post")]
-        public IActionResult Post(Order item)
-        {
-            return Ok();
+        public async Task<IActionResult> Post(Order item)
+        {            
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Insert(item);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
         }
 
         [HttpGet("get")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var response = await _service.SelectAll();
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
         }
 
         [HttpGet("get/{id}")]
         public IActionResult Get(int ID)
         {
             return Ok();
+        }
+
+        [HttpGet("changeConfirmStatus/{id}")]
+        public async Task<IActionResult> ChangeConfirmStatus(int id)
+        {
+            return Ok(await _service.ChangeConfirmStatus(id));
         }
 
         [HttpPut("put")]
@@ -40,7 +61,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult Delete(int ID)
+        public IActionResult Delete(int id)
         {
             return Ok();
         }

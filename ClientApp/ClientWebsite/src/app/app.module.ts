@@ -12,6 +12,7 @@ import { VcHeaderComponent } from './_component/vc-header/vc-header.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { LoginComponent } from './login/login.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoginComponent } from './login/login.component';
     VcHeaderComponent,
     HomeComponent,
     ProductDetailComponent,
-    LoginComponent
+    LoginComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,7 +56,12 @@ import { LoginComponent } from './login/login.component';
           // { path: 'category', component: AccountCategoryComponent},
         ]
       },
-
+      {
+        path: '', component: SiteLayoutComponent, children: [         
+          { path: 'cart', component: CartComponent},
+          // { path: 'category', component: AccountCategoryComponent},
+        ]
+      }
       //Security layout routers
       
 

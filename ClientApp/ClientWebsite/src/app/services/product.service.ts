@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
+import { CartResponse } from '../responses/cart-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,6 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
   //Get danh sách product
-  
   getProducts(): Observable<any[]> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/product/get`);
   }

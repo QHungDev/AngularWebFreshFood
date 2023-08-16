@@ -8,7 +8,8 @@
 			</div>
 			<div class="search">
 				<form class="search-box" method="get" action="search.html">
-					<input class="form-control form-control-lg text-search" type="text" placeholder="Tên sản phẩm bạn cần tìm..." name="search_query">
+					<input class="form-control form-control-lg text-search" type="text"
+						placeholder="Tên sản phẩm bạn cần tìm..." name="search_query">
 					<button class="btn" type="submit" name="submit_search" value="Tìm kiếm">
 						<i class="fa fa-search" style="font-size: 22px"></i>
 					</button>
@@ -35,16 +36,36 @@
 							<a class="nav-link" href="#">
 								<i class="fa fa-user-circle"></i>
 							</a>
-							<ul>
+							<ng-template [ngIf]="loginUsername" [ngIfElse]="loggedOut">
+								<ul>
+									<li id="li_Login">
+										<a class="w-75" (click)="ClientLogin($event)" href="#" class="w-75">{{loginUsername}}</a>
+										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
+									</li>
+									<li id="li_Register">
+										<a class="w-75" (click)="logout($event)" href="#">Đăng Xuất</a>
+									</li>
+								</ul>
+							</ng-template>
+							<ng-template  #loggedOut>
+								<ul>
 									<li id="li_Login">
 										<a class="w-75" (click)="ClientLogin($event)" class="w-75">Đăng nhập</a>
 										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
 									</li>
 									<li id="li_Register">
 										<a class="w-75" href="login.aspx">Đăng ký</a>
-									</li>						
-							</ul>
+									</li>
+								</ul>
+							</ng-template>
 						</div>
+						
+					</li>
+					<li  class="nav-item icon">
+						<a (click)=cartDetail($event) class="nav-link giohang" href="#">
+							<i class="fa fa-shopping-cart"></i>
+							<span class="sogiohang" id="lbl_number_items_header">{{length}}</span>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -52,4 +73,3 @@
 	</nav>
 
 </header>
-  

@@ -11,6 +11,7 @@ namespace API.Interfaces
         public Task<List<Order>> FindWithPaging(string fullName, int page, int pageSize);
         public Task<Order> Insert(Order item);
         public Task<Order> Update(int id, Order item);
+        public Task<Order> ChangeConfirmStatus(int id);
         public Task<bool> Delete(int id);
     }
 }

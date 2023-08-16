@@ -68,6 +68,13 @@ namespace API.Services
         {
             if (item == null)
                 return null;
+            
+            var email = item.FullName;
+            var client = _context.Clients.Where(x => x.Email == email).FirstOrDefault();
+            item.ClientID = client.ClientID;
+            item.FullName = client.FullName;
+            item.Mobile = client.Mobile;
+            item.Address = client.Address;
 
             _context.Orders.Add(item);
 
@@ -82,9 +89,26 @@ namespace API.Services
             }
         }
 
-        public async Task<List<Order>> SelectAll()
+         public async Task<List<Order>> SelectAll()
         {
-            var data = await _context.Orders.ToListAsync();
+            var data = await _context.Orders
+                                    .Select(x => new Order
+                                    {
+                                        OrderID = x.OrderID,
+                                        FullName = x.FullName,
+                                        Mobile = x.Mobile,
+                                        Address = x.Address,
+                                        Total = x.Total,
+                                        Bonus = x.Bonus,
+                                        Amount = x.Amount,
+                                        CreateTime = x.CreateTime,
+                                        OrderStatus = x.OrderStatus,
+                                        ConfirmStatus = x.ConfirmStatus,
+                                        ChargeStatus = x.ChargeStatus,
+                                        DeliveStatus = x.DeliveStatus,
+                                        ClientID = x.ClientID,
+                                        OrderDetails = _context.OrderDetails.Where(y => y.OrderID == x.OrderID).ToList()
+                                    }).ToListAsync();
             return data;
         }
 
@@ -127,5 +151,31 @@ namespace API.Services
             await _context.SaveChangesAsync();
             return existItem;
         }
+
+        public async Task<Order> ChangeConfirmStatus(int id)
+        {
+            var existItem = await _context.Orders.FindAsync(id);
+
+            if (existItem == null)
+                return null;
+
+            // existItem.FullName = existItem.FullName;
+            // existItem.Mobile = existItem.Mobile;
+            // existItem.Address = existItem.Address;
+            // existItem.Total = existItem.Total;
+            // existItem.Bonus = existItem.Bonus;
+            // existItem.Amount = existItem.Amount;
+            // existItem.CreateTime = existItem.CreateTime;
+
+            // existItem.OrderStatus = existItem.OrderStatus;
+            existItem.ConfirmStatus = !existItem.ConfirmStatus;
+            // existItem.ChargeStatus = existItem.ChargeStatus;
+            // existItem.DeliveStatus = existItem.DeliveStatus;
+            // existItem.ClientID = existItem.ClientID;
+
+            await _context.SaveChangesAsync();
+            return existItem;
+        }
+        
     }
 }

@@ -29,10 +29,10 @@ namespace Models
         public double? Amount { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreateTime { get; set; }
-        public bool? OrderStatus { get; set; }
+        public int? OrderStatus { get; set; }
         public bool? ConfirmStatus { get; set; }
         public bool? ChargeStatus { get; set; }
-        public bool? DeliveStatus { get; set; }
+        public int? DeliveStatus { get; set; }
         public int? ClientID { get; set; }
 
         [ForeignKey("ClientID")]
