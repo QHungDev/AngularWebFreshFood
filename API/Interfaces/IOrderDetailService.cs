@@ -5,6 +5,7 @@ namespace API.Interfaces
     public interface IOrderDetailService
     {
         public Task<List<OrderDetail>> SelectAll();
+        public Task<List<OrderDetailProduct>> SelectAllWithOrderID(int orderID);
         public Task<List<OrderDetail>> SelectWithPaging(int page, int pageSize);
         public Task<OrderDetail> FindItem(int orderID, int productID);
         public Task<List<OrderDetail>> FindAll(double price);

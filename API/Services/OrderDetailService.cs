@@ -42,6 +42,23 @@ namespace API.Services
             return data;
         }
 
+        public async Task<List<OrderDetailProduct>> SelectAllWithOrderID(int orderID)
+        {
+            var data = await _context.OrderDetails
+                                     .Where(x => x.OrderID == orderID)
+                                     .Select(x => new OrderDetailProduct
+                                    {
+                                        OrderID = x.OrderID,
+                                        ProductID = x.ProductID,
+                                        Title = _context.Products.Where(y => y.ProductID == x.ProductID).FirstOrDefault().Title,
+                                        Avatar = _context.Products.Where(y => y.ProductID == x.ProductID).FirstOrDefault().Avatar,
+                                        Price = x.Price,
+                                        Quantity = x.Quantity
+                                    }).ToListAsync();
+
+            return data;
+        }
+
         public async Task<OrderDetail> FindItem(int orderID, int productID)
         {
             var item = await _context.OrderDetails.FindAsync(orderID, productID);

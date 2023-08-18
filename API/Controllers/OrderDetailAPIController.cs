@@ -37,10 +37,15 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("get/{id}")]
-        public IActionResult Get(int orderID, int productID)
+        [HttpGet("get/{orderID}")]
+        public async Task<IActionResult> Get(int orderID)
         {
-            return Ok();
+            var response = await _service.SelectAllWithOrderID(orderID);
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
         }
 
         [HttpPut("put")]

@@ -43,9 +43,14 @@ namespace API.Controllers
         }
 
         [HttpGet("get/{id}")]
-        public IActionResult Get(int ID)
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok();
+            var response = await _service.FindItem(id);
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
         }
 
         [HttpGet("changeConfirmStatus/{id}")]
@@ -55,9 +60,18 @@ namespace API.Controllers
         }
 
         [HttpPut("put")]
-        public IActionResult Put(int ID, Order item)
+        public async Task<IActionResult> Put(int orderID,Order item)
         {
-            return Ok();
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Update(orderID,item);
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
         }
 
         [HttpDelete("delete/{id}")]

@@ -92,10 +92,10 @@ import { OrderIndexComponent } from './order/order-index/order-index.component';
         path: 'order', component: SiteLayoutComponent, children: [
           { path: '', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
           { path: 'index', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
-          { path: 'index/:username', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index/:orderID', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
           { path: 'detail', component: OrderDetailComponent, canActivate: [AuthencationGuard] },
-          { path: 'detail/:username', component: OrderDetailComponent, canActivate: [AuthencationGuard] },
-          { path: 'category', component: AccountCategoryComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail/:orderID', component: OrderDetailComponent, canActivate: [AuthencationGuard] },
+          // { path: 'category', component: AccountCategoryComponent, canActivate: [AuthencationGuard] },
         ]
       },
 

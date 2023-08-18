@@ -44,8 +44,8 @@ namespace API.Services
 
         public async Task<Order> FindItem(int id)
         {
-            var item = await _context.Orders.FindAsync(id);
-            return item;
+            var data = await _context.Orders.FindAsync(id);
+            return data;
         }
 
         public async Task<List<Order>> FindWithPaging(string fullName, int page, int pageSize)
@@ -127,10 +127,13 @@ namespace API.Services
             return data;
         }
 
-        public async Task<Order> Update(int id, Order item)
+        public async Task<Order> Update(int orderID, Order item)
         {
-            var existItem = await _context.Orders.FindAsync(id);
-
+            if (item == null)
+                return null;
+            item.OrderID = orderID;
+            
+            var existItem = await _context.Orders.FirstOrDefaultAsync(x => x.OrderID == item.OrderID);
             if (existItem == null)
                 return null;
 

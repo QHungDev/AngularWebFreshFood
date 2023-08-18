@@ -40,4 +40,9 @@ export class OrderIndexComponent implements OnInit {
     window.location.reload();
   }
 
+  editOrder(e: Event, order: any) {
+    e.preventDefault();
+    this.router.navigate(['/order/detail'], { queryParams: { orderID: order.orderID } });
+  }
+
 }

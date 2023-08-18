@@ -1,1 +1,234 @@
-<p>order-detail works!</p>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>Thông tin tài khoản</header>
+            </div>
+            <div class="card-body" id="bar-parent">
+                <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">
+                                OderID
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-height"
+                                    value="{{postOrderRequest.orderID}}" formControlName="orderID" readonly />
+                            </div>
+                            <!-- <label class="control-label col-md-2">
+                                Client ID
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input-height"
+                                    value="{{postOrderRequest.clientID}}" formControlName="clientID" readonly />
+                            </div> -->
+                        </div>
+                        <div class="form-group row">
+                        <label class="control-label col-md-2">
+                            Full Name
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height" [ngModel]="postOrderRequest.fullName"
+                                value='{{postOrderRequest.fullName}}' formControlName="fullName" />
+                        </div>
+                        <label class="control-label col-md-2">
+                            Mobile
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height" [ngModel]="postOrderRequest.mobile"
+                                value='{{postOrderRequest.mobile}}' formControlName="mobile" />
+                        </div>
+                        </div>
+
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">
+                            Address
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height" [ngModel]="postOrderRequest.address"
+                                value='{{postOrderRequest.address}}' formControlName="address" />
+                        </div>
+                        <label class="control-label col-md-2">
+                            Total
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height" [ngModel]="postOrderRequest.total|currency:'VND':''"
+                                value="{{postOrderRequest.total}}" formControlName="total" readonly />
+                        </div>
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">
+                            Amount
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height" [ngModel]="postOrderRequest.amount"
+                                value='{{postOrderRequest.amount}}' formControlName="amount" readonly />
+                        </div>
+                        <label class="control-label col-md-2">
+                            Bonus
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text"class="form-control input-height"  [(ngModel)]="postOrderRequest.bonus" value='{{postOrderRequest.bonus}}' formControlName="bonus"/>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">
+                            Order Status
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <select class="form-control input-height" formControlName="orderStatus" [ngModel]="postOrderRequest.orderStatus">
+                                <!-- <option selected value="">.: Chọn 1 danh mục :.</option> -->
+                                <option *ngFor="let item of orderStatusList" [ngValue]="item.id">
+                                  {{item.title}}
+                                </option>
+                              </select>
+                              
+                            <!-- <input type="text" class="form-control input-height"
+                                [ngModel]="postOrderRequest.orderStatus" value='{{postOrderRequest.orderStatus}}'
+                                formControlName="orderStatus" /> -->
+                        </div>
+                        <label class="control-label col-md-2">
+                            Deliver Status
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <select class="form-control input-height" formControlName="deliveStatus" [ngModel]="postOrderRequest.deliveStatus">
+                                <!-- <option selected value="">.: Chọn 1 danh mục :.</option> -->
+                                <option *ngFor="let item of deliveStatusList" [ngValue]="item.id">
+                                  {{item.title}}
+                                </option>
+                              </select>
+                            <!-- <input type="text" class="form-control input-height"
+                                [ngModel]="postOrderRequest.deliveStatus" value='{{postOrderRequest.deliveStatus}}'
+                                formControlName="deliveStatus" /> -->
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <!-- <label class="control-label col-md-2">
+                            Confirm Status
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height"
+                                [ngModel]="postOrderRequest.confirmStatus" value='{{postOrderRequest.confirmStatus}}'
+                                formControlName="confirmStatus" />
+                        </div>
+                        <label class="control-label col-md-2">
+                            Charge Status
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height"
+                                [ngModel]="postOrderRequest.chargeStatus" value='{{postOrderRequest.chargeStatus}}'
+                                formControlName="chargeStatus" />
+                        </div> -->
+                        
+                        <label class="control-label col-md-2">
+                            Create Time
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-height" [ngModel]="postOrderRequest.createTime"
+                                value='{{postOrderRequest.createTime}}' formControlName="createTime" readonly />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="offset-md-2 col-md-10">
+                                <button type="submit" class="btn btn-primary m-r-20">
+                                    <i class="fa fa-save"></i>
+                                    Lưu
+                                </button>
+                                <a [routerLink]="['/order']" class="btn btn-default">Quay về </a>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+            <div class="table-scrollable">
+                <!-- Filter -->
+                <div class="row p-4">
+                    <div class="col-md-3">
+                        <div class="btn-group mb-2">
+                            <!-- <a href="#" (click)="addProduct($event)"  class="btn btn-info">
+                    Add New <i class="fa fa-plus"></i>
+                  </a> -->
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="dataTables_filter mb-2">
+                            <label class="w-100">
+                                <!-- <input type="search" class="form-control form-control-sm"
+                           placeholder="Search..." aria-controls="example4"
+                           [(ngModel)]="keywords"
+                           (keyup.enter)="searchProduct($event)"> -->
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <table class="table table-hover table-checkable order-column full-width">
+                    <thead>
+                        <tr>
+                            <th class="center">STT</th>
+                            <th class="center w-25">Title</th>
+                            <th class="center w-25">Avatar</th>
+                            <th class="center">Quantity</th>
+                            <th class="center">Price</th>
+                            <th class="center">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX" *ngFor="let item of orderDetailProduct; let i = index">
+                            <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
+                            <td class="center">{{item.title}}</td>
+                            <td class="patient-img center">
+                                <img [src]="showImg(item.avatar)" alt="">
+                            </td>
+                            <td class="center">{{item.quantity}}</td>
+                            <td class="center">{{item.price|currency:'VND':''}} VND</td>
+                            <td class="center">{{item.price*item.quantity|currency:'VND':''}} VND</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pagging -->
+                <div class="pagging text-center">
+                    <div>
+                        <div class="dataTables_info" id="example4_info" role="status" aria-live="polite">Showing
+                            1 to 10 of 18 entries</div>
+                    </div>
+                    <div>
+                        <div class="dataTables_paginate paging_simple_numbers" id="example4_paginate">
+                            <ul class="pagination justify-content-center">
+                                <li class="paginate_button page-item previous disabled" id="example4_previous">
+                                    <a href="#" aria-controls="example4" data-dt-idx="0" tabindex="0"
+                                        class="page-link">Previous</a>
+                                </li>
+                                <li class="paginate_button page-item active"><a href="#" aria-controls="example4"
+                                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="example4"
+                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                <li class="paginate_button page-item next" id="example4_next"><a href="#"
+                                        aria-controls="example4" data-dt-idx="3" tabindex="0" class="page-link">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
