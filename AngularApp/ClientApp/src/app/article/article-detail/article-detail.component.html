@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="card card-box">
+      <div class="card-head">
+        <header>Thông tin bài viết</header>
+      </div>
+      <div class="card-body" id="bar-parent">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+          <div class="form-body">
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Danh mục
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <select class="form-control input-height" formControlName="articleCategoryID" [ngModel]="postArticleRequest.articleCategoryID">
+                  <option selected value="">.: Chọn 1 danh mục :.</option>
+                  <option *ngFor="let item of articleCategories" [ngValue]="item.articleCategoryID">
+                    {{item.title}}
+                  </option>
+                </select>
+              </div>
+
+              <label class="control-label col-md-2">
+                Article ID
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" value="{{postArticleRequest.articleID}}" formControlName="articleID" readonly />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Title
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postArticleRequest.title" value='{{postArticleRequest.title}}' formControlName="title" />
+              </div>
+              <label class="control-label col-md-2">
+                Avatar
+              </label>
+              <div class="col-md-4">
+                <img class="w-50" [src]="showImg(postArticleRequest.avatar)" alt="">
+                <input type="file" class="form-control input-height" (change)="onChangeUploadFile($event)" formControlName="avatar" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Description
+                <span class="required"> * </span>
+              </label>
+              <!-- <div class="col">
+                <editor type="text" [init]="editorConfig"  [(ngModel)]="postArticleRequest.description" formControlName="description"></editor>
+              </div> -->
+
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postArticleRequest.description" value='{{postArticleRequest.description}}' formControlName="description" />
+              </div>
+
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-2">
+                Content
+                <span class="required"> * </span>
+              </label>
+              <div class="col-10">
+                <editor type="text" [init]="editorConfig"  [(ngModel)]="postArticleRequest.content" formControlName="content"></editor>
+              </div>
+            </div>
+            <div class="form-group row">
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                CreateBy
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input readonly type="text" class="form-control input-height" [ngModel]="postArticleRequest.createBy" value='{{postArticleRequest.createBy}}' formControlName="createBy" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                CreateTime
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input readonly type="text" class="form-control input-height" [ngModel]="postArticleRequest.createTime" value='{{postArticleRequest.createTime}}' formControlName="createTime" />
+              </div>
+              <label class="control-label col-md-2">
+                Trạng thái
+              </label>
+              <div class="col-md-4 p-2">
+                <label class="switchToggle">
+                  <input type="checkbox" checked formControlName="status" value='{{postArticleRequest.status}}' />
+                  <span class="slider aqua round"></span>
+                </label>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="row">
+                <div class="offset-md-2 col-md-10">
+                  <button type="submit"
+                          class="btn btn-primary m-r-20">
+                    <i class="fa fa-save"></i>
+                    Lưu
+                  </button>
+                  <a [routerLink]="['/article']" class="btn btn-default">Quay về </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

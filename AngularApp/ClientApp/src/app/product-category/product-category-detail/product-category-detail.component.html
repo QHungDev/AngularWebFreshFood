@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="card card-box">
+      <div class="card-head">
+        <header>Thông tin tài khoản</header>
+      </div>
+      <div class="card-body" id="bar-parent">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+          <div class="form-body">
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Danh mục
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <select class="form-control input-height" formControlName="productMainCategoryID" [ngModel]="postProductCategoryRequest.productMainCategoryID">
+                  <option selected value="">.: Chọn 1 danh mục :.</option>
+                  <option *ngFor="let item of productMainCategories" [ngValue]="item.productMainCategoryID">
+                    {{item.title}}
+                  </option>
+                </select>
+              </div>
+
+              <label class="control-label col-md-2">
+                Product Category ID
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" value="{{postProductCategoryRequest.productCategoryID}}" formControlName="productCategoryID" readonly />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Title
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postProductCategoryRequest.title" value='{{postProductCategoryRequest.title}}' formControlName="title" />
+              </div>
+              <label class="control-label col-md-2">
+                Avatar
+              </label>
+              <div class="col-md-4">
+                <img class="w-50" [src]="showImg(postProductCategoryRequest.avatar)" alt="">
+                <input type="file" class="form-control input-height" (change)="onChangeUploadFile($event)" formControlName="avatar" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Description
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postProductCategoryRequest.description" value='{{postProductCategoryRequest.description}}' formControlName="description" />
+              </div>
+              <label class="control-label col-md-2">
+                Position
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postProductCategoryRequest.position" value='{{postProductCategoryRequest.position}}' formControlName="position" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Trạng thái
+              </label>
+              <div class="col-md-10 p-2">
+                <label class="switchToggle">
+                  <input type="checkbox" checked formControlName="status"[ngModel]="postProductCategoryRequest.status" value='{{postProductCategoryRequest.status}}' />
+                  <span class="slider aqua round"></span>
+                </label>
+              </div>
+              <label class="control-label col-md-2">
+                Create By
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postProductCategoryRequest.createBy" value='{{postProductCategoryRequest.createBy}}' formControlName="createBy" readonly />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Create Time
+              </label>
+              <div class="col-md-4">
+                  <input type="text" class="form-control input-height" [ngModel]="postProductCategoryRequest.createTime" value='{{postProductCategoryRequest.createTime}}' formControlName="createTime" readonly />
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="row">
+                <div class="offset-md-2 col-md-10">
+                  <button type="submit"
+                          class="btn btn-primary m-r-20">
+                    <i class="fa fa-save"></i>
+                    Lưu
+                  </button>
+                  <a [routerLink]="['/product-category']" class="btn btn-default">Quay về </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

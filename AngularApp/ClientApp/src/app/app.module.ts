@@ -12,7 +12,6 @@ import { SecurityLayoutComponent } from './_layout/security-layout/security-layo
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
-import { ArticleListComponent } from './article-list/article-list.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { VcHeaderComponent } from './_component/vc-header/vc-header.component';
 import { VcNavigationComponent } from './_component/vc-navigation/vc-navigation.component';
@@ -27,6 +26,12 @@ import { ProductIndexComponent } from './product/product-index/product-index.com
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { OrderDetailComponent } from './order/order-detail/order-detail.component';
 import { OrderIndexComponent } from './order/order-index/order-index.component';
+import { ProductCategoryDetailComponent } from './product-category/product-category-detail/product-category-detail.component';
+import { ProductCategoryIndexComponent } from './product-category/product-category-index/product-category-index.component';
+import { ArticleDetailComponent } from './article/article-detail/article-detail.component';
+import { ArticleIndexComponent } from './article/article-index/article-index.component';
+import { ProductMainCategoryDetailComponent } from './product-main-category/product-main-category-detail/product-main-category-detail.component';
+import { ProductMainCategoryIndexComponent } from './product-main-category/product-main-category-index/product-main-category-index.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +40,8 @@ import { OrderIndexComponent } from './order/order-index/order-index.component';
     LoginComponent,
     ForgotPasswordComponent,
     HomeComponent,
-    ArticleListComponent,
+    ArticleIndexComponent,
+    ArticleDetailComponent,
     PrivacyComponent,
     VcHeaderComponent,
     VcNavigationComponent,
@@ -50,6 +56,10 @@ import { OrderIndexComponent } from './order/order-index/order-index.component';
     ProductDetailComponent,
     OrderIndexComponent,
     OrderDetailComponent,
+    ProductCategoryIndexComponent,
+    ProductCategoryDetailComponent,
+    ProductMainCategoryIndexComponent,
+    ProductMainCategoryDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -63,7 +73,6 @@ import { OrderIndexComponent } from './order/order-index/order-index.component';
       {
         path: '', component: SiteLayoutComponent, children: [
           { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthencationGuard] },
-          { path: 'article-list', component: ArticleListComponent, canActivate: [AuthencationGuard] }
         ]
       },
       //Product routers
@@ -95,7 +104,35 @@ import { OrderIndexComponent } from './order/order-index/order-index.component';
           { path: 'index/:orderID', component: OrderIndexComponent, canActivate: [AuthencationGuard] },
           { path: 'detail', component: OrderDetailComponent, canActivate: [AuthencationGuard] },
           { path: 'detail/:orderID', component: OrderDetailComponent, canActivate: [AuthencationGuard] },
-          // { path: 'category', component: AccountCategoryComponent, canActivate: [AuthencationGuard] },
+        ]
+      },
+      {
+        path: 'product-category', component: SiteLayoutComponent, children: [
+          { path: '', component: ProductCategoryIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index', component: ProductCategoryIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index/:productCategoryID', component: ProductCategoryIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail', component: ProductCategoryDetailComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail/:productCategoryID', component: ProductCategoryDetailComponent, canActivate: [AuthencationGuard] },
+
+        ]
+      },
+      {
+        path: 'product-main-category', component: SiteLayoutComponent, children: [
+          { path: '', component: ProductMainCategoryIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index', component: ProductMainCategoryIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index/:productMainCategoryID', component: ProductMainCategoryIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail', component: ProductMainCategoryDetailComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail/:productMainCategoryID', component: ProductMainCategoryDetailComponent, canActivate: [AuthencationGuard] },
+
+        ]
+      },
+      {
+        path: 'article', component: SiteLayoutComponent, children: [
+          { path: '', component: ArticleIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index', component: ArticleIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index/:orderID', component: ArticleIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail', component: ArticleDetailComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail/:orderID', component: ArticleDetailComponent, canActivate: [AuthencationGuard] },
         ]
       },
 

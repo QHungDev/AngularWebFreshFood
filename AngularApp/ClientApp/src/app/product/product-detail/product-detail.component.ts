@@ -76,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
 
       this.activeRoute.queryParams.subscribe(params => {
         this.productID = params.productID;
-        
+
         if (this.productID && this.productID !== "") {
           const productsObservable = this.productService.getProduct(this.productID);
           productsObservable.subscribe((productsData: any) => {
@@ -96,22 +96,22 @@ export class ProductDetailComponent implements OnInit {
     e.preventDefault();
     this.router.navigate(['/product']);
   }
-  
+
   onChangeUploadFile(e:Event) {
     this.uploadedImage = (e.target as HTMLInputElement)?.files?.[0];
     //var fileExtension = '.' + this.uploadedImage?.name.split('.').pop();
     //this.uploadedImage?.name.replace(this.uploadedImage.name,"/assets/img/FileUploads/Product/Avatar/"+fileExtension);
     console.log("thisimg",this.imgModified);
-    
+
   }
- 
+
   showImg(imgName: any) {
     //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
     if (imgName !== undefined) {
       var name = imgName.split('/')[4]
-      
+
       var imgUrl = 'https://localhost:7265/api/product/' + name;
-      
+
       return imgUrl;
     }
 
@@ -160,8 +160,8 @@ export class ProductDetailComponent implements OnInit {
     console.log("formdata",imageFormData);
     const updateProductforkJoin = this.productService.updateProduct(this.productID, this.postProductRequest);
     const upLoadImageforkJoin = this.productService.UploadFile(this.productID,imageFormData);
-    
     if (this.productID && this.productID !== "") {
+
       //Update
       if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
         forkJoin([updateProductforkJoin,upLoadImageforkJoin]).subscribe({
@@ -176,7 +176,7 @@ export class ProductDetailComponent implements OnInit {
       else {
         alert('error');
       }
-      
+
     }
     else {
       //Add new
@@ -214,7 +214,7 @@ export class ProductDetailComponent implements OnInit {
   // }
 
   addImg() {
-    
+
     let imageFormData:any = new FormData();
     if (this.uploadedImage !== undefined ) {
       imageFormData.append('this.postProductRequest.Avatar', this.uploadedImage, this.uploadedImage?.name);

@@ -20,7 +20,7 @@
                     </option>
                   </select>
                 </div>
-  
+
                 <label class="control-label col-md-2">
                   ProductID
                 </label>
@@ -68,7 +68,7 @@
                 <div class="col">
                   <editor type="text" [init]="editorConfig"  [(ngModel)]="postProductRequest.content" formControlName="content"></editor>
                 </div>
-                
+
               </div>
               <div class="form-group row">
                 <label class="control-label col-md-2">
@@ -134,14 +134,14 @@
                   <input type="text" class="form-control input-height" [ngModel]="postProductRequest.createTime" value='{{postProductRequest.createTime}}' formControlName="createTime" readonly />
                 </div>
               </div>
-              
+
               <div class="form-group row">
                 <label class="control-label col-md-2">
                   Trạng thái
                 </label>
                 <div class="col-md-10 p-2">
                   <label class="switchToggle">
-                    <input type="checkbox" checked formControlName="status" value='{{postProductRequest.status}}' />
+                    <input type="checkbox" checked formControlName="status" [ngModel]="postProductRequest.status" value='{{postProductRequest.status}}' />
                     <span class="slider aqua round"></span>
                   </label>
                 </div>
@@ -171,4 +171,3 @@
       </div>
     </div>
   </div>
-  

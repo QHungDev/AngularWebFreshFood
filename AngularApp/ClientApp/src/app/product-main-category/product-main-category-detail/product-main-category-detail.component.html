@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="card card-box">
+      <div class="card-head">
+        <header>Thông tin tài khoản</header>
+      </div>
+      <div class="card-body" id="bar-parent">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+          <div class="form-body">
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                ProductMainCategoryID
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height"
+                  value="{{postproductMainCategoryRequest.productMainCategoryID}}"
+                  formControlName="productMainCategoryID" readonly />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Title
+                <span class="required"> * </span>
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postproductMainCategoryRequest.title"
+                  value='{{postproductMainCategoryRequest.title}}' formControlName="title" />
+              </div>
+              <label class="control-label col-md-2">
+                Position
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control input-height" [ngModel]="postproductMainCategoryRequest.position"
+                  value='{{postproductMainCategoryRequest.position}}' formControlName="position" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Trạng thái
+              </label>
+              <div class="col-md-10 p-2">
+                <label class="switchToggle">
+                  <input type="checkbox" checked [ngModel]="postproductMainCategoryRequest.status" formControlName="status" value='{{postproductMainCategoryRequest.status}}' />
+                  <span class="slider aqua round"></span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group row">
+            <label class="control-label col-md-2">
+              Create Time
+              <span class="required"> * </span>
+            </label>
+            <div class="col-md-4">
+              <input readonly type="text" class="form-control input-height" [ngModel]="postproductMainCategoryRequest.createTime"
+                value='{{postproductMainCategoryRequest.createTime}}' formControlName="createTime" />
+            </div>
+            <label class="control-label col-md-2">
+              CreateBy
+              <span class="required"> * </span>
+            </label>
+            <div class="col-md-4">
+              <input type="text" class="form-control input-height" [ngModel]="postproductMainCategoryRequest.createBy"
+                value="{{postproductMainCategoryRequest.createBy}}" formControlName="createBy" readonly />
+            </div>
+
+          </div>
+          <div class="form-actions">
+            <div class="row">
+              <div class="offset-md-2 col-md-10">
+                <button type="submit" class="btn btn-primary m-r-20">
+                  <i class="fa fa-save"></i>
+                  Lưu
+                </button>
+                <a [routerLink]="['/product-main-category']" class="btn btn-default">Quay về </a>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="pagging text-center">
+          <div>
+            <div class="dataTables_info" id="example4_info" role="status" aria-live="polite">Showing
+              1 to 10 of 18 entries</div>
+          </div>
+          <div>
+            <div class="dataTables_paginate paging_simple_numbers" id="example4_paginate">
+              <ul class="pagination justify-content-center">
+                <li class="paginate_button page-item previous disabled" id="example4_previous">
+                  <a href="#" aria-controls="example4" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                </li>
+                <li class="paginate_button page-item active"><a href="#" aria-controls="example4" data-dt-idx="1"
+                    tabindex="0" class="page-link">1</a></li>
+                <li class="paginate_button page-item "><a href="#" aria-controls="example4" data-dt-idx="2" tabindex="0"
+                    class="page-link">2</a></li>
+                <li class="paginate_button page-item next" id="example4_next"><a href="#" aria-controls="example4"
+                    data-dt-idx="3" tabindex="0" class="page-link">Next</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

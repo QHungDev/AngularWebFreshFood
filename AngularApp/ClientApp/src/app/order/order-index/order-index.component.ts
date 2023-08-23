@@ -27,8 +27,8 @@ export class OrderIndexComponent implements OnInit {
         });
       }
       else {
-        const accountsObservable = this.orderService.searchOrders(this.keywords);
-        accountsObservable.subscribe((ordersData: any[]) => {
+        const ordersObservable = this.orderService.searchOrders(this.keywords);
+        ordersObservable.subscribe((ordersData: any[]) => {
           this.orders = ordersData;
         });
       }

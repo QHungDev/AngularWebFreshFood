@@ -31,9 +31,9 @@ namespace API.Controllers
        
 
         [HttpGet("get/{id}")]
-        public async Task<IActionResult> Get(int ID)
+        public async Task<IActionResult> Get(int id)
         {
-            var response = await _service.FindItem(ID);
+            var response = await _service.FindItem(id);
 
             if (response == null)
                 return NotFound();
@@ -57,52 +57,52 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        //[HttpPut("put")]
-        //public async Task<IActionResult> Put(Article item)
-        //{
-        //    if (item == null)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("put")]
+        public async Task<IActionResult> Put(int ProductMainCategoryID,ProductMainCategory item)
+        {
+           if (item == null)
+           {
+               return BadRequest();
+           }
 
-        //    var response = await _service.Update(item);
+           var response = await _service.Update(ProductMainCategoryID,item);
 
-        //    if (response == null)
-        //        return UnprocessableEntity();
+           if (response == null)
+               return UnprocessableEntity();
 
-        //    return Ok(response);
-        //}
+           return Ok(response);
+        }
 
-        //[HttpDelete("delete/{id}")]
-        //public async Task<IActionResult> Delete(int ID)
-        //{
-        //    if (ID <= 0)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete(int ID)
+        {
+           if (ID <= 0)
+           {
+               return BadRequest();
+           }
 
-        //    var response = await _service.Delete(ID);
+           var response = await _service.Delete(ID);
 
-        //    if (!response)
-        //        return UnprocessableEntity();
+           if (!response)
+               return UnprocessableEntity();
 
-        //    return Ok(response);
-        //}
+           return Ok(response);
+        }
 
-        //[HttpPatch("path/{id}/{status}")]
-        //public async Task<IActionResult> Path(int ID, bool status)
-        //{
-        //    if (ID <= 0)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPatch("path/{id}/{status}")]
+        public async Task<IActionResult> Path(int ID, bool status)
+        {
+           if (ID <= 0)
+           {
+               return BadRequest();
+           }
 
-        //    var response = await _service.UpdateStatus(ID, status);
+           var response = await _service.UpdateStatus(ID, status);
 
-        //    if (!response)
-        //        return UnprocessableEntity();
+           if (!response)
+               return UnprocessableEntity();
 
-        //    return Ok(response);
-        //}
+           return Ok(response);
+        }
     }
 }

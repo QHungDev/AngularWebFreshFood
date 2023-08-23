@@ -37,7 +37,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a asp-route="AdminAccountCategory" class="nav-link ">
+              <a href="#" class="nav-link ">
                 <i class="material-icons">list</i>
                 <span class="title">Loại tài khoản</span>
               </a>
@@ -66,9 +66,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a asp-route="AdminProductCategory" class="nav-link ">
+              <a [routerLink]="['/product-category']" class="nav-link ">
                 <i class="material-icons">list</i>
                 <span class="title">Loại sản phẩm</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/product-main-category']" class="nav-link ">
+                <i class="material-icons">list</i>
+                <span class="title">Loại sản phẩm cấp cha</span>
               </a>
             </li>
             <li class="nav-item">
@@ -89,7 +95,7 @@
           </a>
           <ul class="sub-menu">
             <li class="nav-item">
-              <a asp-route="AdminArticleIndex" class="nav-link ">
+              <a [routerLink]="['/article']" class="nav-link ">
                 <i class="material-icons">group</i>
                 <span class="title">Danh sách Tin tức</span>
               </a>
@@ -138,7 +144,7 @@
           <a [routerLink]="['/order']" class="nav-link">
             <i class="material-icons">mail</i>
             <span class="title">Đơn hàng</span>
-            <span class="label label-rouded label-menu">0</span>
+            <span class="label label-rouded label-menu">{{count}}</span>
           </a>
         </li>
       </ul>

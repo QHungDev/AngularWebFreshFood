@@ -116,16 +116,16 @@ namespace API.Services
             if (existItem == null)
                 return null;
 
-            existItem.Avatar = item.Avatar;
+            // existItem.Avatar = item.Avatar;
             existItem.Thumb = item.Thumb;
             existItem.Title = item.Title;
             existItem.Description = item.Description;
             existItem.Content = item.Content;
             existItem.Position = item.Position;
             existItem.Status = item.Status;
-            existItem.CreateTime = item.CreateTime;
+            // existItem.CreateTime = item.CreateTime;
             existItem.ArticleCategoryID = item.ArticleCategoryID;
-            existItem.CreateBy = item.CreateBy;
+            // existItem.CreateBy = item.CreateBy;
 
             try
             {

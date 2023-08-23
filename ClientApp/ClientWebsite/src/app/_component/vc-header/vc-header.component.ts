@@ -9,12 +9,12 @@ import { ClientService } from '../../services/client.service';
 })
 
 export class VcHeaderComponent implements OnInit {
-
+  length = 0;
   loginUsername: any;
   isLogin=true;
   constructor(private clientService: ClientService, private tokenService: TokenService, private router: Router){ };
-  
-  
+
+
   cartDetail(e: Event){
     e.preventDefault();
     this.router.navigate(['/cart']);
@@ -30,7 +30,10 @@ export class VcHeaderComponent implements OnInit {
     this.tokenService.logout();
     this.router.navigate(['/login']);
   }
-  length = 0;
+  trackCart(e: Event){
+    e.preventDefault();
+    this.router.navigate(['/client-cart']);
+  }
   ngOnInit(): void {
     this.loginUsername = this.tokenService.getSession()?.username;
     if(this.loginUsername!= null){
@@ -41,5 +44,5 @@ export class VcHeaderComponent implements OnInit {
     this.length=countCart;
     console.log("abasdac",countCart);
   }
-  
+
 }

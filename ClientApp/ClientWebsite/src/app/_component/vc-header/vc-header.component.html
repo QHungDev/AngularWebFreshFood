@@ -42,6 +42,9 @@
 										<a class="w-75" (click)="ClientLogin($event)" href="#" class="w-75">{{loginUsername}}</a>
 										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
 									</li>
+                  <li id="li_Register">
+										<a class="w-75" (click)="trackCart($event)" href="#">Đơn hàng của bạn</a>
+									</li>
 									<li id="li_Register">
 										<a class="w-75" (click)="logout($event)" href="#">Đăng Xuất</a>
 									</li>
@@ -59,7 +62,7 @@
 								</ul>
 							</ng-template>
 						</div>
-						
+
 					</li>
 					<li  class="nav-item icon">
 						<a (click)=cartDetail($event) class="nav-link giohang" href="#">

@@ -23,7 +23,7 @@
                 </div>
               </div>
             </div>
-  
+
             <!-- Content -->
             <table class="table table-hover table-checkable order-column full-width">
               <thead>
@@ -49,7 +49,7 @@
                   <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
                   <td class="center">{{order.orderID}}</td>
                   <td class="center">{{order.fullName}}</td>
-                  <td class="center">{{order.mobile}}</td>        
+                  <td class="center">{{order.mobile}}</td>
                   <td class="center">{{order.address}}</td>
                   <td class="center">{{order.total}}</td>
                   <td class="center">{{order.bonus}}</td>
@@ -64,12 +64,6 @@
                       <span class="slider aqua round"></span>
                     </label>
                   </td>
-                  <!-- <td class="center">
-                    <label class="switchToggle">
-                      <input type="checkbox" [checked]="order.chargeStatus">
-                      <span class="slider aqua round"></span>
-                    </label>
-                  </td> -->
                   <td [style]="order.deliveStatus == 1 ? 'color: darkgoldenrod;' : order.deliveStatus == 2 ? 'color: blue;' : order.deliveStatus == 3 ? 'color: green;' : 'color: red;'" class="center">
                     {{order.deliveStatus == 1 ? "Đang Đóng Gói" : order.deliveStatus == 2 ? "Đang Giao" : order.deliveStatus == 3 ? "Giao Hàng Thành Công" : "Đã Hủy"}}
                   </td>
@@ -80,7 +74,7 @@
                       <i class="fa fa-pencil"></i> Edit
                     </a>
                     <!-- <a href="#"
-                       
+
                        class="btn btn-danger btn-xs">
                       <i class="fa fa-trash-o "></i> Delete
                     </a> -->
@@ -88,7 +82,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Pagging -->
             <div class="pagging text-center">
               <div>
@@ -110,4 +104,3 @@
       </div>
     </div>
   </div>
-  

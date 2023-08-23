@@ -18,7 +18,7 @@ export class OrderService {
   }
   updateOrder(orderID: string, item: any): Observable<any> {
     return this.httpClient.put<any>(`${environment.apiUrl}/order/put?orderID=${orderID}`, item);
-    }
+   }
   searchOrders(username: string): Observable<any[]> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/order/searchall?username=${username}`);
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-vc-navigation',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VcNavigationComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private orderService: OrderService) { }
+  count: number = 0
   ngOnInit(): void {
+    const ordersObservable = this.orderService.getOrders();
+        ordersObservable.subscribe((ordersData: any[]) => {
+          if (ordersData !== null && ordersData !== undefined) {
+            this.count = ordersData.length
+          }
+        });
   }
 
 }

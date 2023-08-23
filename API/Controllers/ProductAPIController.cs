@@ -12,7 +12,7 @@ namespace API.Controllers
     {
         
         private IWebHostEnvironment myEnvironment;
-         private DBContext _context;
+        private DBContext _context;
         private IProductService _service;
         public ProductAPIController(DBContext context,IProductService service,IWebHostEnvironment environment)
         {
@@ -20,26 +20,26 @@ namespace API.Controllers
              _context = context;
             _service = service;
         }
-        private string SaveImage(string base64)
-        {
-            base64 = base64.Replace("data:image/jpeg;base64,", string.Empty);
-            base64 = base64.Replace("data:image/jpg;base64,", string.Empty);
-            base64 = base64.Replace("data:image/gif;base64,", string.Empty);
-            base64 = base64.Replace("data:image/png;base64,", string.Empty);
+        // private string SaveImage(string base64)
+        // {
+        //     base64 = base64.Replace("data:image/jpeg;base64,", string.Empty);
+        //     base64 = base64.Replace("data:image/jpg;base64,", string.Empty);
+        //     base64 = base64.Replace("data:image/gif;base64,", string.Empty);
+        //     base64 = base64.Replace("data:image/png;base64,", string.Empty);
 
-            string rootFolder = myEnvironment.WebRootPath;
-            string fileName = Guid.NewGuid() + ".jpg";
-            byte[] bytes = Convert.FromBase64String(base64);
-            string folderSave = $"/FileUploads/Account/Avatar/{fileName}";
-            string folderDownload = $"{rootFolder}/{folderSave}".Replace("/", "\\");
-            System.IO.File.WriteAllBytes(folderDownload, bytes);
-            return folderSave;
-        }
-        [NonAction]
-        public string GetActualpath(string FileName)
-        {
-            return myEnvironment.WebRootPath+"FileUploads\\Product\\Avatar\\"+FileName;
-        }
+        //     string rootFolder = myEnvironment.WebRootPath;
+        //     string fileName = Guid.NewGuid() + ".jpg";
+        //     byte[] bytes = Convert.FromBase64String(base64);
+        //     string folderSave = $"/FileUploads/Account/Avatar/{fileName}";
+        //     string folderDownload = $"{rootFolder}/{folderSave}".Replace("/", "\\");
+        //     System.IO.File.WriteAllBytes(folderDownload, bytes);
+        //     return folderSave;
+        // }
+        // [NonAction]
+        // public string GetActualpath(string FileName)
+        // {
+        //     return myEnvironment.WebRootPath+"FileUploads\\Product\\Avatar\\"+FileName;
+        // }
         [HttpGet("{imageAvatar}")]
         public async Task<ActionResult> GetImg([FromRoute] string imageAvatar){
             string folderSave = "FileUploads\\Product\\Avatar\\";
@@ -62,27 +62,27 @@ namespace API.Controllers
             }
             return Ok();
         }
-        [HttpGet("GetProductwithimage")]
-        public  IEnumerable<Product> GetProductwithimage()
-        {
-            List<Product> _list = new List<Product>();
-            var _product = _context.Products.ToList();
-            string Filepath = "https://localhost:7265/api";
-            if (_product != null && _product.Count > 0)
-            {
-                _product.ForEach(item =>
-                {
-                    _list.Add(new Product()
-                    {
-                        ProductID = item.ProductID,
-                        Avatar = Filepath+item.Avatar
-                    });
+        // [HttpGet("GetProductwithimage")]
+        // public  IEnumerable<Product> GetProductwithimage()
+        // {
+        //     List<Product> _list = new List<Product>();
+        //     var _product = _context.Products.ToList();
+        //     string Filepath = "https://localhost:7265/api";
+        //     if (_product != null && _product.Count > 0)
+        //     {
+        //         _product.ForEach(item =>
+        //         {
+        //             _list.Add(new Product()
+        //             {
+        //                 ProductID = item.ProductID,
+        //                 Avatar = Filepath+item.Avatar
+        //             });
 
-                });
+        //         });
 
-            }
-            return _list;
-        }
+        //     }
+        //     return _list;
+        // }
 
         [HttpPost("UploadImage")]
         public async Task<ActionResult> UploadImage(int productID)
@@ -102,7 +102,7 @@ namespace API.Controllers
             {
                 //string rootFolder = myEnvironment.WebRootPath;
                 string FileName = source.FileName;
-                FileName = Guid.NewGuid() + ".jpg";
+                // FileName = Guid.NewGuid() + ".jpg";
                 string folderSave = "FileUploads\\Product\\Avatar\\";
                 try
                 {

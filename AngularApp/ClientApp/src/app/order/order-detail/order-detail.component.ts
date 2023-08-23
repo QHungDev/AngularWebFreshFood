@@ -48,7 +48,7 @@ export class OrderDetailComponent implements OnInit {
     ];
 
   constructor(private orderService: OrderService, private router: Router,
-    public formBuilder: FormBuilder, private http: HttpClient, private activeRoute: ActivatedRoute) { 
+    public formBuilder: FormBuilder, private http: HttpClient, private activeRoute: ActivatedRoute) {
       this.form = this.formBuilder.group({
         orderID: [''],
         fullName: [''],
@@ -71,19 +71,17 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit(): void {
       this.activeRoute.queryParams.subscribe(params => {
         this.orderID = params.orderID;
-        console.log("abc",this.orderID);
         if (this.orderID && this.orderID !== "") {
           const productsObservable = this.orderService.getOrder(this.orderID);
           productsObservable.subscribe((productsData: any) => {
             this.postOrderRequest = productsData;
-            console.log("abc",this.postOrderRequest);
           });
         }
       });
 
       this.activeRoute.queryParams.subscribe(params => {
         this.keywords = params.username;
-  
+
         if (!this.keywords) {
           const ordersObservable = this.orderService.getOrders();
           ordersObservable.subscribe((ordersData: any[]) => {
@@ -106,12 +104,12 @@ export class OrderDetailComponent implements OnInit {
   showImg(imgName: any) {
     //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
     var name = imgName.split('/')[4]
-    
+
     var imgUrl = 'https://localhost:7265/api/product/' + name;
-    
+
     return imgUrl;
   }
-  
+
 
 
 
@@ -142,7 +140,7 @@ export class OrderDetailComponent implements OnInit {
     // this.postOrderRequest.ConfirmStatus = confirmStatus;
     // this.postOrderRequest.ChargeStatus = chargeStatus;
     this.postOrderRequest.DeliveStatus = deliveStatus;
-    
+
     if (this.orderID && this.orderID !== ""  && this.postOrderRequest.orderID !== undefined) {
       //Update
       this.orderService.updateOrder(this.orderID, this.postOrderRequest).subscribe({

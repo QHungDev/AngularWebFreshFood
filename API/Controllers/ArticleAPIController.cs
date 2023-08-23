@@ -10,9 +10,13 @@ namespace API.Controllers
     [ApiController]
     public class ArticleAPIController : ControllerBase
     {
+        private IWebHostEnvironment myEnvironment;
+        private DBContext _context;
         private IArticleService _service;
-        public ArticleAPIController(IArticleService service)
+        public ArticleAPIController(IWebHostEnvironment environment,DBContext context,IArticleService service)
         {
+            myEnvironment = environment;
+             _context = context;
             _service = service;
         }
 
@@ -25,6 +29,17 @@ namespace API.Controllers
                 return NotFound();
 
             return Ok(response);
+        }
+        [HttpGet("{imageAvatar}")]
+        public async Task<ActionResult> GetImg([FromRoute] string imageAvatar){
+            string folderSave = "FileUploads\\Article\\Avatar\\";
+            string path = myEnvironment.WebRootPath+folderSave;
+            var filePath = path + imageAvatar;
+            if(System.IO.File.Exists(filePath)){
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
+                return File(b,"image/jpg");
+            }
+            return Ok();
         }
 
         [HttpGet("get/{page}/{pageSize}")]
@@ -97,15 +112,67 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        [HttpPatch("path/{id}/{status}")]
-        public async Task<IActionResult> Path(int ID, bool status)
+         [HttpPost("UploadImage")]
+        public async Task<ActionResult> UploadImage(int articleID)
         {
-            if (ID <= 0)
+            if (articleID == 0)
+            {
+                articleID = _context.Articles.OrderByDescending(x => x.ArticleID).First().ArticleID;
+            }
+            bool Result = false;
+
+            var fileImg = Request.Form.Files;
+
+            var Files = Request.Form.Files;
+            //string urlName ="";
+            var item = await _context.Articles.FindAsync(articleID);  
+            foreach (IFormFile source in Files)
+            {
+                //string rootFolder = myEnvironment.WebRootPath;
+                string FileName = source.FileName;
+                // FileName = Guid.NewGuid() + ".jpg";
+                string folderSave = "FileUploads\\Article\\Avatar\\";
+                try
+                {
+                    if (!System.IO.Directory.Exists(folderSave))
+                        System.IO.Directory.CreateDirectory(folderSave);
+                    //string folderDownload = $"{rootFolder}/{folderSave}".Replace("/", "\\")+FileName;
+                    string Filepath = myEnvironment.WebRootPath+folderSave+FileName;
+                    string FileUrl ="/FileUploads/Article/Avatar/"+FileName;
+
+                    if (System.IO.File.Exists(Filepath))
+                        System.IO.File.Delete(Filepath);
+                    using (FileStream stream = System.IO.File.Create(Filepath))
+                    {
+                      
+                        await source.CopyToAsync(stream);
+                        if(stream != null){
+                            //urlName = stream.Name;
+                             item.Avatar = FileUrl;
+                             await _context.SaveChangesAsync();
+                        }    
+                        Result = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return Ok();
+
+        }
+
+        [HttpPatch("path/{id}/{status}")]
+        public async Task<IActionResult> Path(int id, bool status)
+        {
+            if (id <= 0)
             {
                 return BadRequest();
             }
 
-            var response = await _service.UpdateStatus(ID, status);
+            var response = await _service.UpdateStatus(id, status);
 
             if (!response)
                 return UnprocessableEntity();

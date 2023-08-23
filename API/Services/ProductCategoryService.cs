@@ -47,6 +47,7 @@ namespace API.Services
             var item = await _context.ProductCategories.FindAsync(id);
             return item;
         }
+        
 
         public async Task<List<ProductCategory>> FindWithPaging(string title, int page, int pageSize)
         {
@@ -110,14 +111,14 @@ namespace API.Services
             if (existItem == null)
                 return null;
 
-            existItem.Avatar = item.Avatar;
+            // existItem.Avatar = item.Avatar;
             existItem.Thumb = item.Thumb;
             existItem.Title = item.Title;
             existItem.Description = item.Description;
             existItem.Position = item.Position;
             existItem.Status = item.Status;
-            existItem.CreateTime = item.CreateTime;
-            existItem.CreateBy = item.CreateBy;
+            // existItem.CreateTime = item.CreateTime;
+            // existItem.CreateBy = item.CreateBy;
             existItem.ProductMainCategoryID = item.ProductMainCategoryID;
             await _context.SaveChangesAsync();
             return existItem;

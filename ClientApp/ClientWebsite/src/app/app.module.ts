@@ -13,6 +13,9 @@ import { HomeComponent } from './home/home.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
+import { VcFooterComponent } from './_component/vc-footer/vc-footer.component';
+import { ClientCartIndexComponent } from './client-cart/client-cart-index/client-cart-index.component';
+import { ClientCartDetailComponent } from './client-cart/client-cart-detail/client-cart-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { CartComponent } from './cart/cart.component';
     HomeComponent,
     ProductDetailComponent,
     LoginComponent,
-    CartComponent
+    CartComponent,
+    VcFooterComponent,
+    ClientCartIndexComponent,
+    ClientCartDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +41,7 @@ import { CartComponent } from './cart/cart.component';
       {
         path: '', component: SiteLayoutComponent, children: [
           { path: '', component: HomeComponent, pathMatch: 'full'}
-          
+
         ]
       },
       //Product routers
@@ -49,24 +55,36 @@ import { CartComponent } from './cart/cart.component';
           // { path: 'category', component: AccountCategoryComponent},
         ]
       },
+      //////CLIENT _CART
+      {
+        path: 'client-cart', component: SiteLayoutComponent, children: [
+          { path: '', component: ClientCartIndexComponent, },
+          { path: 'index', component: ClientCartIndexComponent },
+          { path: 'index/:productID', component: ClientCartIndexComponent },
+          { path: 'detail', component: ClientCartDetailComponent},
+          { path: 'detail/:productID', component: ClientCartDetailComponent},
+          // { path: 'category', component: AccountCategoryComponent},
+        ]
+      },
       //Account routers
       {
-        path: '', component: SiteLayoutComponent, children: [         
+        path: '', component: SiteLayoutComponent, children: [
           { path: 'login', component: LoginComponent},
           // { path: 'category', component: AccountCategoryComponent},
         ]
       },
+      /////CART
       {
-        path: '', component: SiteLayoutComponent, children: [         
+        path: '', component: SiteLayoutComponent, children: [
           { path: 'cart', component: CartComponent},
           // { path: 'category', component: AccountCategoryComponent},
         ]
       }
       //Security layout routers
-      
+
 
       //None layout routers
-     
+
     ])
   ],
   providers: [],

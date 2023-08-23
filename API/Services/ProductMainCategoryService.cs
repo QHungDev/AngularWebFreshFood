@@ -105,9 +105,9 @@ namespace API.Services
             return data;
         }
 
-        public async Task<ProductMainCategory> Update(int id, ProductMainCategory item)
+        public async Task<ProductMainCategory> Update(int ProductMainCategoryID, ProductMainCategory item)
         {
-            var existItem = await _context.ProductMainCategories.FindAsync(id);
+            var existItem = await _context.ProductMainCategories.FindAsync(ProductMainCategoryID);
 
             if (existItem == null)
                 return null;

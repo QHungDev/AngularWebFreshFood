@@ -23,13 +23,14 @@
                 </div>
               </div>
             </div>
-  
+
             <!-- Content -->
             <table class="table table-hover table-checkable order-column full-width">
               <thead>
                 <tr>
-                  <th class="center">Avatar</th>
                   <th class="center">STT</th>
+                  <th class="center">Avatar</th>
+                  <th class="center">ID</th>
                   <th class="center">Title</th>
                   <th>Description</th>
                   <th class="center">Price</th>
@@ -40,6 +41,7 @@
               </thead>
               <tbody>
                 <tr class="odd gradeX" *ngFor="let product of products; let i = index">
+                  <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
                   <td class="patient-img">
                     <!-- <button type="button" (click)="getImageFromService()">Get Image</button> -->
                     <!-- <img  src="{{imageToShow}}" alt=""> -->
@@ -48,8 +50,8 @@
                     <!-- <img  src="{{product.avatar}}" alt=""> -->
                     <!-- <img src="/API/{{product.avatar}}" alt=""> -->
                   </td>
-                  <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
                   <td class="center">{{product.productID}}</td>
+                  <td class="center">{{product.title}}</td>
                   <td>{{product.description}}</td>
                   <td class="center">{{product.price|currency:'VND':''}} VND</td>
                   <td class="center">{{product.createTime  | date: 'dd/MM/yyyy'}}</td>
@@ -74,7 +76,7 @@
                 </tr>
               </tbody>
             </table>
-  
+
             <!-- Pagging -->
             <div class="pagging text-center">
               <div>
@@ -96,4 +98,3 @@
       </div>
     </div>
   </div>
-  
