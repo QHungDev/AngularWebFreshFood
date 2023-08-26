@@ -42,6 +42,16 @@ namespace API.Services
             return data;
         }
 
+        public async Task<List<Order>> FindAllByClient(string client)
+        {
+            var ClientID = _context.Clients.Where(x => x.Email == client).FirstOrDefault().ClientID;
+            var data = await _context.Orders
+                                     .Where(x => x.ClientID == ClientID)
+                                     .ToListAsync();
+
+            return data;
+        }
+
         public async Task<Order> FindItem(int id)
         {
             var data = await _context.Orders.FindAsync(id);
@@ -154,6 +164,31 @@ namespace API.Services
             await _context.SaveChangesAsync();
             return existItem;
         }
+
+        public async Task<Order> CancelOrder(int orderID)
+        {
+            var existItem = await _context.Orders.FirstOrDefaultAsync(x => x.OrderID == orderID);
+            if (existItem == null)
+                return null;
+
+            // existItem.FullName = item.FullName;
+            // existItem.Mobile = item.Mobile;
+            // existItem.Address = item.Address;
+            // existItem.Total = item.Total;
+            // existItem.Bonus = item.Bonus;
+            // existItem.Amount = item.Amount;
+            // existItem.CreateTime = item.CreateTime;
+
+            existItem.OrderStatus = 3;
+            // existItem.ConfirmStatus = item.ConfirmStatus;
+            // existItem.ChargeStatus = item.ChargeStatus;
+            existItem.DeliveStatus = 4;
+            // existItem.ClientID = item.ClientID;
+
+            await _context.SaveChangesAsync();
+            return existItem;
+        }
+        
 
         public async Task<Order> ChangeConfirmStatus(int id)
         {

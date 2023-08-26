@@ -14,6 +14,7 @@ namespace API.Interfaces
         public Task<Article> Insert(Article item);
         public Task<Article> Update(Article item);
         public Task<bool> Delete(int id);
+        public Task<List<Article>> SearchArticle(string title);
         public Task<bool> UpdateStatus(int id, bool status);
     }
 }

@@ -16,6 +16,7 @@ import { CartComponent } from './cart/cart.component';
 import { VcFooterComponent } from './_component/vc-footer/vc-footer.component';
 import { ClientCartIndexComponent } from './client-cart/client-cart-index/client-cart-index.component';
 import { ClientCartDetailComponent } from './client-cart/client-cart-detail/client-cart-detail.component';
+import { RegisterclientComponent } from './registerclient/registerclient.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ClientCartDetailComponent } from './client-cart/client-cart-detail/clie
     CartComponent,
     VcFooterComponent,
     ClientCartIndexComponent,
-    ClientCartDetailComponent
+    ClientCartDetailComponent,
+    RegisterclientComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -60,9 +62,9 @@ import { ClientCartDetailComponent } from './client-cart/client-cart-detail/clie
         path: 'client-cart', component: SiteLayoutComponent, children: [
           { path: '', component: ClientCartIndexComponent, },
           { path: 'index', component: ClientCartIndexComponent },
-          { path: 'index/:productID', component: ClientCartIndexComponent },
+          { path: 'index/:orderID', component: ClientCartIndexComponent },
           { path: 'detail', component: ClientCartDetailComponent},
-          { path: 'detail/:productID', component: ClientCartDetailComponent},
+          { path: 'detail/:orderID', component: ClientCartDetailComponent},
           // { path: 'category', component: AccountCategoryComponent},
         ]
       },
@@ -70,6 +72,12 @@ import { ClientCartDetailComponent } from './client-cart/client-cart-detail/clie
       {
         path: '', component: SiteLayoutComponent, children: [
           { path: 'login', component: LoginComponent},
+          // { path: 'category', component: AccountCategoryComponent},
+        ]
+      },
+      {
+        path: '', component: SiteLayoutComponent, children: [
+          { path: 'registerclient', component: RegisterclientComponent},
           // { path: 'category', component: AccountCategoryComponent},
         ]
       },

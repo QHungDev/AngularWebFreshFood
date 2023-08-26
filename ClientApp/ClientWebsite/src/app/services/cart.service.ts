@@ -14,12 +14,11 @@ export class CartService {
   public cartItemList: any = []
   public productList = new BehaviorSubject<any>([]);
   getProductsLocal(){
-    debugger
     return this.cartItemList = localStorage.getItem('localCart');
   }
   addtoCartLocal(product: any) {
     let localCart = localStorage.getItem('localCart');
-    if (!localCart) {     
+    if (!localCart) {
       localStorage.setItem('localCart', JSON.stringify([product]));
       // this.cartItemList.emit([product]);
     }
@@ -27,7 +26,7 @@ export class CartService {
       this.cartItemList = JSON.parse(localCart);
       this.cartItemList.push(product);
       localStorage.setItem('localCart', JSON.stringify(this.cartItemList));
-      // this.cartItemList.emit(this.cartItemList)     
+      // this.cartItemList.emit(this.cartItemList)
     }
   }
 
@@ -44,5 +43,25 @@ export class CartService {
 
   addOrderDetail(item: any): Observable<any> {
     return this.httpClient.post<any>(`${environment.apiUrl}/order-detail/post`, item);
+  }
+
+  getOrder(client: string): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/order/getOrderByClient/${client}`);
+  }
+
+  getOrderList(orderID: string): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/order/get/${orderID}`);
+  }
+
+  getOrderDetailProduct(orderID: any): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${environment.apiUrl}/order-detail/get/${orderID}`);
+  }
+
+  updateOrder(orderID: string, item: any): Observable<any> {
+    return this.httpClient.put<any>(`${environment.apiUrl}/order/put?orderID=${orderID}`, item);
+  }
+
+  cancelOrder(orderID: string): Observable<any> {
+    return this.httpClient.post<any>(`${environment.apiUrl}/order/cancelOrder/${orderID}`, {});
   }
 }

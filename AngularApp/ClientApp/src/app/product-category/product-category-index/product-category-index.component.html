@@ -7,18 +7,18 @@
           <div class="row p-4">
             <div class="col-md-3">
               <div class="btn-group mb-2">
-                <!-- <a href="#" (click)="addProduct($event)"  class="btn btn-info">
+                <a href="#" (click)="addProductCate($event)"  class="btn btn-info">
                   Add New <i class="fa fa-plus"></i>
-                </a> -->
+                </a>
               </div>
             </div>
             <div class="col-md-9">
               <div class="dataTables_filter mb-2">
                 <label class="w-100">
-                  <!-- <input type="search" class="form-control form-control-sm"
+                  <input type="search" class="form-control form-control-sm"
                          placeholder="Search..." aria-controls="example4"
-                         [(ngModel)]="keywords"
-                         (keyup.enter)="searchProduct($event)"> -->
+                         [(ngModel)]="title"
+                         (keyup.enter)="searchProductCate($event)">
                 </label>
               </div>
             </div>
@@ -44,7 +44,7 @@
                 <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
                 <td class="center">{{item.productCategoryID}}</td>
                 <td class="center">{{item.title}}</td>
-                <td class="center">
+                <td class="patient-img">
                   <img [src]="showImg(item.avatar)" alt="">
                 </td>
                 <td class="center">{{item.position}}</td>

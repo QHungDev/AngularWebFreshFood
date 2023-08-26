@@ -34,7 +34,7 @@ export class ProductCategoryDetailComponent implements OnInit {
     Status: true,
     CreateTime:'',
     CreateBy:'',
-    ProductMainCategoryID: ""
+    ProductMainCategoryID: "0"
   };
   productCategoryID = '';
 
@@ -49,7 +49,7 @@ export class ProductCategoryDetailComponent implements OnInit {
         status: [true],
         createTime: [''],
         createBy: [''],
-        productMainCategoryID: [''],
+        productMainCategoryID: ['0'],
       });
     }
 
@@ -63,7 +63,7 @@ export class ProductCategoryDetailComponent implements OnInit {
 
     showImg(imgName: any) {
       //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
-      if (imgName !== undefined) {
+      if (imgName !== undefined && imgName !== null) {
         var name = imgName.split('/')[4]
 
         var imgUrl = 'https://localhost:7265/api/product-category/' + name;
@@ -94,6 +94,7 @@ export class ProductCategoryDetailComponent implements OnInit {
 
   submitForm() {
     var productMainCategoryID = this.form.get('productMainCategoryID')?.value;
+    var productCategoryID = this.form.get('productCategoryID')?.value;
     var avatar = this.form.get('avatar')?.value;
     var title = this.form.get('title')?.value;
     var description = this.form.get('description')?.value;
@@ -103,12 +104,13 @@ export class ProductCategoryDetailComponent implements OnInit {
     var createBy = this.form.get('createBy')?.value;
     var status = this.form.get('status')?.value;
     this.postProductCategoryRequest.ProductMainCategoryID = productMainCategoryID;
+    this.postProductCategoryRequest.ProductCategoryID = productCategoryID;
     this.postProductCategoryRequest.Avatar = avatar;
     this.postProductCategoryRequest.Title = title;
     this.postProductCategoryRequest.Description = description;
     this.postProductCategoryRequest.Position = position;
-    this.postProductCategoryRequest.CreateTime = createTime;
-    this.postProductCategoryRequest.CreateBy = createBy;
+    this.postProductCategoryRequest.CreateTime = new Date();
+    this.postProductCategoryRequest.CreateBy = window.localStorage.getItem('Username');
     this.postProductCategoryRequest.Status = status;
     let imageFormData:any = new FormData();
     if (this.uploadedImage !== undefined ) {
@@ -116,7 +118,6 @@ export class ProductCategoryDetailComponent implements OnInit {
     }
     const updateProductCategoryforkJoin = this.productCategoryService.updateProductCate(this.productCategoryID, this.postProductCategoryRequest);
     const upLoadImageforkJoin = this.productCategoryService.UploadFile(this.productCategoryID,imageFormData);
-    debugger
     if (this.productCategoryID && this.productCategoryID !== "") {
 
       //Update
@@ -138,6 +139,7 @@ export class ProductCategoryDetailComponent implements OnInit {
     else {
       //Add new
       if (this.postProductCategoryRequest.ProductMainCategoryID && this.postProductCategoryRequest.ProductMainCategoryID !== "" && this.postProductCategoryRequest.ProductMainCategoryID !== undefined) {
+        debugger
         this.productCategoryService.addProductCate(this.postProductCategoryRequest).subscribe({
           next: (data => {
             // this.router.navigate(['/product']);

@@ -46,39 +46,39 @@ export class HomeComponent implements OnInit {
   showImg(imgName: any) {
     //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
     var name = imgName.split('/')[4]
-    
+
     var imgUrl = 'https://localhost:7265/api/product/' + name;
-    
+
     return imgUrl;
   }
-  
+
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
-    
+
     reader.addEventListener("load", () => {
        this.imageToShow = reader.result;
     }, false);
- 
+
     if (image) {
        reader.readAsDataURL(image);
     }
    }
-   
- 
+
+
    getImageFromService() {
        this.isImageLoading = true;
-       
+
        this.productService.getImage(this.imgUrl).subscribe(data => {
          this.createImageFromBlob(data);
          this.isImageLoading = false;
-         
+
        }, error => {
          this.isImageLoading = false;
          console.log(error);
-         
+
        });
    }
-   
+
   searchProduct(e: Event): void {
     e.preventDefault();
     this.router.navigate(['/product/index'], { queryParams: { title: this.keywords } });
@@ -90,6 +90,10 @@ export class HomeComponent implements OnInit {
   editProduct(e: Event, product: any) {
     e.preventDefault();
     this.router.navigate(['/product/detail'], { queryParams: { productID: product.productID } });
+  }
+  percent(price:any, oldPrice: any){
+    // (price/oldPrice)*100
+    return Math.round(((price/oldPrice)*100)*10^2)/10^2
   }
   deleteProduct(e: Event, productID: number) {
     e.preventDefault();

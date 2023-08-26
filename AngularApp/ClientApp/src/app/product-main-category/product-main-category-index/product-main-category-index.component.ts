@@ -18,7 +18,7 @@ export class ProductMainCategoryIndexComponent implements OnInit {
   ngOnInit(): void {
 
     this.activeRoute.queryParams.subscribe(params => {
-      this.keywords = params.username;
+      this.keywords = params.title;
 
       if (!this.keywords) {
         const productMainCategoriesObservable = this.productMainCategoryService.getProductMainCategories();
@@ -42,5 +42,33 @@ export class ProductMainCategoryIndexComponent implements OnInit {
   editProductMainCategory(e: Event, productMainCategories: any) {
     e.preventDefault();
     this.router.navigate(['/product-main-category/detail'], { queryParams: { productMainCategoryID: productMainCategories.productMainCategoryID } });
+  }
+
+  searchProductMain(e: Event): void {
+    e.preventDefault();
+    this.router.navigate(['/product-main-category/index'], { queryParams: { title: this.keywords } });
+  }
+  addProductMain(e: Event): void {
+    e.preventDefault();
+    this.router.navigate(['/product-main-category/detail']);
+  }
+
+  deleteProductMain(e: Event, productMainCategoryID: number) {
+    e.preventDefault();
+
+    var result = confirm("Bạn có chắc muốn xóa không?");
+    if (result == true) {
+      this.productMainCategoryService.deleteProductMain(productMainCategoryID).subscribe({
+        next: (data => {
+          if (data?.message) {
+            alert(data.message)
+          }
+          window.location.reload();
+        }),
+        error: ((error: ErrorResponse) => {
+          alert(error.Error);
+        })
+      });
+    }
   }
 }

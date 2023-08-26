@@ -111,10 +111,10 @@ export class ArticleDetailComponent implements OnInit {
     this.postArticleRequest.Content = content;
     this.postArticleRequest.Position = position;
     this.postArticleRequest.CreateTime = new Date();
-    this.postArticleRequest.CreateBy = createBy
+    this.postArticleRequest.CreateBy = window.localStorage.getItem('Username');
     this.postArticleRequest.Status = status;
     let imageFormData:any = new FormData();
-    debugger
+
     if (this.uploadedImage !== undefined ) {
       imageFormData.append('this.postArticleRequest.Avatar', this.uploadedImage, this.uploadedImage?.name);
     }

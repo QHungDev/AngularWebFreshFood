@@ -82,10 +82,21 @@ namespace API.Controllers
             return Ok();
 
         }
+
         [HttpPost("post")]
-        public IActionResult Post(ProductCategory item)
-        {
-            return Ok();
+        public async Task<IActionResult> Post(ProductCategory item)
+        {            
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Insert(item);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
         }
 
         [HttpGet("get")]
@@ -124,6 +135,14 @@ namespace API.Controllers
                 return UnprocessableEntity();
 
             return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("searchall")]
+        public async Task<IActionResult> SearchProductCate(string title)
+        {
+            var data = await _service.SearchProductCate(title);
+            return Ok(data);
         }
 
         [HttpDelete("delete/{id}")]

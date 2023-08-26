@@ -2,7 +2,7 @@
     <div class="col-md-12 col-sm-12">
         <div class="card card-box">
             <div class="card-head">
-                <header>Thông tin tài khoản</header>
+                <header>Thông tin đơn hàng</header>
             </div>
             <div class="card-body" id="bar-parent">
                 <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
@@ -41,7 +41,7 @@
                         </div>
                         </div>
 
-                        
+
                     </div>
                     <div class="form-group row">
                         <label class="control-label col-md-2">
@@ -60,7 +60,7 @@
                             <input type="text" class="form-control input-height" [ngModel]="postOrderRequest.total|currency:'VND':''"
                                 value="{{postOrderRequest.total}}" formControlName="total" readonly />
                         </div>
-                        
+
                     </div>
                     <div class="form-group row">
                         <label class="control-label col-md-2">
@@ -92,7 +92,7 @@
                                   {{item.title}}
                                 </option>
                               </select>
-                              
+
                             <!-- <input type="text" class="form-control input-height"
                                 [ngModel]="postOrderRequest.orderStatus" value='{{postOrderRequest.orderStatus}}'
                                 formControlName="orderStatus" /> -->
@@ -132,7 +132,7 @@
                                 [ngModel]="postOrderRequest.chargeStatus" value='{{postOrderRequest.chargeStatus}}'
                                 formControlName="chargeStatus" />
                         </div> -->
-                        
+
                         <label class="control-label col-md-2">
                             Create Time
                             <span class="required"> * </span>

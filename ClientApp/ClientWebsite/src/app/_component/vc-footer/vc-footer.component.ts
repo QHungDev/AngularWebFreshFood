@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-vc-footer',
   templateUrl: './vc-footer.component.html',
@@ -7,4 +6,11 @@ import { Component } from '@angular/core';
 })
 export class VcFooterComponent {
 
+  backToTop() {
+    window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+     });
+ }
 }

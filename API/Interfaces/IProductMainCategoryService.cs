@@ -12,6 +12,7 @@ namespace API.Interfaces
         public Task<ProductMainCategory> Insert(ProductMainCategory item);
         public Task<ProductMainCategory> Update(int ProductMainCategoryID, ProductMainCategory item);
         public Task<bool> Delete(int id);
+        public Task<List<ProductMainCategory>> SearchProductMain(string title);
         public Task<bool> UpdateStatus(int id, bool status);
     }
 }

@@ -17,13 +17,12 @@ export class ArticleIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe(params => {
-      this.keywords = params.username;
+      this.keywords = params.title;
 
       if (!this.keywords) {
         const articleObservable = this.articleService.getArticles();
         articleObservable.subscribe((articlesData: any[]) => {
           this.articles = articlesData;
-          console.log("hahaskja", this.articles)
         });
       }
       else {

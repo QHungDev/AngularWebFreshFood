@@ -43,21 +43,21 @@
 										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
 									</li>
                   <li id="li_Register">
-										<a class="w-75" (click)="trackCart($event)" href="#">Đơn hàng của bạn</a>
+										<a class="w-75"  href="#" (click)="trackCart($event)" href="#">Đơn hàng của bạn</a>
 									</li>
 									<li id="li_Register">
-										<a class="w-75" (click)="logout($event)" href="#">Đăng Xuất</a>
+										<a class="w-75"  href="#" (click)="logout($event)" href="#">Đăng Xuất</a>
 									</li>
 								</ul>
 							</ng-template>
 							<ng-template  #loggedOut>
 								<ul>
 									<li id="li_Login">
-										<a class="w-75" (click)="ClientLogin($event)" class="w-75">Đăng nhập</a>
+										<a class="w-75" href="#" (click)="ClientLogin($event)" class="w-75">Đăng nhập</a>
 										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
 									</li>
 									<li id="li_Register">
-										<a class="w-75" href="login.aspx">Đăng ký</a>
+										<a class="w-75"  href="#" (click)="ClientRegister($event)">Đăng ký</a>
 									</li>
 								</ul>
 							</ng-template>

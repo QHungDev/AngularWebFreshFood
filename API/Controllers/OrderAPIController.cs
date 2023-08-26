@@ -31,6 +31,22 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("cancelOrder/{orderID}")]
+        public async Task<IActionResult> Post(int orderID)
+        {            
+            if (orderID == null || orderID == 0)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.CancelOrder(orderID);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
+        }
+
         [HttpGet("get")]
         public async Task<IActionResult> Get()
         {
@@ -46,6 +62,17 @@ namespace API.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var response = await _service.FindItem(id);
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
+        }
+
+        [HttpGet("getOrderByClient/{client}")]
+        public async Task<IActionResult> Get(string client)
+        {
+            var response = await _service.FindAllByClient(client);
 
             if (response == null)
                 return NotFound();

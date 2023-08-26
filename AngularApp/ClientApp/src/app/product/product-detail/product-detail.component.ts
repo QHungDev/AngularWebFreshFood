@@ -181,6 +181,7 @@ export class ProductDetailComponent implements OnInit {
     else {
       //Add new
       if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
+        debugger
         this.productService.addProduct(this.postProductRequest).subscribe({
           next: (data => {
             // this.router.navigate(['/product']);

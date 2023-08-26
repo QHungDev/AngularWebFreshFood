@@ -65,6 +65,12 @@ namespace API.Services
             return data;
         }
         
+        public async Task<List<ProductMainCategory>> SearchProductMain(string title)
+        {
+            var data = await _context.ProductMainCategories.Where(x => x.Title.Contains(title)).ToListAsync();
+
+            return data;
+        }
 
         public async Task<ProductMainCategory> Insert(ProductMainCategory item)
         {
@@ -118,8 +124,8 @@ namespace API.Services
             existItem.Description = item.Description;
             existItem.Position = item.Position;
             existItem.Status = item.Status;
-            existItem.CreateTime = item.CreateTime;
-            existItem.CreateBy = item.CreateBy;
+            // existItem.CreateTime = item.CreateTime;
+            // existItem.CreateBy = item.CreateBy;
             
             await _context.SaveChangesAsync();
             return existItem;

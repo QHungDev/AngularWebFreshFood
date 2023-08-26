@@ -158,6 +158,13 @@ namespace API.Services
             }
         }
 
+        public async Task<List<Article>> SearchArticle(string title)
+        {
+            var data = await _context.Articles.Where(x => x.Title.Contains(title)).ToListAsync();
+
+            return data;
+        }
+
         public async Task<bool> UpdateStatus(int id, bool status)
         {
             var item = await _context.Articles.FindAsync(id);

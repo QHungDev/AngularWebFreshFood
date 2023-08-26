@@ -97,12 +97,12 @@
 								<span class="price">
 									{{product.price}}
 								</span>
-								<span class="sale">Phantram</span>
+								<span class="sale">{{percent(product.price,product.oldPrice)}}%</span>
 								<a  href="#" class="btn btn-success">
 									<i class="fa fa-shopping-cart"></i>
 									Thêm vào giỏ
 								</a>
-								
+
 							</div>
 						</div>
 					</li>
@@ -111,7 +111,7 @@
 				</ul>
 			</div>
 	</div>
-	
+
 	<div class="row preferential">
 		<div class="col-7">
 			<div class="pull-right">
@@ -143,9 +143,9 @@
 				<h2>
 					Mặt hàng bắn chạy
 				</h2>
-				<img class="img-fluid" src="images/hinh-anh-trang-chu/logo-leaf.png" />
+				<img class="img-fluid" src="../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
 			</div>
-			<div class="product-item">
+			<!-- <div class="product-item">
 				<ul>
 					<li class="item">
 						<a href='#' class="product-image">
@@ -170,6 +170,38 @@
 							</div>
 						</div>
 					</li>
+				</ul>
+			</div> -->
+      <div class="product-item" >
+				<ul>
+					<div >
+					<a>
+						<li *ngFor="let product of products; let i = index" class="item">
+						<a href="#"(click)="editProduct($event, product)" class="product-image">
+							<img class="img-fluid"  [src]="showImg(product.avatar)" />
+						</a>
+						<div class="info-box">
+							<p class="product-name mb-1">
+								<a href="#" (click)="editProduct($event, product)">{{product.title}}</a>
+							</p>
+							<div class="price-box">
+								<span class="old-price">
+									{{product.oldPrice}}
+                                </span>
+								<span class="price">
+									{{product.price}}
+								</span>
+								<span class="sale">{{percent(product.price,product.oldPrice)}}%</span>
+								<a  href="#" class="btn btn-success">
+									<i class="fa fa-shopping-cart"></i>
+									Thêm vào giỏ
+								</a>
+
+							</div>
+						</div>
+					</li>
+					</a>
+					</div>
 				</ul>
 			</div>
 		</div>

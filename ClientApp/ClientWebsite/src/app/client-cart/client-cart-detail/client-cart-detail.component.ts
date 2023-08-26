@@ -1,10 +1,127 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { ErrorResponse } from 'src/app/responses/error-response';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-client-cart-detail',
   templateUrl: './client-cart-detail.component.html',
   styleUrls: ['./client-cart-detail.component.css']
 })
-export class ClientCartDetailComponent {
+export class ClientCartDetailComponent implements OnInit {
+  constructor(private router: Router,private cartService : CartService, private activeRoute: ActivatedRoute,  public formBuilder: FormBuilder){
+    this.form = this.formBuilder.group({
+      orderID: [''],
+      fullName: [''],
+      mobile: [''],
+      address: [''],
+      total: [''],
+      bonus: [''],
+      amount: [''],
+      createTime: [''],
+      orderStatus: [''],
+      confirmStatus: [''],
+      chargeStatus: [''],
+      deliveStatus: [''],
+      clientID: [''],
+      client:[''],
+      orderDetails:[''],
+    });
+   };
+
+  form: FormGroup;
+  orderDetailProduct: any[] = [];
+  orderID = "";
+  postOrderRequest: any = {
+    OrderID: "",
+    FullName: "",
+    Mobile: "",
+    Address: "",
+    Total: "",
+    Bonus: "",
+    Amount: "",
+    CreateTime: "",
+    OrderStatus: "",
+    ConfirmStatus: "",
+    ChargeStatus: "",
+    DeliveStatus: "",
+    ClientID: "",
+    Client: "",
+    OrderDetails: "",
+  };
+  ngOnInit(): void {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.orderID = params.orderID;
+      if (this.orderID && this.orderID !== "") {
+        const productsObservable = this.cartService.getOrderList(this.orderID);
+        productsObservable.subscribe((productsData: any) => {
+          this.postOrderRequest = productsData;
+        });
+
+        this.cartService.getOrderDetailProduct(this.orderID).subscribe(data => {
+          this.orderDetailProduct = data
+        })
+      }
+    });
+  }
+
+
+  showImg(imgName: any) {
+    //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
+    var name = imgName.split('/')[4]
+
+    var imgUrl = 'https://localhost:7265/api/product/' + name;
+
+    return imgUrl;
+  }
+
+  submitForm() {
+    // var orderID = this.form.get('orderID')?.value;
+    // var clientID = this.form.get('clientID')?.value;
+    var fullName = this.form.get('fullName')?.value;
+    var mobile = this.form.get('mobile')?.value;
+    var address = this.form.get('address')?.value;
+    // var total = this.form.get('total')?.value;
+    // var bonus = this.form.get('bonus')?.value;
+    // var amount = this.form.get('amount')?.value;
+    // var createTime = this.form.get('createTime')?.value;
+    // var orderStatus = this.form.get('orderStatus')?.value;
+    //var confirmStatus = this.form.get('confirmStatus')?.value;
+    //var chargeStatus = this.form.get('chargeStatus')?.value;
+    // var deliveStatus = this.form.get('deliveStatus')?.value;
+    // this.postOrderRequest.OrderID = orderID;
+    // this.postOrderRequest.ClientID = clientID;
+    this.postOrderRequest.FullName = fullName;
+    this.postOrderRequest.Mobile = mobile;
+    this.postOrderRequest.Address = address;
+    // this.postOrderRequest.Total = total;
+    // this.postOrderRequest.Bonus = bonus;
+    // this.postOrderRequest.Amount = amount;
+    // this.postOrderRequest.CreateTime = createTime;
+    // this.postOrderRequest.OrderStatus = orderStatus;
+    // this.postOrderRequest.ConfirmStatus = confirmStatus;
+    // this.postOrderRequest.ChargeStatus = chargeStatus;
+    // this.postOrderRequest.DeliveStatus = deliveStatus;
+
+    console.log("hahahahaha", this.postOrderRequest)
+
+    if (this.orderID && this.orderID !== ""  && this.postOrderRequest.orderID !== undefined) {
+      //Update
+      this.cartService.updateOrder(this.orderID, this.postOrderRequest).subscribe({
+        next: (data => {
+          this.router.navigate(['/client-cart']);
+        }),
+        error: ((error: ErrorResponse) => {
+          alert(error.Error);
+        })
+      });
+    }
+    else {
+      alert('error');
+    }
+  }
 
 }
+
+

@@ -4,29 +4,43 @@
           <thead>
               <tr >
                   <th>#</th>
-                  <th>Tên người nhận</th>
+                  <th>Tên Người Nhận</th>
                   <th>SĐT</th>
                   <th>Địa Chỉ</th>
                   <th>Số Lượng</th>
                   <th>Tổng Tiền</th>
                   <th>Trạng Thái</th>
-                  <th>Chi tiết đơn hàng</th>
+                  <th>Chi Tiết Đơn Hàng</th>
               </tr>
           </thead>
           <tbody id="cart_body">
-              <!-- <tr *ngFor="let item of productData; let i = index">
+              <tr *ngFor="let item of order; let i = index">
                   <td>{{(i+1).toString().padStart(2, "0")}}</td>
-                  <td>{{item.title}}</td>
-                  <td><img class="img-fluid" style="width: 120px;" [src]="showImg(item.avatar)" /></td>
-                  <td style="width: 12%;text-align:center">{{selectCount(item.productID)}}</td>
-                  <td style="width: 15%;">{{item.price|currency:'VND':''}} VND</td>
-                  <td style="width: 15%;">{{totalPrice(item.productID)|currency:'VND':''}} VND</td>
+                  <td>{{item.fullName}}</td>
+                  <td>{{item.mobile}}</td>
+                  <td>{{item.address}}</td>
+                  <td>{{item.amount}}</td>
+                  <td>{{item.total|currency:'VND':''}} VND</td>
+                  <td>
+                    <span *ngIf="item.orderStatus == 3" style="color: red;">
+                      Đơn Hàng Đã Hủy
+                    </span>
+
+                    <span *ngIf="item.orderStatus != 3">
+                      <span [style]="item.orderStatus == 1 ? 'color: darkgoldenrod;' : item.orderStatus == 2 ? 'color: green;' : 'color: red;'">
+                        {{item.orderStatus == 1 ? "Đang Xử Lý" : item.orderStatus == 2 ? "Đã Hoàn Tất" : "Đã Hủy"}}
+                      </span>-
+                      <span [style]="item.deliveStatus == 1 ? 'color: darkgoldenrod;' : item.deliveStatus == 2 ? 'color: blue;' : item.deliveStatus == 3 ? 'color: green;' : 'color: red;'">
+                        {{item.deliveStatus == 1 ? "Đang Đóng Gói" : item.deliveStatus == 2 ? "Đang Giao" : item.deliveStatus == 3 ? "Giao Hàng Thành Công" : "Đã Hủy"}}
+                      </span>
+                    </span>
+                  </td>
 
                   <td>
-                      <button (click)="removeProduct(item.productID)" class="btn btn-danger"><i class="fas fa-trash-alt"></i>X</button>
-
+                    <button (click)="showDetail($event,item.orderID)" class="btn btn-warning mr-2"><i class="fas fa-trash-alt"></i>Chi Tiết</button>
+                    <button [disabled]="item.orderStatus == 1 && item.deliveStatus == 1 ? false : true" (click)="cancelOrder($event,item.orderID)" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Hủy Đơn</button>
                   </td>
-              </tr> -->
+              </tr>
           </tbody>
           <tfoot>
               <tr>

@@ -34,6 +34,7 @@ export class ProductCategoryIndexComponent implements OnInit {
         });
       }
     });
+
   }
 
   editProductCategory(e: Event, productCategory: any) {
@@ -48,11 +49,16 @@ export class ProductCategoryIndexComponent implements OnInit {
 
   showImg(imgName: any) {
     //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
-    var name = imgName.split('/')[4]
+    if (imgName !== undefined && imgName !== null) {
+      var name = imgName.split('/')[4]
 
-    var imgUrl = 'https://localhost:7265/api/product-category/' + name;
+      var imgUrl = 'https://localhost:7265/api/product-category/' + name;
 
-    return imgUrl;
+      return imgUrl;
+
+    }
+
+    return
   }
 
   deleteProductCate(e: Event, productCategoryID: number) {
@@ -72,6 +78,15 @@ export class ProductCategoryIndexComponent implements OnInit {
         })
       });
     }
+  }
+
+  searchProductCate(e: Event): void {
+    e.preventDefault();
+    this.router.navigate(['/product-category/index'], { queryParams: { title: this.title } });
+  }
+  addProductCate(e: Event): void {
+    e.preventDefault();
+    this.router.navigate(['/product-category/detail']);
   }
 
 }

@@ -2,7 +2,7 @@
   <div class="col-md-12 col-sm-12">
     <div class="card card-box">
       <div class="card-head">
-        <header>Thông tin tài khoản</header>
+        <header>Thông tin loại sản phẩm</header>
       </div>
       <div class="card-body" id="bar-parent">
         <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
@@ -14,7 +14,7 @@
               </label>
               <div class="col-md-4">
                 <select class="form-control input-height" formControlName="productMainCategoryID" [ngModel]="postProductCategoryRequest.productMainCategoryID">
-                  <option selected value="">.: Chọn 1 danh mục :.</option>
+                  <option selected value="0">.: Chọn 1 danh mục :.</option>
                   <option *ngFor="let item of productMainCategories" [ngValue]="item.productMainCategoryID">
                     {{item.title}}
                   </option>

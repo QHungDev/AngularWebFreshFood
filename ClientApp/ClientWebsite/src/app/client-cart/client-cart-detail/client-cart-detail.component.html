@@ -1,1 +1,81 @@
-<p>client-cart-detail works!</p>
+<div class="container">
+  <div id="panel-cart">
+
+      <div>
+        <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+          <div class="form-body">
+            <div class="form-group row">
+
+              <div class="col-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span style="font-weight: 700;" class="input-group-text">Tên Người Nhận:</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Tên Người Nhận..." [ngModel]="postOrderRequest.fullName"
+                  value='{{postOrderRequest.fullName}}' formControlName="fullName">
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span style="font-weight: 700;" class="input-group-text">SĐT:</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Số Điện Thoại..." [ngModel]="postOrderRequest.mobile"
+                  value='{{postOrderRequest.mobile}}' formControlName="mobile">
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span style="font-weight: 700;" class="input-group-text">Địa Chỉ Nhận:</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Địa Chỉ Nhận..." [ngModel]="postOrderRequest.address"
+                  value='{{postOrderRequest.address}}' formControlName="address">
+                </div>
+              </div>
+
+              <div class="col-1">
+                <button type="submit" [disabled]="postOrderRequest.orderStatus == 1 && postOrderRequest.deliveStatus == 1 ? false : true" class="btn btn-info"><i class="fas fa-trash-alt"></i>Sửa</button>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-actions">
+                    <div class="row">
+                        <div class="offset-md-2 col-md-10">
+                            <button type="submit" class="btn btn-primary m-r-20">
+                                <i class="fa fa-save"></i>
+                                Lưu
+                            </button>
+                            <a [routerLink]="['/order']" class="btn btn-default">Quay về </a>
+                        </div>
+                    </div>
+                </div> -->
+        </form>
+      </div>
+      <table id="tbl_cart" class="table table-bordered">
+          <thead>
+              <tr >
+                  <th>STT</th>
+                  <th>Sản Phẩm</th>
+                  <th>Hình Ảnh</th>
+                  <th>Số Lượng</th>
+                  <th>Giá</th>
+                  <th>Tổng Tiền</th>
+              </tr>
+          </thead>
+          <tbody id="cart_body">
+              <tr *ngFor="let item of orderDetailProduct; let i = index">
+                  <td>{{(i+1).toString().padStart(2, "0")}}</td>
+                  <td>{{item.title}}</td>
+                  <td><img class="img-fluid" style="width: 120px;" [src]="showImg(item.avatar)" /></td>
+                  <td>{{item.quantity}}</td>
+                  <td style="width: 15%;">{{item.price|currency:'VND':''}} VND</td>
+                  <td class="center">{{item.price*item.quantity|currency:'VND':''}} VND</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+

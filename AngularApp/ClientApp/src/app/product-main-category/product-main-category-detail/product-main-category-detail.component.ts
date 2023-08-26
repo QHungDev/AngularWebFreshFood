@@ -43,7 +43,6 @@ export class ProductMainCategoryDetailComponent implements OnInit {
         const productMainCategoriesObservable = this.productMainCategoryService.getProductMainCate(this.productMainCategoryID);
         productMainCategoriesObservable.subscribe((productMainCategoriesData: any) => {
           this.postproductMainCategoryRequest = productMainCategoriesData;
-          console.log("hhh", this.postproductMainCategoryRequest)
         });
       }
     });
@@ -76,8 +75,8 @@ export class ProductMainCategoryDetailComponent implements OnInit {
     this.postproductMainCategoryRequest.Title = title;
     this.postproductMainCategoryRequest.Position = position;
     this.postproductMainCategoryRequest.Status = status;
-    this.postproductMainCategoryRequest.CreateTime = createTime;
-    this.postproductMainCategoryRequest.CreateBy = createBy;
+    this.postproductMainCategoryRequest.CreateTime = new Date();
+    this.postproductMainCategoryRequest.CreateBy = window.localStorage.getItem('Username');
     if (this.productMainCategoryID && this.productMainCategoryID !== "" && this.postproductMainCategoryRequest.productMainCategoryID !== undefined) {
       //Update
       this.productMainCategoryService.updateProductMainCategories(this.productMainCategoryID, this.postproductMainCategoryRequest).subscribe({
@@ -90,8 +89,18 @@ export class ProductMainCategoryDetailComponent implements OnInit {
       });
     }
     else {
-      alert('error');
-    }
+      //Add new
+
+        this.productMainCategoryService.addProductMain(this.postproductMainCategoryRequest).subscribe({
+          next: (data => {
+            this.router.navigate(['/product-main-category']);
+          }),
+          error: ((error: ErrorResponse) => {
+            alert(error.Error);
+          })
+        });
+      }
   }
+
 }
 

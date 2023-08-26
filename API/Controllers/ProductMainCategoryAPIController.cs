@@ -12,9 +12,13 @@ namespace API.Controllers
     public class ProductMainCategoryAPIController : ControllerBase
     {
         private IProductMainCategoryService _service;
-        public ProductMainCategoryAPIController(IProductMainCategoryService service)
+        private DBContext _context;
+
+        public ProductMainCategoryAPIController(IProductMainCategoryService service, DBContext context)
         {
             _service = service;
+            _context = context;
+
         }
 
         [HttpGet("get")]
@@ -73,20 +77,36 @@ namespace API.Controllers
            return Ok(response);
         }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete(int ID)
+        [HttpGet]
+        [Route("searchall")]
+        public async Task<IActionResult> SearchProductMain(string title)
         {
-           if (ID <= 0)
-           {
-               return BadRequest();
-           }
+            var data = await _service.SearchProductMain(title);
+            return Ok(data);
+        }
 
-           var response = await _service.Delete(ID);
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            
+            if(id <= 0)
+            {
+                return BadRequest();;
+            }
 
-           if (!response)
-               return UnprocessableEntity();
-
-           return Ok(response);
+            var countProductCate = _context.ProductCategories.Where(x => x.ProductMainCategoryID == id).ToList().Count;
+            if (countProductCate > 0)
+            {
+                object data = new {
+                                    status = false,
+                                    message = "Có " + countProductCate + " loại sản phẩm cùng thể loại cấp cha!"
+                                  };
+                return Ok(data);
+            }
+            var response = await _service.Delete(id);
+            if (!response)
+                return UnprocessableEntity();
+            return Ok(response);
         }
 
         [HttpPatch("path/{id}/{status}")]

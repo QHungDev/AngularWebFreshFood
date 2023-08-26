@@ -164,6 +164,14 @@ namespace API.Controllers
 
         }
 
+        [HttpGet]
+        [Route("searchall")]
+        public async Task<IActionResult> SearchArticle(string title)
+        {
+            var data = await _service.SearchArticle(title);
+            return Ok(data);
+        }
+
         [HttpPatch("path/{id}/{status}")]
         public async Task<IActionResult> Path(int id, bool status)
         {

@@ -83,6 +83,13 @@ namespace API.Services
             }
         }
 
+        public async Task<List<ProductCategory>> SearchProductCate(string title)
+        {
+            var data = await _context.ProductCategories.Where(x => x.Title.Contains(title)).ToListAsync();
+
+            return data;
+        }
+
         public async Task<List<ProductCategory>> SelectAll()
         {
             var data = await _context.ProductCategories.ToListAsync();

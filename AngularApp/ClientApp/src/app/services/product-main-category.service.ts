@@ -19,10 +19,16 @@ export class ProductMainCategoryService {
   updateProductMainCategories(productMainCategoryID: string, item: any): Observable<any> {
     return this.httpClient.put<any>(`${environment.apiUrl}/product-main-category/put?productMainCategoryID=${productMainCategoryID}`, item);
    }
-   searchProductMainCategories(title: string): Observable<any[]> {
+  searchProductMainCategories(title: string): Observable<any[]> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/product-main-category/searchall?title=${title}`);
+  }
+  deleteProductMain(productMainCategoryID: number) {
+    return this.httpClient.delete<any>(`${environment.apiUrl}/product-main-category/delete/${productMainCategoryID}`);
   }
   changeStatus(id: any): Observable<any[]> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/product-main-category/ChangeStatus/${id}`);
+  }
+  addProductMain(item: any): Observable<any> {
+    return this.httpClient.post<any>(`${environment.apiUrl}/product-main-category/post`, item);
   }
 }

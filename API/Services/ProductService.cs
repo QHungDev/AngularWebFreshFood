@@ -18,7 +18,8 @@ namespace API.Services
         }
         public async Task<List<Product>> SearchProducts(string title)
         {
-            var data = await _context.Products.Where(x => x.Title == title).ToListAsync();
+            // var data = await _context.Products.Where(x => x.Title == title).ToListAsync();
+            var data = await _context.Products.Where(x => x.Title.Contains(title)).ToListAsync();
 
             return data;
         }

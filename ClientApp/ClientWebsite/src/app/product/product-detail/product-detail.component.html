@@ -11,9 +11,9 @@
 
                 <ul class="thumbnails">
                     <li>
-                        <a href=''>
+                        <!-- <a href=''>
                             <img [src]="showImg(postProductRequest.thumb)" alt="" />
-                        </a>
+                        </a> -->
                     </li>
                 </ul>
             </div>
@@ -47,7 +47,7 @@
                 <div class="transport-box">
                     <label class="tittle">Vận Chuyển: </label>
                     <span style="font-size: 14px" class="transport-truck">
-                        <img src="images/logo/truck.png" />
+                        <img src="../../assets/img/logo/truck.png" />
                         Miễn Phí Vận Chuyển
                     </span>
                     <div class="ship-to">
@@ -92,15 +92,14 @@
                         </span>
                     </div>
                     <div >
-                        <button  type="submit"
-                            class="btn btn-primary m-r-20">
-                      <i class="fa fa-save"></i> 
-                      Lưu
-                    </button>
+                        <button type="submit" class="btn btn-success mt-4">
+                          <i class="fa fa-cart-plus mr-2"></i>
+                          Thêm vào giỏ hàng
+                        </button>
                         <!-- <button type="submit" class="btn btn-outline-success btn-text btn-add-cart"><i
                                 class="fa fa-cart-plus mr-2"></i>
                             <label>Thêm vào giỏ hàng</label> <i class="icon-shopping-cart"></i>
-                            
+
                         </button> -->
                     </div>
                     <div class="back-box">
@@ -132,7 +131,7 @@
                         <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
                     </div>
                     <p innerHTML="{{postProductRequest.content}}">
-                        
+
                     </p>
                 </div>
             </div>

@@ -23,6 +23,10 @@ export class VcHeaderComponent implements OnInit {
     e.preventDefault();
     this.router.navigate(['/login']);
   }
+  ClientRegister(e: Event) {
+    e.preventDefault();
+    this.router.navigate(['/registerclient']);
+  }
   logout(e: Event): void {
     e.preventDefault();
 
