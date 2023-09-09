@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../requests/login-request';
 import { TokenResponse } from '../responses/token-response';
-
+import {map, skipWhile, tap} from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
@@ -22,3 +22,4 @@ export class ClientService {
     return this.httpClient.post<any>(`${environment.apiUrl}/client/post`, item);
   }
 }
+

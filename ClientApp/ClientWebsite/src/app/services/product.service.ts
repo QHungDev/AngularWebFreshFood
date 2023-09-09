@@ -51,4 +51,8 @@ export class ProductService {
   deleteProduct(productID: number) {
     return this.httpClient.delete<any>(`${environment.apiUrl}/product/delete/${productID}`);
   }
+  fetchSearchResults(query: string): Observable<any> {
+    return this.httpClient.get<any[]>(`${environment.apiUrl}/product/searchall?title=${query}`);
+  }
+
 }

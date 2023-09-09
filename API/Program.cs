@@ -43,6 +43,8 @@ builder.Services.AddTransient<IOrderDetailService, OrderDetailService>();
 builder.Services.AddTransient<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddTransient<IProductMainCategoryService, ProductMainCategoryService>();
 builder.Services.AddTransient<IArticleCategoryService, ArticleCategoryService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddTransient<IMomoService, MomoService>();
 
 var app = builder.Build();
 

@@ -1,0 +1,26 @@
+<div class="list-news container">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" style="margin-bottom: 0px">
+          <li class="breadcrumb-item">
+              <a href="/">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item">
+              <a id="a_CatTitle" href="#">Thể Loại</a>
+          </li>
+          <li id="li_Title" class="breadcrumb-item active" aria-current="page">Bài viết</li>
+      </ol>
+  </nav>
+  <div class="the-title">
+      <h2 id="h2_Title">Bài viết
+      </h2>
+      <small id="small_CreateTime"></small>
+  </div>
+  <div class="news-detail-item">
+      <ul>
+          <li class="news-detail text-justify">
+              <img id="img_Avatar" class="img-fluid" [src]="showImg(postArticleRequest.avatar)" />
+              <p id="p_Content" innerHTML="{{postArticleRequest.content}}"></p>
+          </li>
+      </ul>
+  </div>
+</div>

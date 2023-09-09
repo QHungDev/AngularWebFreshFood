@@ -1,0 +1,41 @@
+<div class="list-news container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/Default.aspx?class=1">Trang chủ</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Bài viết</li>
+    </ol>
+  </nav>
+  <div class="the-title">
+    <h2>Bài viết
+    </h2>
+    <img class="img-fluid" src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+  </div>
+  <div class="news-item">
+    <ul>
+      <li class="news text-justify"*ngFor="let article of articles; let i = index">
+        <img [src]="showImg(article.avatar)" class="img-fluid" />
+        <div class="title">
+          <h3>
+            {{article.title}}
+          </h3>
+        </div>
+        <div class="time">
+          <span style="color: #8bc34a;">
+           <!-- CatTitle -->
+          </span>
+          <small> {{article.createTime| date:'dd-MM-yyyy'}}</small>
+        </div>
+        <div class="content">
+          <p>
+            {{article.description}}
+          </p>
+          <a (click)="detailArticle($event, article)" href="#">
+            Đọc tiếp »
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

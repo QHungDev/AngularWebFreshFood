@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -9,8 +9,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CartService {
+  constructor(private httpClient: HttpClient) {
 
-  constructor(private httpClient: HttpClient) { }
+  }
   public cartItemList: any = []
   public productList = new BehaviorSubject<any>([]);
   getProductsLocal(){
@@ -42,6 +43,7 @@ export class CartService {
   }
 
   addOrderDetail(item: any): Observable<any> {
+
     return this.httpClient.post<any>(`${environment.apiUrl}/order-detail/post`, item);
   }
 
@@ -64,4 +66,34 @@ export class CartService {
   cancelOrder(orderID: string): Observable<any> {
     return this.httpClient.post<any>(`${environment.apiUrl}/order/cancelOrder/${orderID}`, {});
   }
+
+  sendEmail(item: any): Observable<any> {
+    return this.httpClient.post<any>(`${environment.apiUrl}/send-email/post`, item);
+  }
+
+  // sendMomo(item: any) {
+  //   debugger
+  //   return this.httpClient.get<string>(`${environment.apiUrl}/momo/post`);
+  // }
+  sendMomo(item: any): Observable<any> {
+
+    return this.httpClient.post<any>(`${environment.apiUrl}/momo/post`,item);
+  }
+  GetUserName(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/order/getOrderMomo`);
+  }
+  GetUserName2() {
+    return this.httpClient.get<any>(`${environment.apiUrl}/momo/getOrderMomo2`);
+  }
+  // public callRedirection(body: any): Observable<any> {
+
+  //   return this.httpClient.post(`${environment.apiUrl}/momo/post`, body)
+  //     .map((response) => {
+
+  //       //how to handle redirect here
+  //       this.router.navigate(response.url)
+
+  //     })
+  //    .catch(error => {  console.log(error) });
+  //   }
 }

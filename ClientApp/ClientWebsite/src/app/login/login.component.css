@@ -1,0 +1,16 @@
+.background-leaf {
+  background-image: url('../../assets/img/hinh-anh-trang-chu/leaves-right.png');
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: 26% auto;
+  /* opacity: .13; */
+  opacity: 0.31;
+  transition: background .3s,border-radius .3s,opacity .3s;
+  z-index: -9999;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 10%;
+  bottom: -60px;
+}
+

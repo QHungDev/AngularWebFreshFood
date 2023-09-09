@@ -6,11 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CartResponse } from 'src/app/responses/cart-response';
-import { Observable, forkJoin } from 'rxjs';
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit{
   cartResponse: CartResponse = {
@@ -48,6 +48,12 @@ export class ProductDetailComponent implements OnInit{
     ProductCategoryID: ""
   };
   productID = '';
+  quantityProduct = 1;
+  quantityInCart = 0;
+
+
+  public products : any = [];
+  productList: any = {};
 
   constructor(private cartService : CartService, private productService: ProductService, private router: Router,
     public formBuilder: FormBuilder, private http: HttpClient, private activeRoute: ActivatedRoute) {
@@ -74,13 +80,25 @@ export class ProductDetailComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
     const productsObservable = this.productService.getProductCategories();
     productsObservable.subscribe((productsData: any[]) => {
       this.productCategories = productsData;
 
       this.activeRoute.queryParams.subscribe(params => {
         this.productID = params.productID;
-        
+
+        this.products = localStorage.getItem('localCart');
+        this.productList = JSON.parse(this.products);
+        if (this.productList != null && this.productList != undefined) {
+          this.productList = this.productList.filter((x: any) => x.productID == this.productID);
+          this.quantityInCart = this.productList.length;
+        }
+
         if (this.productID && this.productID !== "") {
           const productsObservable = this.productService.getProduct(this.productID);
           productsObservable.subscribe((productsData: any) => {
@@ -89,6 +107,21 @@ export class ProductDetailComponent implements OnInit{
         }
       });
     });
+
+  }
+
+  addition() {
+    if (this.quantityProduct == this.postProductRequest.quantity) {
+      return
+    }
+    this.quantityProduct += 1
+  }
+
+  subtraction() {
+    if (this.quantityProduct == 1) {
+      return
+    }
+    this.quantityProduct -= 1
   }
 
   backToList(e: Event): void {
@@ -100,29 +133,33 @@ export class ProductDetailComponent implements OnInit{
     e.preventDefault();
     this.router.navigate(['/product']);
   }
-  
+
   onChangeUploadFile(e:Event) {
     this.uploadedImage = (e.target as HTMLInputElement)?.files?.[0];
     //var fileExtension = '.' + this.uploadedImage?.name.split('.').pop();
     //this.uploadedImage?.name.replace(this.uploadedImage.name,"/assets/img/FileUploads/Product/Avatar/"+fileExtension);
     console.log("thisimg",this.imgModified);
-    
+
   }
- 
+
   showImg(imgName: any) {
     //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
     if (imgName !== undefined) {
       var name = imgName.split('/')[4]
-      
+
       var imgUrl = 'https://localhost:7265/api/product/' + name;
-      
+
       return imgUrl;
     }
-
     return
   }
   addtoCart(item: any){
-    this.cartService.addtoCartLocal(item);
+    if ((this.quantityProduct + this.quantityInCart) > this.postProductRequest.quantity) {
+      return
+    }
+    for (let i = 1; i <= this.quantityProduct; i++) {
+      this.cartService.addtoCartLocal(item);
+    }
     window.location.reload();
   }
 
@@ -168,7 +205,7 @@ export class ProductDetailComponent implements OnInit{
   //   console.log("formdata",imageFormData);
   //   const updateProductforkJoin = this.productService.updateProduct(this.productID, this.postProductRequest);
   //   const upLoadImageforkJoin = this.productService.UploadFile(this.productID,imageFormData);
-    
+
   //   if (this.productID && this.productID !== "") {
   //     //Update
   //     if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
@@ -184,7 +221,7 @@ export class ProductDetailComponent implements OnInit{
   //     else {
   //       alert('error');
   //     }
-      
+
   //   }
   //   else {
   //     //Add new
@@ -222,7 +259,7 @@ export class ProductDetailComponent implements OnInit{
     // }
 
     addImg() {
-      
+
       let imageFormData:any = new FormData();
       if (this.uploadedImage !== undefined ) {
         imageFormData.append('this.postProductRequest.Avatar', this.uploadedImage, this.uploadedImage?.name);

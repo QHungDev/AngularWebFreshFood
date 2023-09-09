@@ -58,6 +58,28 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("getOrderMomo")]
+        public async Task<IActionResult> GetOrderMomo()
+        {
+            //var response = await _service.SelectAll();
+
+            //if (response == null)
+            //    return NotFound();
+
+            var countProduct = 44;
+            if (countProduct > 0)
+            {
+                object data = new
+                {
+                    status = false,
+                    message = "Có " + countProduct + " sản phẩm cùng thể loại!"
+                };
+                return Ok(data);
+            }
+
+            return Ok("momo");
+        }
+
         [HttpGet("get/{id}")]
         public async Task<IActionResult> Get(int id)
         {

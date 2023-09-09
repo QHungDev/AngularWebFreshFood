@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl,FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -17,7 +17,16 @@ import { VcFooterComponent } from './_component/vc-footer/vc-footer.component';
 import { ClientCartIndexComponent } from './client-cart/client-cart-index/client-cart-index.component';
 import { ClientCartDetailComponent } from './client-cart/client-cart-detail/client-cart-detail.component';
 import { RegisterclientComponent } from './registerclient/registerclient.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { NewsIndexComponent } from './news/news-index/news-index.component';
+import { NewsDetailComponent } from './news/news-detail/news-detail.component';
+import { BillDetailComponent } from './bill/bill-detail/bill-detail.component';
+import { BillSuccessComponent } from './bill/bill-success/bill-success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +40,11 @@ import { RegisterclientComponent } from './registerclient/registerclient.compone
     VcFooterComponent,
     ClientCartIndexComponent,
     ClientCartDetailComponent,
-    RegisterclientComponent
+    RegisterclientComponent,
+    NewsIndexComponent,
+    NewsDetailComponent,
+    BillDetailComponent,
+    BillSuccessComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,6 +52,10 @@ import { RegisterclientComponent } from './registerclient/registerclient.compone
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    AutocompleteLibModule,
     RouterModule.forRoot([
       {
         path: '', component: SiteLayoutComponent, children: [
@@ -64,8 +81,23 @@ import { RegisterclientComponent } from './registerclient/registerclient.compone
           { path: 'index', component: ClientCartIndexComponent },
           { path: 'index/:orderID', component: ClientCartIndexComponent },
           { path: 'detail', component: ClientCartDetailComponent},
-          { path: 'detail/:orderID', component: ClientCartDetailComponent},
-          // { path: 'category', component: AccountCategoryComponent},
+          { path: 'detail/:orderID', component: ClientCartDetailComponent}
+        ]
+      },
+      {
+        path: 'news', component: SiteLayoutComponent, children: [
+          { path: '', component: NewsIndexComponent, },
+          { path: 'index', component: NewsIndexComponent },
+          { path: 'index/:orderID', component: NewsIndexComponent },
+          { path: 'detail', component: NewsDetailComponent},
+          { path: 'detail/:orderID', component: NewsDetailComponent}
+        ]
+      },
+      {
+        path: 'bill', component: SiteLayoutComponent, children: [
+          { path: '', component: BillDetailComponent, },
+          { path: 'bill-detail', component: BillDetailComponent },
+          { path: 'bill-success', component: BillSuccessComponent},
         ]
       },
       //Account routers

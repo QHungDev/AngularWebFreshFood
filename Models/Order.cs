@@ -20,7 +20,7 @@ namespace Models
         public int OrderID { get; set; }
         [StringLength(50)]
         public string FullName { get; set; }
-        [StringLength(15)]
+        [StringLength(50)]
         public string Mobile { get; set; }
         [StringLength(255)]
         public string Address { get; set; }
@@ -40,5 +40,16 @@ namespace Models
         public virtual Client Client { get; set; }
         [InverseProperty("Order")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+    }
+
+    public partial class OrderMoMo
+    {
+        [Key]
+        public int OrderID { get; set; }
+        public string FullName { get; set; }
+        public string OrderInfo { get; set; }
+        public double? Amount { get; set; }
+        public string MomoCode { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

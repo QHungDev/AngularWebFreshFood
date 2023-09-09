@@ -1,7 +1,7 @@
 <div class="last" style="position: relative">
     <div class="background-leaf"></div>
     <div class="container">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-8 container">
                 <div id="login-register">
                     <div class="row">
@@ -29,6 +29,39 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+        <div id="login-register" class="pt-4">
+          <div style="margin: auto;" class="w-50 pb-4">
+              <div class="content-login-register">
+                  <div id="p1" class="form-group input-login-register">
+                    <div class="the-title-box">
+                      <h4>
+                          Đăng Nhập
+                      </h4>
+                      <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+                    </div>
+
+                      <form [formGroup]="loginForm"
+                      (ngSubmit)="loginForm.valid &amp;&amp; onSubmit()" method="post">
+                          <label class="control-label">
+                              Tài khoản
+                          </label>
+                          <input formControlName="usernameControl" type="text" name="username"class="form-control "  placeholder="Nhập email đăng nhập">
+                          <label class="control-label">
+                              Mật khẩu
+                          </label>
+                          <input formControlName="passwordControl" name="pass" class="form-control " type="password" placeholder="Nhập mật khẩu đăng nhập">
+                          <div style="margin-top: 5px; display: block">
+                              <a class="float-right" style="text-decoration: none" href="change-password.aspx">Quên mật khẩu?</a>
+                          </div>
+                          <div class="clearfix"></div>
+                          <button type="submit" class="btn btn-info btn-block" style="margin-top: 10px">Đăng nhập</button>
+                      </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
   </div>

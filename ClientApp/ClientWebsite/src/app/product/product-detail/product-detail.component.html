@@ -41,8 +41,8 @@
                 </div>
                 <div class="price-box">
                     <label class="tittle">Giá: </label>
-                    <span style="text-decoration: line-through;" class="product-old-price">{{postProductRequest.oldPrice}}&nbsp;₫</span>
-                    <strong class="price-order">{{postProductRequest.price}}&nbsp;₫</strong>
+                    <span style="text-decoration: line-through;" class="product-old-price">{{postProductRequest.oldPrice|currency:'VND':''}}&nbsp;₫</span>
+                    <strong class="price-order">{{postProductRequest.price|currency:'VND':''}}&nbsp;₫</strong>
                 </div>
                 <div class="transport-box">
                     <label class="tittle">Vận Chuyển: </label>
@@ -70,11 +70,11 @@
                     <div class="number-box">
                         <label class="mini-tittle">Số lượng: </label>
                         <div class="group-quantity">
-                            <a OnClick="LinkButton_Down_Click" class="btn-down">
+                            <a OnClick="LinkButton_Down_Click" (click)="subtraction()" class="btn-down">
                                 <i class="fa fa-minus"></i>
                             </a>
-                            <input readonly runat="server" id="input_Quantity" type="text" value="1" />
-                            <a ID="LinkButton_Up" OnClick="LinkButton_Up_Click" class="btn-up">
+                            <input readonly id="input_Quantity" type="text" value="{{quantityProduct}}" />
+                            <a ID="LinkButton_Up" OnClick="LinkButton_Up_Click" (click)="addition()" class="btn-up">
                                 <i class="fa fa-plus"></i>
                             </a>
                         </div>
@@ -123,7 +123,7 @@
             </div>
             <div class="clearfix"></div>
             <div class="description">
-                <div id="p1" class="input-login-register">
+                <div id="p1" class="input-login-register pb-3">
                     <div class="the-title">
                         <h4>
                             Mô tả

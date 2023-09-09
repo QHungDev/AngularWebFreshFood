@@ -1,0 +1,6 @@
+{
+  "/api": {
+  "target": "https://test-payment.momo.vn",
+  "secure": false
+  }
+}

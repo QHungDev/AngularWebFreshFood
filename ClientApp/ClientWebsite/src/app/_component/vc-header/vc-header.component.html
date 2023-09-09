@@ -1,78 +1,82 @@
 <header class="sticky-top">
-	<nav id="main-menu" class="navbar navbar-expand-lg navbar-light bg-lightk">
-		<div class="container">
-			<div class="pull-left">
-				<a class="navbar-brand" href="/index.html">
-					<img src="../../../assets/img/logo/logo.png" />
-				</a>
-			</div>
-			<div class="search">
-				<form class="search-box" method="get" action="search.html">
-					<input class="form-control form-control-lg text-search" type="text"
-						placeholder="Tên sản phẩm bạn cần tìm..." name="search_query">
-					<button class="btn" type="submit" name="submit_search" value="Tìm kiếm">
-						<i class="fa fa-search" style="font-size: 22px"></i>
-					</button>
-				</form>
-			</div>
-			<div class="collapse navbar-collapse pull-right" id="navbarSupportedContent">
-				<ul class="navbar-nav ml-auto pull-right">
-					<li class="nav-item active">
-						<a class="nav-link">
-							Trang chủ
-						</a>
-					</li>
+  <nav id="main-menu" class="navbar navbar-expand-lg navbar-light bg-lightk">
+    <div class="container">
+      <div class="pull-left">
+        <a class="navbar-brand" href="/index.html">
+          <img src="../../../assets/img/logo/logo.png" />
+        </a>
+      </div>
+      <div class="search">
+        <div class="search-box">
+            <input class="form-control form-control-lg text-search" type="text"
+						placeholder="Tên sản phẩm bạn cần tìm..." name="search_query" (input)="search($event)"
+              (keyup.enter)="searchProduct($event)">
+              <button class="btn" type="submit" name="submit_search" value="Tìm kiếm">
+                <i class="fa fa-search" style="font-size: 22px"></i>
+              </button>
+            <ul style="background-color:white;list-style-type: none;">
+              <li class="new-custom" href="#" (click)="productDetail($event, result)" *ngFor="let result of searchResults">{{result.title}}</li>
+            </ul>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse pull-right" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto pull-right">
+          <li class="nav-item active">
+            <a class="nav-link">
+              Trang chủ
+            </a>
+          </li>
 
-					<li class="nav-item">
-						<a class="nav-link">Bài viết</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link">
-							Liên hệ
-						</a>
-					</li>
-					<li class="nav-item icon">
-						<div class="menu-product">
-							<a class="nav-link" href="#">
-								<i class="fa fa-user-circle"></i>
-							</a>
-							<ng-template [ngIf]="loginUsername" [ngIfElse]="loggedOut">
-								<ul>
-									<li id="li_Login">
-										<a class="w-75" (click)="ClientLogin($event)" href="#" class="w-75">{{loginUsername}}</a>
-										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
-									</li>
+          <li class="nav-item">
+            <a href="#" [routerLink]="['/news']" class="nav-link">Bài viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              Liên hệ
+            </a>
+          </li>
+          <li class="nav-item icon">
+            <div class="menu-product">
+              <a class="nav-link" href="#">
+                <i class="fa fa-user-circle"></i>
+              </a>
+              <ng-template [ngIf]="loginUsername" [ngIfElse]="loggedOut">
+                <ul>
+                  <li id="li_Login">
+                    <a class="w-75" (click)="ClientLogin($event)" href="#" class="w-75">{{loginUsername}}</a>
+                    <!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
+                  </li>
                   <li id="li_Register">
-										<a class="w-75"  href="#" (click)="trackCart($event)" href="#">Đơn hàng của bạn</a>
-									</li>
-									<li id="li_Register">
-										<a class="w-75"  href="#" (click)="logout($event)" href="#">Đăng Xuất</a>
-									</li>
-								</ul>
-							</ng-template>
-							<ng-template  #loggedOut>
-								<ul>
-									<li id="li_Login">
-										<a class="w-75" href="#" (click)="ClientLogin($event)" class="w-75">Đăng nhập</a>
-										<!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
-									</li>
-									<li id="li_Register">
-										<a class="w-75"  href="#" (click)="ClientRegister($event)">Đăng ký</a>
-									</li>
-								</ul>
-							</ng-template>
-						</div>
+                    <a class="w-75" href="#" (click)="trackCart($event)" href="#">Đơn hàng của bạn</a>
+                  </li>
+                  <li id="li_Register">
+                    <a class="w-75" href="#" (click)="logout($event)" href="#">Đăng Xuất</a>
+                  </li>
+                </ul>
+              </ng-template>
+              <ng-template #loggedOut>
+                <ul>
+                  <li id="li_Login">
+                    <a class="w-75" href="#" (click)="ClientLogin($event)" class="w-75">Đăng nhập</a>
+                    <!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
+                  </li>
+                  <li id="li_Register">
+                    <a class="w-75" href="#" (click)="ClientRegister($event)">Đăng ký</a>
+                  </li>
+                </ul>
+              </ng-template>
+            </div>
 
-					</li>
-					<li  class="nav-item icon">
-						<a (click)=cartDetail($event) class="nav-link giohang" href="#">
-							<i class="fa fa-shopping-cart"></i>
-							<span class="sogiohang" id="lbl_number_items_header">{{length}}</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+          </li>
+          <li class="nav-item icon">
+            <a (click)=cartDetail($event) class="nav-link giohang" href="#">
+              <i class="fa fa-shopping-cart"></i>
+              <span class="sogiohang" id="lbl_number_items_header">{{length}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 </header>

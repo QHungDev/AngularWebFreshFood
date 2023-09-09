@@ -1,5 +1,11 @@
-<div class="container">
-    <div id="panel-cart">
+<div class="container" style="background-color: #fff; margin-top: 35px;">
+    <div id="panel-cart" class="pb-3">
+      <div class="the-title-box mt-5 ml-3">
+        <h4>
+          Giỏ Hàng
+        </h4>
+        <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+      </div>
         <table id="tbl_cart" class="table table-bordered">
             <thead>
                 <tr >
@@ -13,27 +19,41 @@
             </thead>
             <tbody id="cart_body">
                 <tr *ngFor="let item of productData; let i = index">
-                    <td>{{(i+1).toString().padStart(2, "0")}}</td>
+                    <td style="width: 5%;">{{(i+1).toString().padStart(2, "0")}}</td>
                     <td>{{item.title}}</td>
                     <td><img class="img-fluid" style="width: 120px;" [src]="showImg(item.avatar)" /></td>
-                    <td style="width: 12%;text-align:center">{{selectCount(item.productID)}}</td>
+                    <td style="width: 12%;text-align:center">
+                      <!-- {{selectCount(item.productID)}} -->
+                      <div class="number-box">
+                        <div class="group-quantity">
+                            <a (click)="subtraction(item.productID)" class="btn-down">
+                                <i class="fa fa-minus"></i>
+                            </a>
+                            <input readonly id="input_Quantity" type="text" value="{{selectCount(item.productID)}}" />
+                            <a (click)="addition(item.productID)" class="btn-up">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                      </div>
+                    </td>
                     <td style="width: 15%;">{{item.price|currency:'VND':''}} VND</td>
                     <td style="width: 15%;">{{totalPrice(item.productID)|currency:'VND':''}} VND</td>
-                    
+
                     <td>
-                        <button (click)="removeProduct(item.productID)" class="btn btn-danger"><i class="fas fa-trash-alt"></i>X</button>
-                        
+                        <button (click)="removeProduct(item.productID)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td style="text-align:left"><strong>Thành tiền =</strong></td>
+                    <td colspan="2" style="text-align:left"><strong>Tạm tính =</strong></td>
                     <td colspan="5" style="text-align:center"> <strong> <span id="lbl_total">{{needPay()|currency:'VND':''}} VND</span> </strong></td>
                 </tr>
             </tfoot>
         </table>
         <!-- <a href="/@culture/Cart/Checkout" class="btn btn-success">Tiếp theo <i class="icon-arrow-right"></i></a> -->
-        <button [disabled]="disabled" (click)="buy()" class="btn btn-success">Thanh Toán <i class="icon-arrow-right"></i></button>
+        <button (click)="billDetail()" class="btn btn-success">Tiếp Tục Thanh Toán <i class="fa fa-arrow-right"></i></button>
+        <!-- <button [disabled]="disabled" (click)="buy()" class="btn btn-success">Tiếp Tục Thanh Toán <i class="fa fa-arrow-right"></i></button> -->
+        <!-- <button (click)="showMomo($event)" class="btn btn-danger">Momo <i class="fa fa-money"></i></button> -->
     </div>
 </div>
