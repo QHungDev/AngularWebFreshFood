@@ -1,8 +1,8 @@
 ﻿using API.Interfaces;
+using API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-
 namespace API.Controllers
 {
     [Route("api/picture")]
@@ -10,17 +10,29 @@ namespace API.Controllers
     public class PictureAPIController : ControllerBase
     {
         private IPictureService _service;
-        public PictureAPIController(IPictureService service)
+        private IWebHostEnvironment myEnvironment;
+        public PictureAPIController(IWebHostEnvironment environment, IPictureService service)
         {
+             myEnvironment = environment;
             _service = service;
         }
-
+        [HttpGet("{imageAvatar}")]
+        public async Task<ActionResult> GetImg([FromRoute] string imageAvatar){
+            string folderSave = "FileUploads\\Carousel\\";
+            string path = myEnvironment.WebRootPath+folderSave;
+            var filePath = path + imageAvatar;
+            if(System.IO.File.Exists(filePath)){
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
+                return File(b,"image/jpg");
+            }
+            return Ok();
+        }
         [HttpPost("post")]
         public IActionResult Post(Picture item)
         {
             return Ok();
         }
-
+  
         [HttpGet("get")]
         public IActionResult Get()
         {

@@ -7,6 +7,7 @@ using System;
 using API.Interfaces;
 using API.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 const string AllowAllHeadersPolicy = "AllowAllHeadersPolicy";
@@ -46,6 +47,7 @@ builder.Services.AddTransient<IArticleCategoryService, ArticleCategoryService>()
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IMomoService, MomoService>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,7 +56,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseCors(AllowAllHeadersPolicy);
 app.UseHttpsRedirection();
 app.UseAuthorization();
