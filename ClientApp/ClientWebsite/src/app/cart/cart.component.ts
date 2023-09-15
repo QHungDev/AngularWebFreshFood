@@ -86,7 +86,17 @@ export class CartComponent implements OnInit{
   };
 
   ngOnInit(): void {
-    if (localStorage.getItem('Username') && localStorage.getItem('localCart')) {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+    // if (localStorage.getItem('Username') && localStorage.getItem('localCart')) {
+    //   this.disabled = false
+    // } else {
+    //   this.disabled = true
+    // }
+    if (localStorage.getItem('localCart')) {
       this.disabled = false
     } else {
       this.disabled = true

@@ -4,6 +4,7 @@ using Utilities.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Org.BouncyCastle.Asn1.Eac;
 
 namespace API.Controllers
 {
@@ -50,6 +51,17 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpGet("getWithEmail/{email}")]
+        public async Task<IActionResult> GetWithEmail(string email)
+        {
+            var response = await _service.SelectWithEmail(email);
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
+        }
+
         [HttpPut("put")]
         public IActionResult Put(int ID, Client item)
         {
@@ -92,5 +104,6 @@ namespace API.Controllers
 
             return Ok(response);
         }
+
     }
 }

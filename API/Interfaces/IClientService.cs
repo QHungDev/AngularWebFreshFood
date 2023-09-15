@@ -7,6 +7,7 @@ namespace API.Interfaces
     public interface IClientService
     {
         public Task<List<Client>> SelectAll();
+        public Task<Client> SelectWithEmail(string Email);
         public Task<List<Client>> SelectWithPaging(int page, int pageSize);
         public Task<Client> FindItem(int id);
         public Task<List<Client>> FindAll(string fullName);

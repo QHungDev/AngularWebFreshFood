@@ -79,12 +79,12 @@ namespace API.Services
             if (item == null)
                 return null;
             
-            var email = item.FullName;
-            var client = _context.Clients.Where(x => x.Email == email).FirstOrDefault();
-            item.ClientID = client.ClientID;
-            item.FullName = client.FullName;
-            item.Mobile = client.Mobile;
-            item.Address = client.Address;
+            // var email = item.FullName;
+            // var client = _context.Clients.Where(x => x.Email == email).FirstOrDefault();
+            // item.ClientID = client.ClientID;
+            // item.FullName = client.FullName;
+            // item.Mobile = client.Mobile;
+            // item.Address = client.Address;
 
             _context.Orders.Add(item);
 

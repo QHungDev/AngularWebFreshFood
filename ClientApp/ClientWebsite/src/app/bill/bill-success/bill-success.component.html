@@ -1,1 +1,118 @@
-<p>bill-success works!</p>
+<div class="container" style="background-color: #fff; margin-top: 35px; width: 30%; height: auto; padding: 30px;">
+  <div class="box-status">
+
+    <div class="box-status-all-item">
+      <div class="row">
+        <div class="col-4">
+          <div class="box-status-item-active">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="box-status-item-active">
+            <i class="fa fa-credit-card"></i>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="box-status-item-active">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="errorCodes == 0; else faild">
+  <div class="container" style="background-color: #fff; margin-top: 35px; width: 50%;">
+    <div id="panel-cart" class="pb-3">
+      <div class="the-title-box mt-5 ml-3">
+        <h4>
+          Xác Nhận Đơn Hàng
+        </h4>
+        <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+      </div>
+
+      <div style="width: 65%; margin: auto;" novalidate class="form-horizontal was-validated">
+        <div class="row mb-4">
+
+          <div class="col-12 mb-2">
+            <div class="img-logo-check" >
+              <img style="border: 3px solid #008000; border-radius: 100%; padding: 10px;" class="img-fluid" src="../../../assets/img/logo/tich-xanh.png" />
+            </div>
+          </div>
+
+          <div class="col-12 mb-2 text-center">
+            <h4 style=" color: #008000;">
+              Thanh toán thành công!
+            </h4>
+          </div>
+
+          <div class="col-12 mb-2 text-center">
+            <h5 style="font-style: italic; color: #676a77c9;">
+              Đơn hàng của quý khách đã thanh toán thành công. <span style="font-style: normal;color: #8BC34A;">FreshFoodStore</span> sẽ sớm liên hệ với quý khách để bàn giao sản phẩm, đơn hàng.
+            </h5>
+          </div>
+
+          <div class="col-12 mb-2 text-center">
+            <p>
+              <a (click)="backIndex()" href="#">Quay về trang mua hàng</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #faild>
+  <div class="container" style="background-color: #fff; margin-top: 35px; width: 50%;">
+    <div id="panel-cart" class="pb-3">
+      <div class="the-title-box mt-5 ml-3">
+        <h4>
+          Xác Nhận Đơn Hàng
+        </h4>
+        <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+      </div>
+
+      <div style="width: 65%; margin: auto;" novalidate class="form-horizontal was-validated">
+        <div class="row mb-4">
+
+          <div class="col-12 mb-2">
+            <div class="img-logo-check" >
+              <img style="border: 3px solid #BE1931; border-radius: 100%; padding: 10px;" class="img-fluid" src="../../../assets/img/logo/cham-than.png" />
+            </div>
+          </div>
+
+          <div class="col-12 mb-2 text-center">
+            <h4 style=" color: #BE1931;">
+              Thanh toán không thành công!
+            </h4>
+          </div>
+
+          <div class="col-12 mb-2 text-center">
+            <h5 style="font-style: italic; color: #676a77c9;">
+              Quý khách vui lòng kiểm tra lại thông tin thanh toán hoặc lựa chọn phương thức thanh toán khác.
+            </h5>
+          </div>
+
+          <div class="col-12 mb-2 text-center">
+            <p>
+              <a (click)="backIndex()" href="#">Quay về trang mua hàng</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+

@@ -98,6 +98,7 @@ import { BillSuccessComponent } from './bill/bill-success/bill-success.component
           { path: '', component: BillDetailComponent, },
           { path: 'bill-detail', component: BillDetailComponent },
           { path: 'bill-success', component: BillSuccessComponent},
+          { path: 'bill-success/:errorCode', component: BillSuccessComponent},
         ]
       },
       //Account routers

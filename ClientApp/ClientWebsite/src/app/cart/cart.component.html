@@ -1,4 +1,33 @@
-<div class="container" style="background-color: #fff; margin-top: 35px;">
+<div class="container" style="background-color: #fff; margin-top: 35px; width: 30%; height: auto; padding: 30px;">
+  <div class="box-status">
+
+    <div class="box-status-all-item">
+      <div class="row">
+        <div class="col-4">
+          <div class="box-status-item-active">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="box-status-item">
+            <i class="fa fa-credit-card"></i>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="box-status-item">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container" style="background-color: #fff; margin-top: 25px;">
     <div id="panel-cart" class="pb-3">
       <div class="the-title-box mt-5 ml-3">
         <h4>
@@ -53,7 +82,7 @@
             </tfoot>
         </table>
         <!-- <a href="/@culture/Cart/Checkout" class="btn btn-success">Tiếp theo <i class="icon-arrow-right"></i></a> -->
-        <button (click)="billDetail()" class="btn btn-success">Tiếp Tục Thanh Toán <i class="fa fa-arrow-right"></i></button>
+        <button [disabled]="disabled" (click)="billDetail()" class="btn btn-success">Tiếp Tục Thanh Toán <i class="fa fa-arrow-right"></i></button>
         <!-- <button [disabled]="disabled" (click)="buy()" class="btn btn-success">Tiếp Tục Thanh Toán <i class="fa fa-arrow-right"></i></button> -->
         <!-- <button (click)="showMomo($event)" class="btn btn-danger">Momo <i class="fa fa-money"></i></button> -->
     </div>

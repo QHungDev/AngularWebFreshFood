@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { DatePipe } from '@angular/common';
 import { ErrorResponse } from 'src/app/responses/error-response';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ClientService } from 'src/app/services/client.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class BillDetailComponent implements OnInit {
 
 
-  constructor(private router: Router,private cartService : CartService, private productService: ProductService, public formBuilder: FormBuilder){
+  constructor(private router: Router,private cartService : CartService,private clientService : ClientService, private productService: ProductService, public formBuilder: FormBuilder){
     this.form = this.formBuilder.group({
       orderID: [''],
       fullName: [''],
@@ -32,8 +33,11 @@ export class BillDetailComponent implements OnInit {
       clientID: [''],
       client:[''],
       orderDetails:[''],
+      email:[''],
     });
   }
+  payment = "cod";
+  email: any;
   form: FormGroup;
   public products : any = [];
   productList: any = {};
@@ -109,10 +113,34 @@ export class BillDetailComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    if (localStorage.getItem('Username') && localStorage.getItem('localCart')) {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+    if (localStorage.getItem('localCart')) {
       this.disabled = false
     } else {
       this.disabled = true
+    }
+    this.email = "";
+    this.orderMoMo.OrderID = 0
+    if (localStorage.getItem('Username')) {
+      this.email = localStorage.getItem('Username');
+      this.clientService.getWithEmail(this.email).subscribe((data) => {
+        this.orderRequest.FullName = data.fullName;
+        this.orderRequest.Mobile = data.mobile;
+        this.orderRequest.Address = data.address;
+        // this.form.patchValue({
+        //   fullName: data.fullName,
+        //   mobile: data.mobile,
+        //   address: data.address,
+        //   clientID: data.clientID,
+        //   email: data.email,
+        // });
+
+        this.orderMoMo.OrderID = data.clientID
+      });
     }
 
     this.products = localStorage.getItem('localCart');
@@ -120,6 +148,7 @@ export class BillDetailComponent implements OnInit {
     this.productList = JSON.parse(this.products);
 
     this.countDuplicates();
+
   }
   // increaseCount(id: string): void {
   //   if (this.idCountMap[id]) {
@@ -196,13 +225,10 @@ export class BillDetailComponent implements OnInit {
     }
     return needPay;
   }
-  removeProduct(id: any) {
-    let newproductList: any;
-    newproductList = this.productList.filter((element: any) =>{
-      return element.productID != id
-    });
-    this.cartService.removetoCartLocal(newproductList);
-    window.location.reload();
+  needPayAll(){
+    let needPayAll = this.needPay() + 25000;
+
+    return needPayAll;
   }
 
   showImg(imgName: any) {
@@ -289,12 +315,12 @@ export class BillDetailComponent implements OnInit {
       const total = productPrice * count;
       needPay += total;
     }
-    this.orderMoMo.OrderID = "27"
-    this.orderMoMo.FullName = "PhuongPhuong"
+    // this.orderMoMo.OrderID = "27"
+    this.orderMoMo.FullName = this.form.get('fullName')?.value
     this.orderMoMo.OrderInfo = ""
-    this.orderMoMo.Amount = needPay.toString()
+    this.orderMoMo.Amount = (needPay + 25000).toString()
     this.orderMoMo.MomoCode = ""
-    this.orderMoMo.ReturnUrl = window.location.origin.toString()
+    this.orderMoMo.ReturnUrl = window.location.origin.toString() + '/bill/bill-success'
 
     this.cartService.sendMomo(this.orderMoMo).subscribe({
       next: (data => {
@@ -315,6 +341,13 @@ export class BillDetailComponent implements OnInit {
 
     //console.log("linkkkkk", window.location.host)
 
+  }
+  radioPayment(e:any){
+    this.payment = e.target.value;
+    // console.log(e.target.value)
+    // if (e.target.value == "momo") {
+    //   this.showMomo(e)
+    // }
   }
 
   submitForm() {
@@ -362,4 +395,45 @@ export class BillDetailComponent implements OnInit {
     //   alert('error');
     // }
   }
+  pay(){
+    this.orderRequest.FullName = this.form.get('fullName')?.value
+    this.orderRequest.Mobile = this.form.get('mobile')?.value
+    this.orderRequest.Address = this.form.get('address')?.value
+
+    if (this.orderRequest.FullName == "" || this.orderRequest.Mobile == "" || this.orderRequest.Address == "") {
+      alert("Quý Khách vui lòng nhập đầy đủ thông tin nhận hàng!");
+    }
+    else {
+      //luu client vao localstorage
+      let client: any = {
+        FullName: "",
+        Mobile: "",
+        Address: "",
+        Email: "",
+      };
+      client.FullName = this.orderRequest.FullName;
+      client.Mobile = this.orderRequest.Mobile;
+      client.Address = this.orderRequest.Address;
+      client.Email = this.form.get('email')?.value;
+      let localClient = localStorage.getItem('localClient');
+      if (!localClient) {
+        localStorage.setItem('localClient', JSON.stringify(client));
+      }
+      else {
+        localStorage.removeItem('localClient');
+
+        localStorage.setItem('localClient', JSON.stringify(client));
+      }
+      if (this.payment == "cod") {
+        this.router.navigate(['/bill/bill-success'], { queryParams: { errorCode: 0, orderType: "cod" } });
+
+        return
+      }
+      if (this.payment == "momo") {
+        this.showMomo(event!);
+        return
+      }
+    }
+  }
+
 }

@@ -21,5 +21,8 @@ export class ClientService {
   addClient(item: any): Observable<any> {
     return this.httpClient.post<any>(`${environment.apiUrl}/client/post`, item);
   }
+  getWithEmail(email: any): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/client/getWithEmail/${email}`);
+  }
 }
 

@@ -49,6 +49,7 @@ namespace API.Services
             var data = await _context.Clients.FindAsync(id);
             return data;
         }
+        
 
         public async Task<List<Client>> FindWithPaging(string fullName, int page, int pageSize)
         {
@@ -87,6 +88,12 @@ namespace API.Services
         public async Task<List<Client>> SelectAll()
         {
             var data = await _context.Clients.ToListAsync();
+            return data;
+        }
+
+        public async Task<Client> SelectWithEmail(string Email)
+        {
+            var data = await _context.Clients.Where(x => x.Email == Email).FirstOrDefaultAsync();
             return data;
         }
 
