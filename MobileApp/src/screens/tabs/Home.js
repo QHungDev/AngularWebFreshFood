@@ -45,11 +45,6 @@ const Home = () => {
       <FlatList
         data={products}
         renderItem={({item, index}) => {
-          const originalPath = item.avatar;
-          const newPath = originalPath.replace(
-            '/FileUploads/Product/Avatar/',
-            'http://192.168.1.215:7265/api/product/',
-          );
           return (
             <TouchableOpacity
               activeOpacity={1}
@@ -57,7 +52,7 @@ const Home = () => {
               onPress={() => {
                 navigation.navigate('ProductDetail', {data: item});
               }}>
-              <Image source={{uri: newPath}} style={styles.itemImage} />
+              <Image source={{uri: item.avatar}} style={styles.itemImage} />
               <View>
                 <Text style={styles.name}>
                   {item.title.length > 25

@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng serve --port 4202"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +20,9 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "angular-ng-autocomplete": "^2.0.12",
+    "ngx-bootstrap": "^11.0.2",
+    "ngx-toastr": "^17.0.2",
+    "randomstring": "^1.3.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

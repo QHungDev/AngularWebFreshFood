@@ -27,12 +27,16 @@ namespace API.Controllers
             }
             return Ok();
         }
-        [HttpPost("post")]
-        public IActionResult Post(Picture item)
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile imageFile)
         {
-            return Ok();
+            var folderName = "FileUploads";
+
+            var res = await _service.UploadImageAsync(imageFile, folderName);
+
+            return RedirectToAction("ResponseData", new { fileURL = res.Content?.DownloadUrl });
         }
-  
+
         [HttpGet("get")]
         public async Task<IActionResult> Get()
         {

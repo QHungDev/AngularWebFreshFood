@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-6">
 					<div class="banner">
-						<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+						<!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
 									<a href="#"><img src="../../assets/img/hinh-anh-trang-chu/banner/banner-1.png" class="d-block w-100" alt="..."></a>
@@ -17,7 +17,19 @@
 									<a href="#"><img src="../../assets/img/hinh-anh-trang-chu/banner/banner-3.jpg" class="d-block w-100" alt="..."></a>
 								</div>
 							</div>
-						</div>
+						</div> -->
+
+            <carousel [isAnimated]="true">
+              <slide>
+                <img src="../../assets/img/hinh-anh-trang-chu/banner/banner-1.png" alt="first slide" style="display: block; width: 100%;">
+              </slide>
+              <slide>
+                <img src="../../assets/img/hinh-anh-trang-chu/banner/banner-2.png" alt="second slide" style="display: block; width: 100%;">
+              </slide>
+              <slide>
+                <img src="../../assets/img/hinh-anh-trang-chu/banner/banner-3.jpg" alt="third slide" style="display: block; width: 100%;">
+              </slide>
+            </carousel>
 					</div>
 				</div>
 				<div class="col-6">
@@ -84,7 +96,7 @@
 					<a>
 						<li *ngFor="let product of products; let i = index" class="item">
 						<a href="#"(click)="detailProduct($event, product)" class="product-image">
-							<img class="img-fluid"  [src]="showImg(product.avatar)" />
+							<img class="img-fluid"  src="{{product.avatar}}" />
 						</a>
 						<div class="info-box">
 							<p class="product-name mb-1">
@@ -151,7 +163,7 @@
 					<a>
 						<li *ngFor="let product of products; let i = index" class="item">
 						<a href="#"(click)="detailProduct($event, product)" class="product-image">
-							<img class="img-fluid"  [src]="showImg(product.avatar)" />
+							<img class="img-fluid"  src="{{product.avatar}}" />
 						</a>
 						<div class="info-box">
 							<p class="product-name mb-1">

@@ -112,21 +112,48 @@ namespace API.Services
             return data;
         }
 
-        public async Task<Client> Update(int id, Client item)
+        public async Task<Client> Update(ClientUpdate item)
         {
-            var existItem = await _context.Clients.FindAsync(id);
+            var existItem = await _context.Clients.Where(x => x.Email == item.Email && x.Password == item.RePassword).FirstOrDefaultAsync();
 
             if (existItem == null)
                 return null;
 
-            existItem.Email = item.Email;
-            existItem.Password = item.Password;
+            // existItem.Email = item.Email;
             existItem.FullName = item.FullName;
+            existItem.Password = item.Password;
             existItem.Mobile = item.Mobile;
             existItem.Address = item.Address;
-            existItem.Status = item.Status;
-            existItem.CreateTime = item.CreateTime;
-            existItem.ClientCategoryID = item.ClientCategoryID;
+            // existItem.Status = item.Status;
+            // existItem.CreateTime = item.CreateTime;
+            // existItem.ClientCategoryID = item.ClientCategoryID;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return existItem;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Client> ForgotPassword(ClientUpdate item)
+        {
+            var existItem = await _context.Clients.Where(x => x.Email == item.Email).FirstOrDefaultAsync();
+
+            if (existItem == null)
+                return null;
+
+            // existItem.Email = item.Email;
+            // existItem.FullName = item.FullName;
+            existItem.Password = item.Password;
+            // existItem.Mobile = item.Mobile;
+            // existItem.Address = item.Address;
+            // existItem.Status = item.Status;
+            // existItem.CreateTime = item.CreateTime;
+            // existItem.ClientCategoryID = item.ClientCategoryID;
 
             try
             {

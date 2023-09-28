@@ -62,77 +62,73 @@ namespace API.Controllers
             }
             return Ok();
         }
-        // [HttpGet("GetProductwithimage")]
-        // public  IEnumerable<Product> GetProductwithimage()
-        // {
-        //     List<Product> _list = new List<Product>();
-        //     var _product = _context.Products.ToList();
-        //     string Filepath = "https://localhost:7265/api";
-        //     if (_product != null && _product.Count > 0)
-        //     {
-        //         _product.ForEach(item =>
-        //         {
-        //             _list.Add(new Product()
-        //             {
-        //                 ProductID = item.ProductID,
-        //                 Avatar = Filepath+item.Avatar
-        //             });
+         [HttpPost("UploadImagev2")]
+         public async Task<IActionResult> UploadImagev2(int productID,IFormFile imageFile)
+        {
+            if (productID == 0)
+            {
+               productID = _context.Products.OrderByDescending(x => x.ProductID).First().ProductID;
+            }
+            var folderName = "FileUploads";
 
-        //         });
-
-        //     }
-        //     return _list;
-        // }
+            var res = await _service.UploadImageAsync(imageFile, folderName);
+            var item = await _context.Products.FindAsync(productID); 
+            var fileURL = res.Content?.DownloadUrl;
+            item.Avatar = fileURL;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
 
         [HttpPost("UploadImage")]
         public async Task<ActionResult> UploadImage(int productID)
         {
-            if (productID == 0)
-            {
-                productID = _context.Products.OrderByDescending(x => x.ProductID).First().ProductID;
-            }
-            bool Result = false;
+           if (productID == 0)
+           {
+               productID = _context.Products.OrderByDescending(x => x.ProductID).First().ProductID;
+           }
+           bool Result = false;
 
-            var fileImg = Request.Form.Files;
+           var fileImg = Request.Form.Files;
 
-            var Files = Request.Form.Files;
-            //string urlName ="";
-            var item = await _context.Products.FindAsync(productID);  
-            foreach (IFormFile source in Files)
-            {
-                //string rootFolder = myEnvironment.WebRootPath;
-                string FileName = source.FileName;
-                // FileName = Guid.NewGuid() + ".jpg";
-                string folderSave = "FileUploads\\Product\\Avatar\\";
-                try
-                {
-                    if (!System.IO.Directory.Exists(folderSave))
-                        System.IO.Directory.CreateDirectory(folderSave);
-                    //string folderDownload = $"{rootFolder}/{folderSave}".Replace("/", "\\")+FileName;
-                    string Filepath = myEnvironment.WebRootPath+folderSave+FileName;
-                    string FileUrl ="/FileUploads/Product/Avatar/"+FileName;
+           var Files = Request.Form.Files;
+           //string urlName ="";
+           var item = await _context.Products.FindAsync(productID);
+           foreach (IFormFile source in Files)
+           {
+               //string rootFolder = myEnvironment.WebRootPath;
+               string FileName = source.FileName;
+               // FileName = Guid.NewGuid() + ".jpg";
+               string folderSave = "FileUploads\\Product\\Avatar\\";
+               try
+               {
+                   if (!System.IO.Directory.Exists(folderSave))
+                       System.IO.Directory.CreateDirectory(folderSave);
+                   //string folderDownload = $"{rootFolder}/{folderSave}".Replace("/", "\\")+FileName;
+                   string Filepath = myEnvironment.WebRootPath + folderSave + FileName;
+                   string FileUrl = "/FileUploads/Product/Avatar/" + FileName;
 
-                    if (System.IO.File.Exists(Filepath))
-                        System.IO.File.Delete(Filepath);
-                    using (FileStream stream = System.IO.File.Create(Filepath))
-                    {
-                      
-                        await source.CopyToAsync(stream);
-                        if(stream != null){
-                            //urlName = stream.Name;
-                             item.Avatar = FileUrl;
-                             await _context.SaveChangesAsync();
-                        }    
-                        Result = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
+                   if (System.IO.File.Exists(Filepath))
+                       System.IO.File.Delete(Filepath);
+                   using (FileStream stream = System.IO.File.Create(Filepath))
+                   {
 
-            return Ok();
+                       await source.CopyToAsync(stream);
+                       if (stream != null)
+                       {
+                           //urlName = stream.Name;
+                           item.Avatar = FileUrl;
+                           await _context.SaveChangesAsync();
+                       }
+                       Result = true;
+                   }
+               }
+               catch (Exception ex)
+               {
+                   throw ex;
+               }
+           }
+
+           return Ok();
 
         }
         [HttpGet]

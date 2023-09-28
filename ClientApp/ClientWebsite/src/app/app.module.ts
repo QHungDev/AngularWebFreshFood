@@ -3,6 +3,15 @@ import { NgModule} from '@angular/core';
 import { FormControl,FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
+
+
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +36,9 @@ import { NewsIndexComponent } from './news/news-index/news-index.component';
 import { NewsDetailComponent } from './news/news-detail/news-detail.component';
 import { BillDetailComponent } from './bill/bill-detail/bill-detail.component';
 import { BillSuccessComponent } from './bill/bill-success/bill-success.component';
+import { ClientInfoComponent } from './client-info/client-info.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AuthenticCodeComponent } from './authentic-code/authentic-code.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +56,10 @@ import { BillSuccessComponent } from './bill/bill-success/bill-success.component
     NewsIndexComponent,
     NewsDetailComponent,
     BillDetailComponent,
-    BillSuccessComponent
+    BillSuccessComponent,
+    ClientInfoComponent,
+    ForgotPasswordComponent,
+    AuthenticCodeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +71,11 @@ import { BillSuccessComponent } from './bill/bill-success/bill-success.component
     BrowserAnimationsModule,
     MatAutocompleteModule,
     AutocompleteLibModule,
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
+    CarouselModule.forRoot(),
+    // ToastNoAnimationModule.forRoot(),
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '', component: SiteLayoutComponent, children: [
@@ -106,6 +126,17 @@ import { BillSuccessComponent } from './bill/bill-success/bill-success.component
         path: '', component: SiteLayoutComponent, children: [
           { path: 'login', component: LoginComponent},
           // { path: 'category', component: AccountCategoryComponent},
+        ]
+      },
+      {
+        path: '', component: SiteLayoutComponent, children: [
+          { path: 'forgot-password', component: ForgotPasswordComponent},
+          { path: 'authentic-code', component: AuthenticCodeComponent},
+        ]
+      },
+      {
+        path: '', component: SiteLayoutComponent, children: [
+          { path: 'client-info', component: ClientInfoComponent}
         ]
       },
       {

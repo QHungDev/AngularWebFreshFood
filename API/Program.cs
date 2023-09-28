@@ -35,6 +35,7 @@ builder.Services.AddCors(x =>
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<IAccountCategoryService, AccountCategoryService>();
+builder.Services.AddTransient<IClientCategoryService, ClientCategoryService>();
 builder.Services.AddTransient<IContactService, ContactService>();
 builder.Services.AddTransient<IArticleService, ArticleService>();
 builder.Services.AddTransient<IPictureService, PictureService>();

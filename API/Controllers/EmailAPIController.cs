@@ -55,5 +55,26 @@ namespace API.Controllers
             _emailService.SendMail(request);
             return Ok();
         }
+
+        [HttpPost("sendEmailAuthenticCode")]
+        public IActionResult SendEmailAuthenticCode(EmailAuthenticCode request)
+        {
+            string body = "gui mail";
+            string folderEmail = "FileUploads\\Email\\email-authentic-code.html";
+            string path = myEnvironment.WebRootPath + folderEmail;
+            if (System.IO.File.Exists(path))
+            {
+                body = System.IO.File.ReadAllText(path).Trim().Replace("{code}", request.Code); 
+            }
+            else
+            {
+                body = "khong co file";
+            }
+            request.Body = body;
+            request.Subject = "Mã xác thực tài khoản";
+            
+            _emailService.SendEmailAuthenticCode(request);
+            return Ok();
+        }
     }
 }

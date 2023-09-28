@@ -21,8 +21,8 @@ export class VcHeaderComponent implements OnInit {
   length = 0;
   loginUsername: any;
   isLogin=true;
-
-  constructor(private productService: ProductService,private clientService: ClientService, private tokenService: TokenService, private router: Router){
+  clients: any[] = [];
+  constructor(private activeRoute: ActivatedRoute,private productService: ProductService,private clientService: ClientService, private tokenService: TokenService, private router: Router){
 
    }
    search(event: Event): void {
@@ -35,6 +35,12 @@ export class VcHeaderComponent implements OnInit {
       .subscribe(results => {
         this.searchResults = results;
       });
+      this.activeRoute.queryParams.subscribe(params => {
+        const articlesObservable = this.clientService.clientget();
+        articlesObservable.subscribe((clientsData: any[]) => {
+          this.clients = clientsData;
+        });
+    });
   }
 
    ngOnInit(): void {
@@ -45,6 +51,7 @@ export class VcHeaderComponent implements OnInit {
     let countCart: any;
     countCart= Object.keys(JSON.parse(localStorage.getItem('localCart')||'{}')).length;
     this.length=countCart;
+
   }
   searchProduct(e: Event): void {
     e.preventDefault();
@@ -61,6 +68,10 @@ export class VcHeaderComponent implements OnInit {
   ClientLogin(e: Event) {
     e.preventDefault();
     this.router.navigate(['/login']);
+  }
+  clientInfo(e: Event) {
+    e.preventDefault();
+    this.router.navigate(['/client-info'],{ queryParams: {} });
   }
   ClientRegister(e: Event) {
     e.preventDefault();

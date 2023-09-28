@@ -22,9 +22,14 @@ namespace API.Controllers
         }
 
         [HttpGet("get")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var response = await _service.SelectAll();
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
         }
 
         [HttpGet("get/{id}")]

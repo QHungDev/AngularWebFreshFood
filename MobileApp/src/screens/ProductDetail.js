@@ -22,11 +22,6 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
-  const originalPath = route.params.data.image || '';
-  const newPath = originalPath.replace(
-    '/FileUploads/Product/Avatar/',
-    'http://192.168.1.215:7265/api/product/',
-  );
   const checkUserStatus = async () => {
     let isUserLoggedIn = false;
     const status = await AsyncStorage.getItem('IS_USER_LOGGED_IN');
@@ -49,7 +44,7 @@ const ProductDetail = () => {
         isCart={true}
       />
       <ScrollView>
-        <Image source={{uri: newPath}} style={styles.banner} />
+        <Image source={{uri: route.params.data.avatar}} style={styles.banner} />
         <Text style={styles.title}>{route.params.data.title}</Text>
         <Text style={styles.desc}>{route.params.data.description}</Text>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>

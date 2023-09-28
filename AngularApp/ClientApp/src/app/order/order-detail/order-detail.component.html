@@ -194,7 +194,7 @@
                             <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
                             <td class="center">{{item.title}}</td>
                             <td class="patient-img center">
-                                <img [src]="showImg(item.avatar)" alt="">
+                                <img src="{{item.avatar}}"alt="">
                             </td>
                             <td class="center">{{item.quantity}}</td>
                             <td class="center">{{item.price|currency:'VND':''}} VND</td>

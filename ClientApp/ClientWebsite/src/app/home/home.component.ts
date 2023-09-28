@@ -104,14 +104,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  showImg(imgName: any) {
-    //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
-    var name = imgName.split('/')[4]
+  // showImg(imgName: any) {
+  //   //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
+  //   var name = imgName.split('/')[4]
 
-    var imgUrl = 'https://localhost:7265/api/product/' + name;
+  //   var imgUrl = 'https://localhost:7265/api/product/' + name;
 
-    return imgUrl;
-  }
+  //   return imgUrl;
+  // }
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit {
   }
   percent(price:any, oldPrice: any){
     // (price/oldPrice)*100
-    return Math.round(((price/oldPrice)*100)*10^2)/10^2
+    return Math.round((((oldPrice - price)/oldPrice)*100)*10^2)/10^2
   }
 
 }

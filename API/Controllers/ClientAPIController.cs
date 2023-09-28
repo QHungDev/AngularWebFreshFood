@@ -63,9 +63,35 @@ namespace API.Controllers
         }
 
         [HttpPut("put")]
-        public IActionResult Put(int ID, Client item)
+        public async Task<IActionResult> Put(ClientUpdate item)
         {
-            return Ok();
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Update(item);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
+        }
+
+        [HttpPut("forgotPassword")]
+        public async Task<IActionResult> ForgotPassword(ClientUpdate item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.ForgotPassword(item);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
         }
 
         [HttpDelete("delete/{id}")]

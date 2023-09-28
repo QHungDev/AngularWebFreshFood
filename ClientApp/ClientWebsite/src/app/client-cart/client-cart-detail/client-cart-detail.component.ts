@@ -104,8 +104,6 @@ export class ClientCartDetailComponent implements OnInit {
     // this.postOrderRequest.ChargeStatus = chargeStatus;
     // this.postOrderRequest.DeliveStatus = deliveStatus;
 
-    console.log("hahahahaha", this.postOrderRequest)
-
     if (this.orderID && this.orderID !== ""  && this.postOrderRequest.orderID !== undefined) {
       //Update
       this.cartService.updateOrder(this.orderID, this.postOrderRequest).subscribe({

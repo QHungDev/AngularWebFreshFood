@@ -45,4 +45,27 @@ namespace Models
         [InverseProperty("Client")]
         public virtual ICollection<ProductVote> ProductVotes { get; set; }
     }
+
+    public partial class ClientUpdate
+    {
+        // [Key]
+        // public int ClientID { get; set; }
+        // [StringLength(255)]
+        public string Email { get; set; }
+        [StringLength(50)]
+        public string Password { get; set; }
+        [StringLength(50)]
+        public string RePassword { get; set; }
+        [StringLength(50)]
+        public string FullName { get; set; }
+        [StringLength(15)]
+        public string Mobile { get; set; }
+        [StringLength(255)]
+        public string Address { get; set; }
+        // public bool? Status { get; set; }
+        // [Column(TypeName = "datetime")]
+        // public DateTime? CreateTime { get; set; }
+        // public int? ClientCategoryID { get; set; }
+
+    }
 }

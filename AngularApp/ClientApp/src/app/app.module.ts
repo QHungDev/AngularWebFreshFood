@@ -143,6 +143,11 @@ import { ProductMainCategoryIndexComponent } from './product-main-category/produ
           { path: 'forgot-password', component: ForgotPasswordComponent }
         ]
       },
+      {
+        path: '', component: SiteLayoutComponent, children: [
+          { path: 'privacy', component: PrivacyComponent },
+        ]
+      },
 
       //None layout routers
       { path: 'privacy', component: PrivacyComponent },

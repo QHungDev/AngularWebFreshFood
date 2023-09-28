@@ -20,7 +20,8 @@ export class ProductDetailComponent implements OnInit {
     plugins: 'lists link image table wordcount'
   }
   uploadedImage: File| undefined;
-  imgModified:any;
+  selectedFile:any;
+  newImg:any;
   productCategories: any[] = [];
   form: FormGroup;
   postProductRequest: any = {
@@ -68,8 +69,8 @@ export class ProductDetailComponent implements OnInit {
       status: [true]
     });
   }
-
   ngOnInit(): void {
+
     const productsObservable = this.productService.getProductCategories();
     productsObservable.subscribe((productsData: any[]) => {
       this.productCategories = productsData;
@@ -81,6 +82,7 @@ export class ProductDetailComponent implements OnInit {
           const productsObservable = this.productService.getProduct(this.productID);
           productsObservable.subscribe((productsData: any) => {
             this.postProductRequest = productsData;
+            this.newImg = this.postProductRequest.avatar;
           });
         }
       });
@@ -97,26 +99,29 @@ export class ProductDetailComponent implements OnInit {
     this.router.navigate(['/product']);
   }
 
-  onChangeUploadFile(e:Event) {
-    this.uploadedImage = (e.target as HTMLInputElement)?.files?.[0];
-    //var fileExtension = '.' + this.uploadedImage?.name.split('.').pop();
-    //this.uploadedImage?.name.replace(this.uploadedImage.name,"/assets/img/FileUploads/Product/Avatar/"+fileExtension);
-    console.log("thisimg",this.imgModified);
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
 
-  }
-
-  showImg(imgName: any) {
-    //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
-    if (imgName !== undefined) {
-      var name = imgName.split('/')[4]
-
-      var imgUrl = 'https://localhost:7265/api/product/' + name;
-
-      return imgUrl;
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event: any) => {
+      this.newImg = event.target.result;
     }
-
-    return
   }
+
+
+  // showImg(imgName: any) {
+  //   //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
+  //   if (imgName !== undefined) {
+  //     var name = imgName.split('/')[4]
+
+  //     var imgUrl = 'https://localhost:7265/api/product/' + name;
+
+  //     return imgUrl;
+  //   }
+
+  //   return
+  // }
 
   submitForm() {
     var productCategoryID = this.form.get('productCategoryID')?.value;
@@ -153,17 +158,26 @@ export class ProductDetailComponent implements OnInit {
     this.postProductRequest.CreateBy = window.localStorage.getItem('Username');
     this.postProductRequest.Status = status;
     this.postProductRequest.ProductCategoryID = productCategoryID;
-    let imageFormData:any = new FormData();
-    if (this.uploadedImage !== undefined ) {
-      imageFormData.append('this.postProductRequest.Avatar', this.uploadedImage, this.uploadedImage?.name);
-    }
-    console.log("formdata",imageFormData);
+    let imageFile = new FormData();
+    imageFile.append('imageFile', this.selectedFile);
     const updateProductforkJoin = this.productService.updateProduct(this.productID, this.postProductRequest);
-    const upLoadImageforkJoin = this.productService.UploadFile(this.productID,imageFormData);
+    const upLoadImageforkJoin = this.productService.uploadImagev2(this.productID,imageFile);
     if (this.productID && this.productID !== "") {
 
       //Update
       if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
+
+        if (!this.selectedFile) {
+          forkJoin([updateProductforkJoin]).subscribe({
+            next: (data => {
+              this.router.navigate(['/product']);
+            }),
+            error: ((error: ErrorResponse) => {
+              alert(error.Error);
+            })
+          });
+          return;
+        }
         forkJoin([updateProductforkJoin,upLoadImageforkJoin]).subscribe({
           next: (data => {
             this.router.navigate(['/product']);
@@ -181,11 +195,10 @@ export class ProductDetailComponent implements OnInit {
     else {
       //Add new
       if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
-        debugger
         this.productService.addProduct(this.postProductRequest).subscribe({
           next: (data => {
-            // this.router.navigate(['/product']);
             this.add();
+            //  this.router.navigate(['/product']);
           }),
           error: ((error: ErrorResponse) => {
             alert(error.Error);
@@ -201,6 +214,7 @@ export class ProductDetailComponent implements OnInit {
   async add() {
     // await this.addItem();
     await this.addImg();
+    // await this.backToList(event!);
   }
 
   // addItem() {
@@ -214,21 +228,30 @@ export class ProductDetailComponent implements OnInit {
   //   });
   // }
 
-  addImg() {
+   addImg() {
+    if (this.selectedFile) {
+          const imageFile = new FormData();
+          imageFile.append('imageFile', this.selectedFile);
 
-    let imageFormData:any = new FormData();
-    if (this.uploadedImage !== undefined ) {
-      imageFormData.append('this.postProductRequest.Avatar', this.uploadedImage, this.uploadedImage?.name);
-    }
-    this.productService.UploadFile("0",imageFormData).subscribe({
-      next: (data => {
-        this.router.navigate(['/product']);
-      }),
-      error: ((error: ErrorResponse) => {
-        alert(error.Error);
-      })
-    });
-  }
+          this.productService.uploadImagev2("0",imageFile).subscribe(
+            ( response) => {
+              // this.router.navigate(['/product']);
+            this.backToList(event!);
+
+              console.log('File uploaded successfully');
+              // Xử lý dữ liệu phản hồi từ API nếu cần
+            },
+            (error) => {
+              console.error('Error uploading file:', error);
+              // Xử lý lỗi nếu cần
+            }
+          );
+        } else {
+          this.backToList(event!);
+
+          console.error('No file selected.');
+        }
+      }
 
 
 

@@ -101,14 +101,14 @@ export class OrderDetailComponent implements OnInit {
       })
   }
 
-  showImg(imgName: any) {
-    //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
-    var name = imgName.split('/')[4]
+  // showImg(imgName: any) {
+  //   //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
+  //   var name = imgName.split('/')[4]
 
-    var imgUrl = 'https://localhost:7265/api/product/' + name;
+  //   var imgUrl = 'https://localhost:7265/api/product/' + name;
 
-    return imgUrl;
-  }
+  //   return imgUrl;
+  // }
 
 
 

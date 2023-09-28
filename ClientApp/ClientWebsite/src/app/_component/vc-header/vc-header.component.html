@@ -43,7 +43,7 @@
               <ng-template [ngIf]="loginUsername" [ngIfElse]="loggedOut">
                 <ul>
                   <li id="li_Login">
-                    <a class="w-75" (click)="ClientLogin($event)" href="#" class="w-75">{{loginUsername}}</a>
+                    <a class="w-75" (click)="clientInfo($event)" href="#" class="w-75">{{loginUsername}}</a>
                     <!-- <a class="w-75" [routerLink]="['/login']" class="w-75">Đăng nhập</a> -->
                   </li>
                   <li id="li_Register">

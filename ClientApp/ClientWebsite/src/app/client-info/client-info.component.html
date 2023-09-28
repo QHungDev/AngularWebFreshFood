@@ -1,0 +1,226 @@
+<div class="list-product container">
+
+  <!-- <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="index.html">Trang chủ</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="#">Rau củ quả</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Thông tin cá nhân khách hàng</li>
+    </ol>
+  </nav>
+  <div class="the-title">
+    <h2>Thông tin cá nhân khách hàng
+    </h2>
+    <img class="img-fluid" src="../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+  </div> -->
+
+  <div class="the-title-box mt-5 ml-3">
+    <h4>
+      Thông tin cá nhân khách hàng
+    </h4>
+    <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal was-validated">
+  <div style="margin: 10px 70px 0 70px;">
+    <table class="table table-borderless">
+      <tr>
+        <th scope="row">Họ và tên: </th>
+        <td>{{getclientRequest.fullName}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Số điện thoại: </th>
+        <td>{{getclientRequest.mobile}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Địa chỉ nhận hàng: </th>
+        <td>{{getclientRequest.address}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Email xác nhận: </th>
+        <td>{{getclientRequest.email}}</td>
+      </tr>
+    </table>
+
+    <div class="personal-import">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-4">
+            <label class="control-label">
+              Thay đổi họ tên:
+            </label>
+          </div>
+          <div class="col-8">
+            <input formControlName="fullName" name="fullName" [(ngModel)]="postclientRequest.FullName" id="input_changeUserName" class="form-control" type="text" placeholder="Nhập họ tên" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label class="control-label">
+              Thay đổi mật khẩu:
+            </label>
+          </div>
+          <div class="col-8">
+            <input formControlName="password" name="password" [(ngModel)]="postclientRequest.Password" id="input_changePassword" class="form-control" type="password"
+              placeholder="Nhập mật khẩu mới" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label class="control-label">
+              Thay đổi số điện thoại:
+            </label>
+          </div>
+          <div class="col-8">
+            <input formControlName="mobile" name="mobile" [(ngModel)]="postclientRequest.Mobile" id="input_changeMobi" class="form-control" type="text"
+              placeholder="Nhập số điện thoại" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label class="control-label">
+              Thay đổi địa chỉ nhận hàng:
+            </label>
+          </div>
+          <div class="col-8">
+            <textarea formControlName="address" name="address" [(ngModel)]="postclientRequest.Address" id="textarea_changeAddress" class="form-control" type="text"
+              placeholder="Nhập địa chỉ" required></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <i class="pull-right">Để nhận hàng thuận tiện hơn, bạn vui lòng cho FreshFood biết loại địa chỉ.
+            </i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label class="control-label">
+              Loại địa chỉ:
+            </label>
+          </div>
+          <div class="col-4 form-check">
+            <!-- <input class="form-check-input check-box" type="radio" name="addressType" id="gridRadios1" value="option1"
+              checked>
+            <label class="form-check-label" for="gridRadios1">
+              Nhà riêng / Chung cư
+            </label> -->
+            <div class="custom-control custom-radio custom-control-inline" style="line-height: normal;">
+              <input type="radio" id="gridRadios1" name="addressType" class="custom-control-input" value="option1" checked>
+              <label class="custom-control-label" for="gridRadios1">Nhà riêng / Chung cư</label>
+            </div>
+
+          </div>
+          <div class="col-4 form-check">
+            <!-- <input class="form-check-input check-box" type="radio" name="addressType" id="gridRadios2" value="option2">
+            <label class="form-check-label" for="gridRadios2">
+              Cơ quan / Công ty
+            </label> -->
+
+            <div class="custom-control custom-radio custom-control-inline" style="line-height: normal;">
+              <input type="radio" id="gridRadios2" name="addressType" class="custom-control-input" value="option2">
+              <label class="custom-control-label" for="gridRadios2">Cơ quan / Công ty</label>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label class="control-label">
+              Nhập lại mật khẩu cũ:
+            </label>
+          </div>
+          <div class="col-8">
+            <input formControlName="repassword" name="repassword" [(ngModel)]="postclientRequest.RePassword" id="input_oldPassword" class="form-control" type="password"
+              placeholder="Nhập mật lại khẩu cũ để lưu thay đổi" required>
+            <div runat="server" id="div_oldPassword" class="invalid-feedback">
+              Mục này là bắt buộc.
+              <i class="fa fa-exclamation-circle fa-spin" aria-hidden="true"></i>
+            </div>
+            <div *ngIf="disabledButtonUpdate"><i style="color: rgb(108, 141, 44);">Đang gửi mã xác thực... </i> <i class='fa fa-spinner fa-spin'style="color: rgb(108, 141, 44);"></i></div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="pull-right">
+              <button [disabled]="disabledButtonUpdate" ID="LinkButton_Cancel" (click)="clearForm()" class="btn btn-outline-danger" tooltip="Xóa tất cả các thông tin đã nhập">Hủy bỏ</button>
+            </div>
+          </div>
+          <div class="col-4">
+            <button [disabled]="disabledButtonUpdate" style="color: #fff;" ID="LinkButton_Save" type="submit" class="btn btn-success" tooltip="{{postclientRequest.FullName && postclientRequest.Mobile && postclientRequest.Password && postclientRequest.RePassword ? 'Gửi mã xác nhận' : 'Vui lòng nhập đầy đủ thông tin trước khi thay đổi'}}">
+              Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+
+
+  <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create</button> -->
+
+  <ng-template #template class="modal-dialog modal-dialog-centered">
+    <div class="modal-header pb-0">
+      <div class="modal-title pull-left">
+        <div class="the-title-box mt-4 ml-2">
+          <h5 style="font-family: Merriweather; font-weight: 600; color: #8BC34A; text-transform: capitalize;">
+            Nhập Mã Xác Thực
+          </h5>
+          <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+        </div>
+      </div>
+      <!-- <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" style="color: #e30d0d;" class="visually-hidden">&times;</span>
+      </button> -->
+    </div>
+    <div class="modal-body">
+      <div class="w-75" style="margin: auto;">
+        <div class="row w-75" style="margin: auto;">
+          <div class="col-3">
+            <input #authenticCode1 maxlength="1" class="form-control authenticCode" type="text"
+            placeholder="-" required [readonly]="readonly_AuthenticCode1" [(ngModel)]="value_AuthenticCode1" (ngModelChange)="changeAuthenticCode($event, 1)">
+          </div>
+
+          <div class="col-3">
+            <input #authenticCode2 maxlength="1" class="form-control authenticCode" type="text"
+            placeholder="-" required [readonly]="readonly_AuthenticCode2" [(ngModel)]="value_AuthenticCode2" (ngModelChange)="changeAuthenticCode($event, 2)">
+          </div>
+
+          <div class="col-3">
+            <input #authenticCode3 maxlength="1" class="form-control authenticCode" type="text"
+            placeholder="-" required [readonly]="readonly_AuthenticCode3" [(ngModel)]="value_AuthenticCode3" (ngModelChange)="changeAuthenticCode($event, 3)">
+          </div>
+
+          <div class="col-3">
+            <input #authenticCode4 maxlength="1" class="form-control authenticCode" type="text"
+            placeholder="-" required [readonly]="readonly_AuthenticCode4" [(ngModel)]="value_AuthenticCode4" (ngModelChange)="changeAuthenticCode($event, 4)">
+          </div>
+
+
+          <div class="m-auto">
+            <div *ngIf="showTime">
+              <i>
+                Mã xác thực sẽ hết hạn sau:
+              </i>
+              <span style="color: #378f97;">
+                {{countTime}}
+              </span>
+            </div>
+            <div *ngIf="showAuthenticating"><i style="color: rgb(108, 141, 44);">Đang xác thực... </i> <i class='fa fa-spinner fa-spin'style="color: rgb(108, 141, 44);"></i></div>
+            <div class="d-flex">
+              <button [disabled]="!disabledResendAuthenticCode" type="button" (click)="resendAuthenticCode()" class="resendAuthenticCode btn btn-warning mt-2 mr-auto ml-auto btn-sm">Gửi lại mã</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+
+
+</div>

@@ -1,16 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  
+
   constructor(private httpClient: HttpClient) { }
   //Get danh sách product
-  
+
   getProducts(): Observable<any[]> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/product/get`);
   }
@@ -38,6 +37,9 @@ export class ProductService {
   //   }
   UploadFile(productID:string,uploadedImage: any){
     return this.httpClient.post(`${environment.apiUrl}/product/UploadImage?productID=${productID}`,uploadedImage);
+    }
+    uploadImagev2(productID:string,imageFile: FormData): Observable<any> {
+      return this.httpClient.post(`${environment.apiUrl}/product/uploadImagev2?productID=${productID}`, imageFile);
     }
   //Get danh sách account category
   getProductCategories(): Observable<any[]> {

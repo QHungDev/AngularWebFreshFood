@@ -1,0 +1,18 @@
+.authenticCode{
+  width: 100%;
+  border: 1px solid #3ea23d;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+}
+
+.authenticCode:read-only{
+  background-color: #0000005c;
+  color: #191b18;
+  cursor: not-allowed;
+}
+
+.resendAuthenticCode:disabled {
+  cursor: not-allowed;
+}

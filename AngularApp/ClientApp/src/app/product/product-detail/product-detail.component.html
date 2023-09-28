@@ -5,7 +5,7 @@
           <header>Thông tin sản phẩm</header>
         </div>
         <div class="card-body" id="bar-parent">
-          <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate class="form-horizontal">
+          <form [formGroup]="form" enctype="multipart/form-data" (ngSubmit)="submitForm()" method="POST" action="/File/Upload" novalidate class="form-horizontal">
             <div class="form-body">
               <div class="form-group row">
                 <label class="control-label col-md-2">
@@ -40,8 +40,10 @@
                   Avatar
                 </label>
                 <div class="col-md-4">
-                  <img class="w-50" [src]="showImg(postProductRequest.avatar)" alt="">
-                  <input type="file" class="form-control input-height" (change)="onChangeUploadFile($event)" formControlName="avatar" />
+                  <!-- <img class="w-50" src="{{postProductRequest.avatar}}" alt=""> -->
+                  <img class="w-50" src="{{newImg}}" alt="">
+                  <input type="file" id="file" name="imageFile" (change)="onFileSelected($event)" formControlName="avatar"><br><br>
+                  <!-- <input type="file" class="form-control input-height" (change)="onChangeUploadFile($event)" formControlName="avatar" /> -->
                 </div>
               </div>
               <div class="form-group row">
@@ -161,7 +163,7 @@
                       <i class="fa fa-save"></i>
                       Lưu
                     </button>
-                    <a [routerLink]="['/account']" class="btn btn-default">Quay về </a>
+                    <a [routerLink]="['/product']" class="btn btn-default">Quay về </a>
                   </div>
                 </div>
               </div>

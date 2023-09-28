@@ -13,5 +13,6 @@ namespace API.Interfaces
         public Task<Picture> Update(int id, Picture item);
         public Task<bool> Delete(int id);
         public Task<bool> UpdateStatus(int id, bool status);
+        public Task<GitResponseModel> UploadImageAsync(IFormFile file, string folderSource);
     }
 }
