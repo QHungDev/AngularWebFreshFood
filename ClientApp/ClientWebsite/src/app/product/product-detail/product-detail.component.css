@@ -1,0 +1,14 @@
+.countTime{
+  position: absolute;
+  left: 35%;
+  /*
+  mix-blend-mode: difference;
+  color: rgb(231 255 8);
+  font-weight: bold; */
+}
+.countTimeText{
+  /* left: 40%; */
+  mix-blend-mode: difference;
+  color: rgb(231 255 8);
+  font-weight: bold;
+}

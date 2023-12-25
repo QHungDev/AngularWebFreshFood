@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { ErrorResponse } from 'src/app/responses/error-response';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ClientService } from 'src/app/services/client.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { ClientService } from 'src/app/services/client.service';
 export class BillDetailComponent implements OnInit {
 
 
-  constructor(private router: Router,private cartService : CartService,private clientService : ClientService, private productService: ProductService, public formBuilder: FormBuilder){
+  constructor(private router: Router,private cartService : CartService,private clientService : ClientService, private productService: ProductService, public formBuilder: FormBuilder,private toastr: ToastrService){
     this.form = this.formBuilder.group({
       orderID: [''],
       fullName: [''],
@@ -49,6 +50,10 @@ export class BillDetailComponent implements OnInit {
   jsonData: any[] = [];
   disabled = true;
   userID: any;
+  checkUsePoint = false
+  bonus = 0
+  maxPoint = 0
+  point = 0
   orderRequest: any = {
     OrderID: 0,
     FullName: "",
@@ -118,6 +123,7 @@ export class BillDetailComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+    localStorage.removeItem('bonus');
     if (localStorage.getItem('localCart')) {
       this.disabled = false
     } else {
@@ -140,6 +146,7 @@ export class BillDetailComponent implements OnInit {
         // });
 
         this.orderMoMo.OrderID = data.clientID
+        this.maxPoint = Math.floor(data.point)
       });
     }
 
@@ -226,7 +233,7 @@ export class BillDetailComponent implements OnInit {
     return needPay;
   }
   needPayAll(){
-    let needPayAll = this.needPay() + 25000;
+    let needPayAll = this.needPay() + 25000 - this.bonus;
 
     return needPayAll;
   }
@@ -318,7 +325,7 @@ export class BillDetailComponent implements OnInit {
     // this.orderMoMo.OrderID = "27"
     this.orderMoMo.FullName = this.form.get('fullName')?.value
     this.orderMoMo.OrderInfo = ""
-    this.orderMoMo.Amount = (needPay + 25000).toString()
+    this.orderMoMo.Amount = (needPay + 25000 - this.bonus).toString()
     this.orderMoMo.MomoCode = ""
     this.orderMoMo.ReturnUrl = window.location.origin.toString() + '/bill/bill-success'
 
@@ -396,6 +403,7 @@ export class BillDetailComponent implements OnInit {
     // }
   }
   pay(){
+    localStorage.setItem('bonus', this.bonus.toString());
     this.orderRequest.FullName = this.form.get('fullName')?.value
     this.orderRequest.Mobile = this.form.get('mobile')?.value
     this.orderRequest.Address = this.form.get('address')?.value
@@ -434,6 +442,31 @@ export class BillDetailComponent implements OnInit {
         return
       }
     }
+  }
+
+  clickUsePoint(){
+    this.checkUsePoint = !this.checkUsePoint
+    this.changePoint();
+  }
+
+  changePoint() {
+    if (Math.floor(this.point) > this.maxPoint) {
+      this.showAlert()
+      this.bonus = 0
+    } else {
+      if (this.checkUsePoint) {
+        this.bonus = Math.floor(this.point)
+        return
+      }
+      this.bonus = 0
+    }
+  }
+  showAlert() {
+    this.toastr.error('Bạn không có đủ điểm tích lũy', '', {
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      progressBar: true,
+    });
   }
 
 }

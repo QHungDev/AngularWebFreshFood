@@ -1,45 +1,27 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  FlatList,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
 import Header from '../common/Header';
 import RazorpayCheckout from 'react-native-razorpay';
-import {
-  CommonActions,
-  useIsFocused,
-  useNavigation,
-} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-  addItemToCart,
-  emptyCart,
-  reduceItemFromCart,
-  removeItemFromCart,
-} from '../redux/slices/CartSlice';
+import { CommonActions, useIsFocused, useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemToCart, emptyCart, reduceItemFromCart, removeItemFromCart } from '../redux/slices/CartSlice';
 import CustomButton from '../common/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {orderItem} from '../redux/slices/OrderSlice';
-
+import { orderItem } from '../redux/slices/OrderSlice';
+import axios from 'axios';
+import Toast from 'react-native-toast-message';
 const Checkout = () => {
   const navigation = useNavigation();
-  const items = useSelector(state => state.cart);
+  const items = useSelector((state) => state.cart);
   const [cartItems, setCartItems] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState(0);
   const isFocused = useIsFocused();
-  const [selectedAddress, setSelectedAddress] = useState(
-    'Please Select Address',
-  );
+  const [selectedAddress, setSelectedAddress] = useState('Please Select Address');
   const dispatch = useDispatch();
   useEffect(() => {
     setCartItems(items.data);
   }, [items]);
+
 
   const getTotal = () => {
     let total = 0;
@@ -90,6 +72,30 @@ const Checkout = () => {
     dispatch(emptyCart([]));
     navigation.navigate('OrderSuccess');
   };
+  const API_URL = 'http://192.168.1.215:7265/api/order/post';
+  const paymentData = {
+    // Thông tin thanh toán, ví dụ:
+    amount: getTotal(),
+    fullName: 'Truong Quoc Hung',
+    // Thêm các trường thông tin thanh toán khác ở đây
+  };
+  const headers = {
+    'Content-Type': 'application/json',
+    // Nếu cần thêm các header khác, bạn có thể thêm ở đây
+  };
+  const postDataToApi = async () => {
+    try {
+      const response = await axios.post(API_URL, paymentData, { headers });
+  
+      // Xử lý dữ liệu trả về nếu cần
+      console.log('Dữ liệu trả về từ API:', response.data);
+      alert(`Thanh toan thanh cong`);
+      navigation.navigate('HomeScreen');
+    } catch (error) {
+      // Xử lý lỗi nếu có
+      console.error('Lỗi khi gửi POST request:', error);
+    }
+  };
   const payNow = () => {
     var options = {
       description: 'Credits towards consultation',
@@ -97,7 +103,7 @@ const Checkout = () => {
       currency: 'INR',
       key: 'rzp_test_Wy1YsPwzDklWv8', // Your api key
       amount: getTotal() * 100,
-      name: 'foo',
+      fullName: 'foo',
       prefill: {
         email: 'void@razorpay.com',
         contact: '9191919191',
@@ -125,22 +131,21 @@ const Checkout = () => {
           navigation.goBack();
         }}
       />
-      <ScrollView>
-        <Text style={styles.title}>Added Items</Text>
-        <View>
-          <FlatList
-            data={cartItems}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity
-                  activeOpacity={1}
-                  style={styles.productItem}
-                  onPress={() => {
-                    navigation.navigate('ProductDetail', {data: item});
-                  }}>
-                  <Image source={{uri: item.image}} style={styles.itemImage} />
-                  <View>
-                    <Text style={styles.name}>
+      <Text style={styles.title}>Added Items</Text>
+      <FlatList
+        data={cartItems}
+        renderItem={({ item, index }) => {
+          return (
+            <TouchableOpacity
+              activeOpacity={1}
+              style={styles.productItem}
+              onPress={() => {
+                navigation.navigate('ProductDetail', { data: item });
+              }}
+            >
+              <Image source={{ uri: item.avatar }} style={styles.itemImage} />
+              <View>
+              <Text style={styles.name}>
                       {item.title.length > 25
                         ? item.title.substring(0, 25) + '...'
                         : item.title}
@@ -172,13 +177,12 @@ const Checkout = () => {
                         <Text style={{fontSize: 18, fontWeight: '600'}}>+</Text>
                       </TouchableOpacity>
                     </View>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </View>
-        <View style={styles.totalView}>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
+      <View style={styles.totalView}>
           <Text style={styles.title}>Total</Text>
           <Text style={[styles.title, {marginRight: 20}]}>
             {'$' + getTotal()}
@@ -282,13 +286,185 @@ const Checkout = () => {
           title={'Pay & Order'}
           color={'#fff'}
           onClick={() => {
-            payNow();
+            postDataToApi();
           }}
         />
-      </ScrollView>
-    </View>
+        </View>
   );
 };
+  // return (
+  //   <View style={styles.container}>
+  //     <Header
+  //       leftIcon={require('../images/back.png')}
+  //       title={'Checkout'}
+  //       onClickLeftIcon={() => {
+  //         navigation.goBack();
+  //       }}
+  //     />
+  //     <ScrollView>
+  //       <Text style={styles.title}>Added Items</Text>
+  //       <View>
+  //         <FlatList
+  //           data={cartItems}
+  //           renderItem={({item, index}) => {
+  //             return (
+  //               <TouchableOpacity
+  //                 activeOpacity={1}
+  //                 style={styles.productItem}
+  //                 onPress={() => {
+  //                   navigation.navigate('ProductDetail', {data: item});
+  //                 }}>
+  //                 <Image source={{uri: item.avatar}} style={styles.itemImage} />
+  //                 <View>
+  //                   <Text style={styles.name}>
+  //                     {item.title.length > 25
+  //                       ? item.title.substring(0, 25) + '...'
+  //                       : item.title}
+  //                   </Text>
+  //                   <Text style={styles.desc}>
+  //                     {item.description.length > 30
+  //                       ? item.description.substring(0, 30) + '...'
+  //                       : item.description}
+  //                   </Text>
+  //                   <View style={styles.qtyview}>
+  //                     <Text style={styles.price}>{'$' + item.price}</Text>
+  //                     <TouchableOpacity
+  //                       style={styles.btn}
+  //                       onPress={() => {
+  //                         if (item.qty > 1) {
+  //                           dispatch(reduceItemFromCart(item));
+  //                         } else {
+  //                           dispatch(removeItemFromCart(index));
+  //                         }
+  //                       }}>
+  //                       <Text style={{fontSize: 18, fontWeight: '600'}}>-</Text>
+  //                     </TouchableOpacity>
+  //                     <Text style={styles.qty}>{item.qty}</Text>
+  //                     <TouchableOpacity
+  //                       style={styles.btn}
+  //                       onPress={() => {
+  //                         dispatch(addItemToCart(item));
+  //                       }}>
+  //                       <Text style={{fontSize: 18, fontWeight: '600'}}>+</Text>
+  //                     </TouchableOpacity>
+  //                   </View>
+  //                 </View>
+  //               </TouchableOpacity>
+  //             );
+  //           }}
+  //         />
+  //       </View>
+  //       <View style={styles.totalView}>
+  //         <Text style={styles.title}>Total</Text>
+  //         <Text style={[styles.title, {marginRight: 20}]}>
+  //           {'$' + getTotal()}
+  //         </Text>
+  //       </View>
+  //       <Text style={styles.title}>Select Payment Mode</Text>
+  //       <TouchableOpacity
+  //         style={styles.paymentMethods}
+  //         onPress={() => {
+  //           setSelectedMethod(0);
+  //         }}>
+  //         <Image
+  //           source={
+  //             selectedMethod == 0
+  //               ? require('../images/radio_2.png')
+  //               : require('../images/radio_1.png')
+  //           }
+  //           style={[
+  //             styles.img,
+  //             {tintColor: selectedMethod == 0 ? 'orange' : 'black'},
+  //           ]}
+  //         />
+  //         <Text style={styles.paymentMethdodsTxt}>Credit Card</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity
+  //         style={styles.paymentMethods}
+  //         onPress={() => {
+  //           setSelectedMethod(1);
+  //         }}>
+  //         <Image
+  //           source={
+  //             selectedMethod == 1
+  //               ? require('../images/radio_2.png')
+  //               : require('../images/radio_1.png')
+  //           }
+  //           style={[
+  //             styles.img,
+  //             {tintColor: selectedMethod == 1 ? 'orange' : 'black'},
+  //           ]}
+  //         />
+  //         <Text style={styles.paymentMethdodsTxt}>Debit Card</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity
+  //         style={styles.paymentMethods}
+  //         onPress={() => {
+  //           setSelectedMethod(2);
+  //         }}>
+  //         <Image
+  //           source={
+  //             selectedMethod == 2
+  //               ? require('../images/radio_2.png')
+  //               : require('../images/radio_1.png')
+  //           }
+  //           style={[
+  //             styles.img,
+  //             {tintColor: selectedMethod == 2 ? 'orange' : 'black'},
+  //           ]}
+  //         />
+  //         <Text style={styles.paymentMethdodsTxt}>UPI</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity
+  //         style={styles.paymentMethods}
+  //         onPress={() => {
+  //           setSelectedMethod(3);
+  //         }}>
+  //         <Image
+  //           source={
+  //             selectedMethod == 3
+  //               ? require('../images/radio_2.png')
+  //               : require('../images/radio_1.png')
+  //           }
+  //           style={[
+  //             styles.img,
+  //             {tintColor: selectedMethod == 3 ? 'orange' : 'black'},
+  //           ]}
+  //         />
+  //         <Text style={styles.paymentMethdodsTxt}>Cash on Delivery</Text>
+  //       </TouchableOpacity>
+  //       <View style={styles.addressView}>
+  //         <Text style={styles.title}>Address</Text>
+  //         <Text
+  //           style={[
+  //             styles.title,
+  //             {textDecorationLine: 'underline', color: '#0269A0FB'},
+  //           ]}
+  //           onPress={() => {
+  //             navigation.navigate('Addresses');
+  //           }}>
+  //           Edit Address
+  //         </Text>
+  //       </View>
+  //       <Text
+  //         style={[
+  //           styles.title,
+  //           {marginTop: 10, fontSize: 16, color: '#636363'},
+  //         ]}>
+  //         {selectedAddress}
+  //       </Text>
+  //       <CustomButton
+  //         bg={'green'}
+  //         title={'Pay & Order'}
+  //         color={'#fff'}
+  //         onClick={() => {
+  //           payNow();
+  //         }}
+  //       />
+  //     </ScrollView>
+  //   </View>
+  // );
+
 
 export default Checkout;
 const styles = StyleSheet.create({

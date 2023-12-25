@@ -16,6 +16,7 @@ export class ProductService {
   getImg():Observable<any[]> {
   return this.httpClient.get<any[]>(`${environment.apiUrl}/FileUploads/Product/Avatar`);
   }
+
   //Get 1 product
   getProduct(productID: string): Observable<any> {
     return this.httpClient.get<any>(`${environment.apiUrl}/product/get/${productID}`);
@@ -42,7 +43,6 @@ export class ProductService {
   getProductCategories(): Observable<any[]> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/product-category/get`);
   }
-
   //Tìm kiếm product
   searchProducts(title: string): Observable<any[]> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/product/searchall?title=${title}`);
@@ -54,5 +54,22 @@ export class ProductService {
   fetchSearchResults(query: string): Observable<any> {
     return this.httpClient.get<any[]>(`${environment.apiUrl}/product/searchall?title=${query}`);
   }
+  getProductSellToday(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/product/getSellToday`);
+  }
+  getAllWithCreateTime(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/product/getAllWithCreateTime`);
+  }
+  getAllWithQuantity(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/product/getAllWithQuantity`);
+  }
+
+  getProductComment(productID: string): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/product-comment/getAllByProduct/${productID}`);
+  }
+  postProductComment(item: any): Observable<any> {
+    return this.httpClient.post<any>(`${environment.apiUrl}/product-comment/post`, item);
+  }
+
 
 }

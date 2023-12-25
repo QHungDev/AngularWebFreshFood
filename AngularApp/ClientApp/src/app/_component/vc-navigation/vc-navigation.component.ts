@@ -10,7 +10,11 @@ export class VcNavigationComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
   count: number = 0
+  roleAccount: any
   ngOnInit(): void {
+    if (localStorage.getItem("Username")) {
+      this.roleAccount = localStorage.getItem('Username')
+    }
     const ordersObservable = this.orderService.getOrders();
         ordersObservable.subscribe((ordersData: any[]) => {
           if (ordersData !== null && ordersData !== undefined) {

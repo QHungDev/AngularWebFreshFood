@@ -54,3 +54,8 @@
   border: 1px solid #8BC34A;
 
 }
+
+#input_pointBox:disabled {
+  background-color: #8bc34aa2;
+  cursor: no-drop;
+}

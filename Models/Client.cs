@@ -35,6 +35,8 @@ namespace Models
         public DateTime? CreateTime { get; set; }
         public int? ClientCategoryID { get; set; }
 
+        public double? Point { get; set; }
+
         [ForeignKey("ClientCategoryID")]
         [InverseProperty("Clients")]
         public virtual ClientCategory ClientCategory { get; set; }

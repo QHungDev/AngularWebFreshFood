@@ -15,7 +15,7 @@ const string AllowAllHeadersPolicy = "AllowAllHeadersPolicy";
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddSignalR();
 var connection = builder.Configuration.GetConnectionString("MyDB");
 builder.Services.AddDbContext<DBContext>(x => x.UseSqlServer(connection));
 
@@ -43,9 +43,11 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IOrderDetailService, OrderDetailService>();
 builder.Services.AddTransient<IProductCategoryService, ProductCategoryService>();
+builder.Services.AddTransient<IProductCommentService, ProductCommentService>();
 builder.Services.AddTransient<IProductMainCategoryService, ProductMainCategoryService>();
 builder.Services.AddTransient<IArticleCategoryService, ArticleCategoryService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddTransient<IProductVoteService, ProductVoteService>();
 builder.Services.AddTransient<IMomoService, MomoService>();
 
 
@@ -58,6 +60,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseDeveloperExceptionPage(); 
 app.UseCors(AllowAllHeadersPolicy);
 app.UseHttpsRedirection();
 app.UseAuthorization();

@@ -9,7 +9,7 @@
       <div class="search">
         <div class="search-box">
             <input class="form-control form-control-lg text-search" type="text"
-						placeholder="Tên sản phẩm bạn cần tìm..." name="search_query" (input)="search($event)"
+						placeholder="Tên sản phẩm bạn cần tìm..." name="search_query" [(ngModel)]="keywords" (input)="search($event)"
               (keyup.enter)="searchProduct($event)">
               <button class="btn" type="submit" name="submit_search" value="Tìm kiếm">
                 <i class="fa fa-search" style="font-size: 22px"></i>
@@ -26,12 +26,14 @@
               Trang chủ
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="#" [routerLink]="['/chat']" class="nav-link">Chat</a>
+          </li>
           <li class="nav-item">
             <a href="#" [routerLink]="['/news']" class="nav-link">Bài viết</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">
+            <a href="#" [routerLink]="['/contact']"  class="nav-link">
               Liên hệ
             </a>
           </li>

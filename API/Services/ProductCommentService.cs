@@ -48,6 +48,22 @@ namespace API.Services
             return item;
         }
 
+        public async Task<List<ProductCommentList>> GetAllByProduct(int id)
+        {
+            var item = await _context.ProductComments.Where(x => x.ProductID == id).OrderByDescending(x => x.ProductCommentID)
+                                                    .Select(x => new ProductCommentList(){
+                                                        ProductCommentID = x.ProductCommentID,
+                                                        Content = x.Content,
+                                                        Status = x.Status,
+                                                        CreateTime = x.CreateTime,
+                                                        ClientID = x.ClientID,
+                                                        ClientName = _context.Clients.Where(y => y.ClientID == x.ClientID).FirstOrDefault().FullName,
+                                                        ProductID = x.ProductID,
+                                                        Rate = x.Rate
+                                                    }).ToListAsync();
+            return item;
+        }
+
         public async Task<List<ProductComment>> FindWithPaging(int clientID, int page, int pageSize)
         {
             if (page <= 0 || pageSize <= 0)
@@ -68,6 +84,8 @@ namespace API.Services
         {
             if (item == null)
                 return null;
+
+            item.CreateTime = DateTime.Now;
 
             _context.ProductComments.Add(item);
 

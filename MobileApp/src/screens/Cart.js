@@ -54,7 +54,7 @@ const Cart = () => {
               onPress={() => {
                 navigation.navigate('ProductDetail', {data: item});
               }}>
-              <Image source={{uri: item.image}} style={styles.itemImage} />
+             <Image source={{uri: item.avatar}} style={styles.itemImage} />
               <View>
                 <Text style={styles.name}>
                   {item.title.length > 25

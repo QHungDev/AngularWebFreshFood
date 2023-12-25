@@ -96,7 +96,7 @@ const ProductDetail = () => {
                   category: route.params.data.category,
                   description: route.params.data.description,
                   id: route.params.data.id,
-                  image: route.params.data.image,
+                  avatar: route.params.data.avatar,
                   price: route.params.data.price,
                   qty: qty,
                   rating: route.params.data.rating,

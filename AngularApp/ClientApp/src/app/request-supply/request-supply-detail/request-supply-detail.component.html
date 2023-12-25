@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="card card-box">
+      <div class="card-head">
+        <header>Thông tin yêu cầu nhập kho</header>
+      </div>
+      <div class="card-body" id="bar-parent">
+        <form [formGroup]="form" enctype="multipart/form-data" (ngSubmit)="submitForm()" method="POST" action="/File/Upload" novalidate class="form-horizontal">
+          <div class="form-body">
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Title
+              </label>
+              <div class="col-md-4">
+                <input readonly type="text" class="input-product form-control input-height" [ngModel]="postProductRequest.title" value='{{postProductRequest.title}}' formControlName="title" />
+              </div>
+              <label class="control-label col-md-2">
+                Avatar
+              </label>
+              <div class="col-md-4">
+                <!-- <img class="w-50" src="{{postProductRequest.avatar}}" alt=""> -->
+                <img class="w-50" src="{{newImg}}" alt="">
+                <!-- <input type="file" id="file" name="imageFile" (change)="onFileSelected($event)" formControlName="avatar"><br><br> -->
+                <!-- <input type="file" class="form-control input-height" (change)="onChangeUploadFile($event)" formControlName="avatar" /> -->
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Sale Price
+              </label>
+              <div class="col-md-4">
+                <input readonly type="text" class="input-product form-control input-height"  value='{{postProductRequest.price|currency:"VND":""}} VND' formControlName="price" />
+              </div>
+              <label class="control-label col-md-2">
+                Quantity Available
+              </label>
+              <div class="col-md-4">
+                <input readonly type="text"
+                [class]='postProductRequest.quantity <= 20 ? "input-product form-control input-height text-danger" : postProductRequest.quantity <= 30 ? "input-product form-control input-height text-primary" : "input-product form-control input-height text-success"'
+                [ngModel]="postProductRequest.quantity" value='{{postProductRequest.quantity}}' formControlName="quantity" />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="control-label col-md-2">
+                Supplier
+              </label>
+              <div class="col-md-10">
+                <select class="form-control input-height" formControlName="supplier" [(ngModel)]="postRequestSupply.Supplier">
+                  <!-- <option selected value="">.: Chọn 1 danh mục :.</option> -->
+                  <option *ngFor="let item of supplierList" [ngValue]="item.title">
+                    {{item.title}}
+                  </option>
+                </select>
+                <!-- <input type="text" class="form-control input-height"  value='{{postProductRequest.price|currency:"VND":""}} VND' formControlName="price" /> -->
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+
+              <label class="control-label col-md-2">
+                Quantity Supply
+              </label>
+              <div class="col-md-2">
+                <input placeholder="0" onlyNumber (keyup)="onChange()" style="border: 1px solid;" type="text" class="form-control input-height text-center" [(ngModel)]="postRequestSupply.QuantityRequestSupply" formControlName="quantityRequestSupply" />
+              </div>
+
+              <label class="control-label col-md-2">
+                Unit Price (VND)
+              </label>
+              <div class="col-md-2">
+                <input placeholder="0" onlyNumber (keyup)="onChange()" style="border: 1px solid;" type="text" class="form-control input-height text-center" [(ngModel)]="postRequestSupply.UnitPrice" formControlName="unitPrice" />
+              </div>
+
+              <label class="control-label col-md-2">
+                Total
+              </label>
+              <div class="col-md-2">
+                <input readonly placeholder="0" type="text" class="input-amount form-control input-height"  value='{{postRequestSupply.Total|currency:"VND":""}} VND'  formControlName="total" />
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+              <div class="row">
+                <div class="offset-md-2 col-md-10">
+                  <button type="submit"
+                          class="btn btn-primary m-r-20">
+                    <i class="fa fa-save"></i>
+                    Gửi yêu cầu
+                  </button>
+                  <a [routerLink]="['/request-supply']" class="btn btn-default">Quay về </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -36,12 +36,13 @@ $(".btn-image").click(function () {
 
 /*login-register*/
 
-function changeContent(e, content) {
-    $(".li").attr("class", "li");
-    $(e).attr("class", "li active");
-    $(".input-login-register").fadeOut(1);
-    $("#" + content).fadeIn(1);
-}
+$('.btnNext').click(function() {
+  $('.nav-pills .active').parent().next('li').find('a').trigger('click');
+});
+
+$('.btnPrevious').click(function() {
+  $('.nav-pills .active').parent().prev('li').find('a').trigger('click');
+});
 /*end login-register*/
 
 /*question*/

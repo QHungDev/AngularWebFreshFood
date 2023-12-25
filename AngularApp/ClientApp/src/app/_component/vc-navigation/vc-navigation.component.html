@@ -86,6 +86,32 @@
           </ul>
         </li>
 
+        <!--Request Supply-->
+        <li class="nav-item">
+          <a asp-route="AdminProductIndex" class="nav-link nav-toggle">
+            <i class="material-icons">group</i>
+            <span class="title">Nhập kho</span>
+            <span class="arrow"></span>
+          </a>
+          <ul class="sub-menu">
+
+            <li *ngIf='roleAccount == "admin"' class="nav-item">
+              <a [routerLink]="['/request-supply-approve']" class="nav-link ">
+                <i class="material-icons">list</i>
+                <span class="title">Duyệt nhập kho</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a [routerLink]="['/request-supply/index']" class="nav-link ">
+                <i class="material-icons">add_box</i>
+                <span class="title">Yêu cầu nhập kho</span>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
         <!--Article-->
         <li class="nav-item">
           <a asp-route="AdminArticleIndex" class="nav-link nav-toggle">
@@ -119,23 +145,23 @@
         <li class="nav-item">
           <a asp-route="AdminContactIndex" class="nav-link nav-toggle">
             <i class="material-icons">mail</i>
-            <span class="title">Thư liên hệ</span>
+            <span class="title">Chat</span>
             <span class="arrow"></span>
             <span class="label label-rouded label-menu">0</span>
           </a>
           <ul class="sub-menu">
             <li class="nav-item">
-              <a [routerLink]="['/privacy']" class="nav-link ">
+              <a [routerLink]="['/chat']" class="nav-link ">
                 <i class="material-icons">mail</i>
-                <span class="title">Danh sách thư liên hệ</span>
+                <span class="title">Chat</span>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link ">
                 <i class="material-icons">list</i>
                 <span class="title">Loại thư liên hệ</span>
               </a>
-            </li>
+            </li> -->
           </ul>
         </li>
 

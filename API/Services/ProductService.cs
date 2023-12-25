@@ -25,6 +25,25 @@ namespace API.Services
 
             return data;
         }
+        public async Task<List<Product>> GetSellToday()
+        {
+            var data = await _context.Products.Where(x => x.IsSellToday == true).ToListAsync();
+
+            return data;
+        }
+        public async Task<List<Product>> GetAllWithCreateTime()
+        {
+            var data = await _context.Products.Where(x => x.IsSellToday == false).OrderByDescending(x => x.CreateTime).Take(4).ToListAsync();
+
+            return data;
+        }
+
+        public async Task<List<Product>> GetAllWithQuantity()
+        {
+            var data = await _context.Products.Where(x => x.IsSellToday == false).OrderBy(x => x.Quantity).Take(4).ToListAsync();
+
+            return data;
+        }
         public async Task<bool> Delete(int id)
         {
             var item = await _context.Products.FindAsync(id);
@@ -169,6 +188,21 @@ namespace API.Services
             //existItem.CreateTime = item.CreateTime;
             existItem.ProductCategoryID = item.ProductCategoryID;
             //existItem.CreateBy = item.CreateBy;
+            // existItem.IsSellToday = item.IsSellToday;
+
+            await _context.SaveChangesAsync();
+            return existItem;
+        }
+
+        public async Task<Product> ChangeSellToday(int id)
+        {
+            
+            var existItem = await _context.Products.FirstOrDefaultAsync(x => x.ProductID == id);
+
+            if (existItem == null)
+                return null;
+            
+            existItem.IsSellToday = !existItem.IsSellToday;
 
             await _context.SaveChangesAsync();
             return existItem;
@@ -269,5 +303,70 @@ namespace API.Services
 
             return stringName;
         }
+
+        //Request Supply
+        public async Task<RequestSupply> InsertRequestSupply(RequestSupply item)
+        {   
+            
+            if (item == null)
+                return null;
+            
+            item.CreateTime = DateTime.Now;
+            
+            _context.RequestSupplies.Add(item);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return item;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<RequestSupplyProduct>> GetRequestSupply()
+        {
+            var data = await _context.RequestSupplies.Where(x => x.Status == false)
+            .Select(x => new RequestSupplyProduct
+            {
+                ID = x.ID,
+                ProductID = x.ProductID,
+                CreateBy = x.CreateBy,
+                CreateTime = x.CreateTime,
+                Supplier = x.Supplier,
+                QuantityRequestSupply = x.QuantityRequestSupply,
+                UnitPrice = x.UnitPrice,
+                Total = x.Total,
+                Status = x.Status,
+
+                Avatar = _context.Products.Where(y => y.ProductID == x.ProductID).FirstOrDefault().Avatar,
+                Title = _context.Products.Where(y => y.ProductID == x.ProductID).FirstOrDefault().Title,
+                Price = _context.Products.Where(y => y.ProductID == x.ProductID).FirstOrDefault().Price,
+                Quantity = _context.Products.Where(y => y.ProductID == x.ProductID).FirstOrDefault().Quantity,
+            }).ToListAsync();
+
+            return data;
+        }
+
+        public async Task<RequestSupply> ApproveRequestSupply(int id)
+        {
+            
+            var existItem = await _context.RequestSupplies.FirstOrDefaultAsync(x => x.ID == id);
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.ProductID == existItem.ProductID);
+
+            if (existItem == null)
+                return null;
+            if (product == null)
+                return null;
+            
+            existItem.Status = !existItem.Status;
+            product.Quantity = product.Quantity + existItem.QuantityRequestSupply;
+
+            await _context.SaveChangesAsync();
+            return existItem;
+        }
+
     }
 }

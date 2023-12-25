@@ -32,7 +32,21 @@ namespace API.Services
                 return false;
             }
         }
-
+        public async Task<List<ProductCommentList>> GetAllByProduct(int id)
+        {
+            var item = await _context.ProductComments.Where(x => x.ProductID == id).OrderByDescending(x => x.ProductCommentID)
+                                                    .Select(x => new ProductCommentList()
+                                                    {
+                                                        ProductCommentID = x.ProductCommentID,
+                                                        Content = x.Content,
+                                                        Status = x.Status,
+                                                        CreateTime = x.CreateTime,
+                                                        ClientID = x.ClientID,
+                                                        ClientName = _context.Clients.Where(y => y.ClientID == x.ClientID).FirstOrDefault().FullName,
+                                                        ProductID = x.ProductID
+                                                    }).ToListAsync();
+            return item;
+        }
         public async Task<List<ProductVote>> FindAll(int value)
         {
             var data = await _context.ProductVotes

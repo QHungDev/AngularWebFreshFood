@@ -138,6 +138,27 @@ namespace API.Controllers
             var data = await _service.SearchProducts(title);
             return Ok(data);
         }
+        [HttpGet]
+        [Route("getSellToday")]
+        public async Task<IActionResult> GetSellToday()
+        {
+            var data = await _service.GetSellToday();
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("getAllWithCreateTime")]
+        public async Task<IActionResult> GetAllWithCreateTime()
+        {
+            var data = await _service.GetAllWithCreateTime();
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("getAllWithQuantity")]
+        public async Task<IActionResult> GetAllWithQuantity()
+        {
+            var data = await _service.GetAllWithQuantity();
+            return Ok(data);
+        }
         [HttpPost("post")]
         public async Task<IActionResult> Post(Product item)
         {            
@@ -200,6 +221,20 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpPut("changeSellToday/{id}")]
+        public async Task<IActionResult> ChangeSellToday(int id)
+        {
+            if(id <= 0)
+            {
+                return BadRequest();
+            }
+            var response = await _service.ChangeSellToday(id);
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
+        }
+
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -228,5 +263,45 @@ namespace API.Controllers
 
             return Ok(response);
         }
+
+        //Request Supply
+        [HttpPost("postRequestSupply")]
+        public async Task<IActionResult> PostRequestSupply(RequestSupply item)
+        {            
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.InsertRequestSupply(item);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("getRequestSupply")]
+        public async Task<IActionResult> GetRequestSupply()
+        {
+            var data = await _service.GetRequestSupply();
+            return Ok(data);
+        }
+
+        [HttpPut("approveRequestSupply/{id}")]
+        public async Task<IActionResult> ApproveRequestSupply(int id)
+        {
+            if(id <= 0)
+            {
+                return BadRequest();
+            }
+            var response = await _service.ApproveRequestSupply(id);
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
+        }
+
     }
 }

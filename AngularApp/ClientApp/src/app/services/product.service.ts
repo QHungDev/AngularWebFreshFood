@@ -54,4 +54,22 @@ export class ProductService {
   deleteProduct(productID: number) {
     return this.httpClient.delete<any>(`${environment.apiUrl}/product/delete/${productID}`);
   }
+
+  changeSellToday(id: any) {
+    return this.httpClient.put<any>(`${environment.apiUrl}/product/changeSellToday/${id}`, {});
+  }
+
+  //Request Supply
+  addRequestSupply(item: any): Observable<any> {
+    return this.httpClient.post<any>(`${environment.apiUrl}/product/postRequestSupply`, item);
+  }
+  getRequestSupply(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${environment.apiUrl}/product/getRequestSupply`);
+  }
+  approveRequestSupply(id: any) {
+    return this.httpClient.put<any>(`${environment.apiUrl}/product/approveRequestSupply/${id}`, {});
+  }
+  postRating(ratingData: string): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/product-vote/get/${ratingData}`);
+  }
 }

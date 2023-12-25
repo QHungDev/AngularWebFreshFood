@@ -183,7 +183,8 @@
               <tr *ngFor="let item of productData; let i = index">
                   <td style="width: 5%;">{{(i+1).toString().padStart(2, "0")}}</td>
                   <td>{{item.title}}</td>
-                  <td><img class="img-fluid" style="width: 120px;" [src]="showImg(item.avatar)" /></td>
+                  <!-- <td><img class="img-fluid" style="width: 120px;" [src]="showImg(item.avatar)" /></td> -->
+                  <td><img class="img-fluid" style="width: 120px;" [src]="item.avatar" /></td>
                   <td style="width: 12%;text-align:center">
                     {{selectCount(item.productID)}}
                   </td>
@@ -201,7 +202,26 @@
                   <td colspan="5" style="text-align:center; color: #f20707; font-style: italic;"> <strong> <span id="lbl_total">{{25000|currency:'VND':''}} VND</span> </strong></td>
               </tr>
               <tr>
-                  <td colspan="2" style="text-align:left"><strong>Tổng tiền:</strong></td>
+                <td colspan="2" style="text-align:left; font-style: italic">
+                  <strong>Sử dụng điểm tích lũy:</strong>
+                  <div class="custom-control custom-switch">
+                    <input (click)="clickUsePoint()" type="checkbox" class="custom-control-input" id="checkBoxUsePoint">
+                    <label style="color: #7a7a7a; font-style: italic;" class="custom-control-label" for="checkBoxUsePoint">Bạn có {{maxPoint}} điểm khả dụng</label>
+                  </div>
+                </td>
+
+                <td colspan="5" style="text-align:center; font-style: italic;">
+                  <input (keyup)="changePoint()" onlyNumber style="text-align: center;border-radius: 5px; border: 2px solid #f20707; color: green; font-weight: bold;" id="input_pointBox" type="text" [(ngModel)]='point' [disabled]="!checkUsePoint" placeholder="0">
+                  <br>
+                  <i style="color: #7a7a7a; font-style: italic;">VD: 1000 điểm = 1000 VND</i>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-aligne:left;font-style: italic;"><strong>Được giảm:</strong></td>
+                <td colspan="5" style="text-align:center; color: blue;font-style: italic;"> <strong> <span>-{{bonus|currency:'VND':''}} VND</span> </strong></td>
+              </tr>
+              <tr>
+                  <td colspan="2" style="text-aligne:left"><strong>Tổng tiền:</strong></td>
                   <td colspan="5" style="text-align:center"> <strong> <span id="lbl_total">{{needPayAll()|currency:'VND':''}} VND</span> </strong></td>
               </tr>
           </tfoot>

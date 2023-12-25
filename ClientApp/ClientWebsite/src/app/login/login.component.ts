@@ -6,6 +6,8 @@ import { LoginRequest } from '../requests/login-request';
 import { ErrorResponse } from '../responses/error-response';
 import { TokenService } from '../services/token.service';
 import { ClientService } from '../services/client.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,7 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   error: ErrorResponse = { Error: '', ErrorCode: '0' };
 
-  constructor(private clientService: ClientService, private tokenService: TokenService, private router: Router) { }
+  constructor(private clientService: ClientService, private tokenService: TokenService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     let isLoggedIn = this.tokenService.isLoggedIn();
@@ -68,14 +70,14 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
 
-  onSubmit() { 
+  onSubmit() {
     if (this.loginForm.value.usernameControl != null) {
       this.loginRequest.Username = this.loginForm.value.usernameControl;
-      
+
     }
     if (this.loginForm.value.passwordControl != null) {
       this.loginRequest.Password = this.loginForm.value.passwordControl;
-      
+
     }
 
     this.clientService.login(this.loginRequest).subscribe({
@@ -89,6 +91,11 @@ export class LoginComponent implements OnInit {
         this.error = error;
         this.isLoggedIn = false;
         this.isLoginFailed = true;
+        this.toastr.error('Vui lòng kiểm tra lại thông tin tài khoản', '', {
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right',
+          progressBar: true,
+        });
       })
     });
   }

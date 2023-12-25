@@ -1,11 +1,15 @@
 import { Component, OnInit, getNgModuleById } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { ErrorResponse } from '../../responses/error-response';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CartResponse } from 'src/app/responses/cart-response';
+import { sellTodayEndTime, sellTodayStartTime } from 'src/app/responses/sell-today-time';
+import { ClientService } from 'src/app/services/client.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-product-detail',
@@ -13,6 +17,44 @@ import { CartResponse } from 'src/app/responses/cart-response';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit{
+
+
+  maxRate = 5;
+  rate = 4;
+
+  overStar: number|undefined;
+  titleRating = "Rất Tốt"
+
+  hoveringOver(value: number): void {
+
+    switch (value) {
+      case 1:
+        this.titleRating = "Tệ"
+      break;
+      case 2:
+        this.titleRating = "Tạm Được"
+      break;
+      case 3:
+        this.titleRating = "Bình Thường"
+      break;
+      case 4:
+        this.titleRating = "Tốt"
+      break;
+      case 5:
+        this.titleRating = "Rất Tốt"
+      break;
+
+      default:
+        break;
+    }
+
+    this.overStar = value;
+  }
+
+  resetStar(): void {
+    this.overStar = void 0;
+  }
+
   cartResponse: CartResponse = {
     ProductID: "",
     Title: "",
@@ -26,7 +68,9 @@ export class ProductDetailComponent implements OnInit{
   uploadedImage: File| undefined;
   imgModified:any;
   productCategories: any[] = [];
+  productComment: any[] = [];
   form: FormGroup;
+  formCommentProduct:FormGroup;
   postProductRequest: any = {
     ProductID: "",
     Thumb: "",
@@ -45,8 +89,20 @@ export class ProductDetailComponent implements OnInit{
     CreateBy: "",
     CreateTime: new Date(),
     Status: true,
-    ProductCategoryID: ""
+    ProductCategoryID: "",
+    IsSellToday: false
   };
+  postProductComment:any={
+    ProductCommentID:"",
+    ClientID:"",
+    ProductID: "",
+    CreateTime:new Date(),
+    Status:true,
+    Content:"",
+    Rate: this.rate
+  };
+  productCommentID='';
+  clientID='';
   productID = '';
   quantityProduct = 1;
   quantityInCart = 0;
@@ -55,8 +111,20 @@ export class ProductDetailComponent implements OnInit{
   public products : any = [];
   productList: any = {};
 
-  constructor(private cartService : CartService, private productService: ProductService, private router: Router,
-    public formBuilder: FormBuilder, private http: HttpClient, private activeRoute: ActivatedRoute) {
+
+  sellTodayStartTime = sellTodayStartTime;
+  sellTodayEndTime = sellTodayEndTime;
+
+  time = 0;
+  timeMax = 0;
+  countTime = "00:00:00"
+  showSellToday = false;
+
+  interval: any;
+
+
+  constructor(private cartService : CartService, private productService: ProductService, private clientService : ClientService, private router: Router,
+    public formBuilder: FormBuilder,public formComment:FormBuilder, private http: HttpClient, private activeRoute: ActivatedRoute, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       productCategoryID: [''],
       username: [''],
@@ -75,8 +143,18 @@ export class ProductDetailComponent implements OnInit{
       createBy:[''],
       imageList: [''],
       position: [''],
-      status: [true]
+      status: [true],
+      comment: [''],
+      ratingProduct: [''],
+      ratingComment: ['']
     });
+    this.formCommentProduct = this.formComment.group({
+      clientID:"",
+      productID: "",
+      createTime:[''],
+      status: [true],
+      content:"",
+    })
   }
 
   ngOnInit(): void {
@@ -85,6 +163,18 @@ export class ProductDetailComponent implements OnInit{
       left: 0,
       behavior: 'smooth'
     });
+    if (localStorage.getItem('Username')) {
+      this.clientService.getWithEmail(localStorage.getItem('Username')).subscribe((data) => {
+        this.clientID = data.clientID
+      });
+    }
+    if (this.productID && this.productID !== "") {
+      const productsCommentObservable = this.productService.getProductComment(this.clientID);
+      productsCommentObservable.subscribe((productsCommentData: any) => {
+        this.postProductComment = productsCommentData;
+      });
+    }
+
     const productsObservable = this.productService.getProductCategories();
     productsObservable.subscribe((productsData: any[]) => {
       this.productCategories = productsData;
@@ -103,8 +193,18 @@ export class ProductDetailComponent implements OnInit{
           const productsObservable = this.productService.getProduct(this.productID);
           productsObservable.subscribe((productsData: any) => {
             this.postProductRequest = productsData;
+            if (this.postProductRequest.isSellToday) {
+              if (((new Date()).getTime() > (new Date(new Date().setHours(this.sellTodayStartTime.hours, this.sellTodayStartTime.minutes, this.sellTodayStartTime.seconds, this.sellTodayStartTime.milliSeconds))).getTime()) &&
+                ((new Date()).getTime() < (new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime())) {
+
+                this.showSellToday = true;
+                this.countDown()
+              }
+            }
           });
         }
+
+        this.loadAllComment()
       });
     });
 
@@ -139,21 +239,18 @@ export class ProductDetailComponent implements OnInit{
     //var fileExtension = '.' + this.uploadedImage?.name.split('.').pop();
     //this.uploadedImage?.name.replace(this.uploadedImage.name,"/assets/img/FileUploads/Product/Avatar/"+fileExtension);
     console.log("thisimg",this.imgModified);
-
   }
 
-  // showImg(imgName: any) {
-  //   //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
-  //   if (imgName !== undefined) {
-  //     var name = imgName.split('/')[4]
-
-  //     var imgUrl = 'https://localhost:7265/api/product/' + name;
-
-  //     return imgUrl;
-  //   }
-  //   return
   // }
   addtoCart(item: any){
+    if (
+      (((new Date()).getTime() < (new Date(new Date().setHours(this.sellTodayStartTime.hours, this.sellTodayStartTime.minutes, this.sellTodayStartTime.seconds, this.sellTodayStartTime.milliSeconds))).getTime()) ||
+      ((new Date()).getTime() > (new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime())) &&
+      item.isSellToday)
+      {
+        item.price = Math.round(item.price * (50/100))
+      }
+
     if ((this.quantityProduct + this.quantityInCart) > this.postProductRequest.quantity) {
       return
     }
@@ -162,101 +259,11 @@ export class ProductDetailComponent implements OnInit{
     }
     window.location.reload();
   }
-
-  // submitForm() {
-  //   var productCategoryID = this.form.get('productCategoryID')?.value;
-  //   var title = this.form.get('title')?.value;
-  //   var avatar = this.form.get('avatar')?.value;
-  //   var productID = this.form.get('productID')?.value;
-  //   var thumb = this.form.get('thumb')?.value;
-  //   var description = this.form.get('description')?.value;
-  //   var specification = this.form.get('specification')?.value;
-  //   var content = this.form.get('content')?.value;
-  //   var warranty = this.form.get('warranty')?.value;
-  //   var price = this.form.get('price')?.value;
-  //   var oldPrice = this.form.get('oldPrice')?.value;
-  //   var quantity = this.form.get('quantity')?.value;
-  //   var imageList = this.form.get('imageList')?.value;
-  //   var position = this.form.get('position')?.value;
-  //   var createTime = this.form.get('createTime')?.value;
-  //   var createBy = this.form.get('createBy')?.value;
-  //   var status = this.form.get('status')?.value;
-  //   this.postProductRequest.Title = title;
-  //   this.postProductRequest.ProductID = productID;
-  //   this.postProductRequest.Thumb = thumb;
-  //   this.postProductRequest.Description = description;
-  //   this.postProductRequest.Avatar = avatar;
-  //   this.postProductRequest.Specification = specification;
-  //   this.postProductRequest.Content = content;
-  //   this.postProductRequest.Warranty = warranty;
-  //   this.postProductRequest.Price = price;
-  //   this.postProductRequest.OldPrice = oldPrice;
-  //   this.postProductRequest.Quantity = quantity;
-  //   this.postProductRequest.ImageList = imageList;
-  //   this.postProductRequest.Position = position;
-  //   this.postProductRequest.CreateTime = new Date();
-  //   this.postProductRequest.CreateBy = window.localStorage.getItem('Username');
-  //   this.postProductRequest.Status = status;
-  //   this.postProductRequest.ProductCategoryID = productCategoryID;
-  //   let imageFormData:any = new FormData();
-  //   if (this.uploadedImage !== undefined ) {
-  //     imageFormData.append('this.postProductRequest.Avatar', this.uploadedImage, this.uploadedImage?.name);
-  //   }
-  //   console.log("formdata",imageFormData);
-  //   const updateProductforkJoin = this.productService.updateProduct(this.productID, this.postProductRequest);
-  //   const upLoadImageforkJoin = this.productService.UploadFile(this.productID,imageFormData);
-
-  //   if (this.productID && this.productID !== "") {
-  //     //Update
-  //     if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
-  //       forkJoin([updateProductforkJoin,upLoadImageforkJoin]).subscribe({
-  //         next: (data => {
-  //           this.router.navigate(['/product']);
-  //         }),
-  //         error: ((error: ErrorResponse) => {
-  //           alert(error.Error);
-  //         })
-  //       });
-  //     }
-  //     else {
-  //       alert('error');
-  //     }
-
-  //   }
-  //   else {
-  //     //Add new
-  //     if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
-  //       this.productService.addProduct(this.postProductRequest).subscribe({
-  //         next: (data => {
-  //           // this.router.navigate(['/product']);
-  //           this.add();
-  //         }),
-  //         error: ((error: ErrorResponse) => {
-  //           alert(error.Error);
-  //         })
-  //       });
-  //     }
-  //     else {
-  //       alert('error');
-  //     }
-  //   }
-  //   }
-
     async add() {
-      // await this.addItem();
       await this.addImg();
     }
 
-    // addItem() {
-    //   this.productService.addProduct(this.postProductRequest).subscribe({
-    //     next: (data => {
-    //       // this.router.navigate(['/product']);
-    //     }),
-    //     error: ((error: ErrorResponse) => {
-    //       alert(error.Error);
-    //     })
-    //   });
-    // }
+
 
     addImg() {
 
@@ -271,6 +278,110 @@ export class ProductDetailComponent implements OnInit{
         error: ((error: ErrorResponse) => {
           alert(error.Error);
         })
+      });
+    }
+
+    percent(price:any, oldPrice: any, isSellToday: boolean){
+      if (isSellToday) {
+        return 50
+      } else {
+        return Math.round((((oldPrice - price)/oldPrice)*100)*10^2)/10^2
+      }
+    }
+
+    countDown() {
+      this.timeMax = ((new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime() - (new Date(new Date().setHours(this.sellTodayStartTime.hours, this.sellTodayStartTime.minutes, this.sellTodayStartTime.seconds, this.sellTodayStartTime.milliSeconds))).getTime())/1000;
+
+      let time = ((new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime() - (new Date()).getTime())/1000;
+      this.time = time;
+      setTimeout(() => {
+        window.location.reload();
+      }, time*1000);
+      this.interval = setInterval(() => {
+        this.time--;
+        let hours = Math.floor(this.time / 3600);
+        let minutes = Math.floor(this.time % 3600 / 60);
+        let seconds = Math.floor(this.time % 3600 % 60);
+        this.countTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0')
+        if (this.time <= 0) {
+          clearInterval(this.interval);
+          this.countTime = "00:00:00"
+          this.showSellToday = false;
+
+        }
+      }, 1000);
+    }
+
+    saleOff(price:any, oldPrice: any, isSellToday: boolean){
+      if (
+        (((new Date()).getTime() < (new Date(new Date().setHours(this.sellTodayStartTime.hours, this.sellTodayStartTime.minutes, this.sellTodayStartTime.seconds, this.sellTodayStartTime.milliSeconds))).getTime()) ||
+        ((new Date()).getTime() > (new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime())) &&
+        isSellToday)
+        {
+          return [Math.round(price * (50/100)), price, 50]
+        }
+
+      return [price, oldPrice, Math.round((((oldPrice - price)/oldPrice)*100)*10^2)/10^2]
+
+    }
+
+    loadAllComment(){
+      if (this.productID && this.productID !== "") {
+        this.productService.getProductComment(this.productID).subscribe((productsCommentData: any) => {
+          this.productComment = productsCommentData;
+        });
+      }
+
+    }
+
+    splitName(name: any){
+      return name.split("", 1)[0];
+    }
+
+    sendComment() {
+
+      if (!this.clientID || this.clientID == "" || this.clientID == "0") {
+        this.toastr.error('Vui lòng đăng nhập', '', {
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right',
+          progressBar: true,
+        });
+        return
+      }
+
+      var Comment = this.form.get('comment')?.value;
+      if (Comment.trim() == "") {
+        this.toastr.error('Để lại ý kiến của bạn', '', {
+          timeOut: 5000,
+          positionClass: 'toast-bottom-right',
+          progressBar: true,
+        });
+        this.form.controls['comment'].setValue('');
+        return
+      }
+      this.postProductComment.ProductCommentID = 0;
+      this.postProductComment.ClientID = this.clientID;
+      this.postProductComment.ProductID = this.productID;
+      this.postProductComment.Content = Comment;
+      this.postProductComment.Rate = this.rate;
+
+      this.productService.postProductComment(this.postProductComment).subscribe({
+        next: (data => {
+          this.form.controls['comment'].setValue('');
+          this.showAlert()
+          this.loadAllComment()
+        }),
+        error: ((error: ErrorResponse) => {
+          alert(error.Error);
+        })
+      })
+    }
+
+    showAlert() {
+      this.toastr.success('Cám ơn bạn đã góp ý về sản phẩm!', '', {
+        timeOut: 5000,
+        positionClass: 'toast-bottom-right',
+        progressBar: true,
       });
     }
 

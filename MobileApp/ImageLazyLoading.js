@@ -15,7 +15,7 @@ const ImageLazyLoading = () => {
     getData();
   }, []);
   const getData = () => {
-    fetch('https://jsonplaceholder.typicode.com/photos')
+    fetch('http://localhost:7265/api/product/get')
       .then(res => res.json())
       .then(res => {
         

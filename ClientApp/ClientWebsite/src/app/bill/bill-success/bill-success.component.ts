@@ -50,6 +50,7 @@ export class BillSuccessComponent implements OnInit {
   jsonData: any[] = [];
   disabled = true;
   userID: any;
+  bonus = 0
   orderRequest: any = {
     OrderID: 0,
     FullName: "",
@@ -238,7 +239,8 @@ export class BillSuccessComponent implements OnInit {
     return needPay;
   }
   needPayAll(){
-    let needPayAll = this.needPay() + 25000;
+    this.bonus = Number(localStorage.getItem('bonus'));
+    let needPayAll = this.needPay() + 25000 - this.bonus;
 
     return needPayAll;
   }
@@ -253,6 +255,11 @@ export class BillSuccessComponent implements OnInit {
       }
       this.clientService.getWithEmail(Username).subscribe((data) => {
         this.userID = data.clientID;
+
+        let point = Number(this.needPayAll()) * 0.01;
+        this.bonus = Number(localStorage.getItem('bonus'));
+
+        this.clientService.updateClientPoint(this.userID, point, this.bonus).subscribe((data) => {})
 
         this.orderRequest.ClientID = this.userID;
         let client: any;
@@ -305,6 +312,7 @@ export class BillSuccessComponent implements OnInit {
   }
 
   sendEmail(){
+    this.bonus = Number(localStorage.getItem('bonus'));
     let needPay = 0;
     let quantity = 0;
     for (const item of this.productData) {
@@ -333,7 +341,7 @@ export class BillSuccessComponent implements OnInit {
     })
     this.emailRequest.Date = this.pipe.transform(new Date(), 'dd/MM/yyyy');
     this.emailRequest.Products = this.listProductsBuy
-    this.emailRequest.Total = new Intl.NumberFormat('vi-vn').format(needPay + 25000) + " VND";
+    this.emailRequest.Total = new Intl.NumberFormat('vi-vn').format(needPay + 25000 - this.bonus) + " VND";
 
     this.cartService.sendEmail(this.emailRequest).subscribe();
 

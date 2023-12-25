@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { ErrorResponse } from '../responses/error-response';
 import { CartService } from '../services/cart.service';
+import { sellTodayEndTime, sellTodayStartTime } from '../responses/sell-today-time';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,33 @@ export class HomeComponent implements OnInit {
     Avatar: "",
   };
   products: any[] = [];
+  productsWithCreateTime: any[] = [];
+  productsWithQuantity: any[] = [];
+
+  productSellToday: any[] = [];
+
+  // sellTodayStartTime = {
+  //   hours: 7,
+  //   minutes: 30,
+  //   seconds: 0,
+  //   milliSeconds: 0
+  // };
+  sellTodayStartTime = sellTodayStartTime;
+  sellTodayEndTime = sellTodayEndTime;
+
+  // sellTodayEndTime = {
+  //   hours: 16,
+  //   minutes: 30,
+  //   seconds: 0,
+  //   milliSeconds: 0
+  // };
+  time = 0;
+  timeMax = 0;
+  countTime = "00:00:00"
+  showSellToday = false;
+
+  interval: any;
+
 
   public productsCart : any = [];
   productList: any = {};
@@ -49,6 +77,20 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute, private cartService : CartService) { }
   ngOnInit(): void {
+    this.productService.getProductSellToday().subscribe((data: any) => {
+      this.productSellToday = data;
+      console.log(this.productSellToday)
+    });
+    if (((new Date()).getTime() > (new Date(new Date().setHours(this.sellTodayStartTime.hours, this.sellTodayStartTime.minutes, this.sellTodayStartTime.seconds, this.sellTodayStartTime.milliSeconds))).getTime()) &&
+        ((new Date()).getTime() < (new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime()) )
+        {
+
+          this.showSellToday = true;
+          this.countDown()
+        }
+
+
+
     this.getImageFromService();
     this.activeRoute.queryParams.subscribe(params => {
       this.keywords = params.title;
@@ -57,6 +99,12 @@ export class HomeComponent implements OnInit {
         productsObservable.subscribe((productsData: any[]) => {
           this.products = productsData;
         });
+        this.productService.getAllWithCreateTime().subscribe((data: any) => {
+          this.productsWithCreateTime = data
+        })
+        this.productService.getAllWithQuantity().subscribe((data: any) => {
+          this.productsWithQuantity = data
+        })
       }
       else {
         const productsObservable = this.productService.searchProducts(this.keywords);
@@ -151,6 +199,46 @@ export class HomeComponent implements OnInit {
   percent(price:any, oldPrice: any){
     // (price/oldPrice)*100
     return Math.round((((oldPrice - price)/oldPrice)*100)*10^2)/10^2
+  }
+
+
+  countDown() {
+    this.timeMax = ((new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime() - (new Date(new Date().setHours(this.sellTodayStartTime.hours, this.sellTodayStartTime.minutes, this.sellTodayStartTime.seconds, this.sellTodayStartTime.milliSeconds))).getTime())/1000;;
+
+    // console.log((3662 % 3600 % 60))
+    // console.log(((new Date('2023-09-18T16:00')).getTime() - (new Date('2023-09-18T06:06:40')).getTime())/1000);
+    // console.log(((new Date(new Date().setHours(16,0,0,0))).getTime() - (new Date()).getTime())/1000);
+
+    let time = ((new Date(new Date().setHours(this.sellTodayEndTime.hours, this.sellTodayEndTime.minutes, this.sellTodayEndTime.seconds, this.sellTodayEndTime.milliSeconds))).getTime() - (new Date()).getTime())/1000;
+    this.time = time;
+    setTimeout(() => {
+      window.location.reload();
+    }, time*1000);
+    // let time = 120
+    this.interval = setInterval(() => {
+      this.time--;
+      let hours = Math.floor(this.time / 3600);
+      let minutes = Math.floor(this.time % 3600 / 60);
+      let seconds = Math.floor(this.time % 3600 % 60);
+      // console.log(hours + " " + minutes + " " + seconds);
+      this.countTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0')
+      // this.countTime = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0')
+      if (this.time <= 0) {
+        clearInterval(this.interval);
+        this.countTime = "00:00:00"
+        this.showSellToday = false;
+        // this.showTime = false;
+        // this.showAuthenticating = false;
+        // this.disabledResendAuthenticCode = true;
+        // this.randomAuthenticCode = "";
+        // window.location.reload();
+      }
+    }, 1000);
+  }
+
+  discount(price: any){
+
+    return Math.round(price * (50/100))
   }
 
 }

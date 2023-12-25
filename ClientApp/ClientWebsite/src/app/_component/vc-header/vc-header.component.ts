@@ -16,6 +16,7 @@ export class VcHeaderComponent implements OnInit {
   /**
    * Form
    */
+  products: any[] = [];
   keywords = '';
   searchResults: any[] = [];
   length = 0;
@@ -44,6 +45,22 @@ export class VcHeaderComponent implements OnInit {
   }
 
    ngOnInit(): void {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.keywords = params.username;
+
+      if (!this.keywords) {
+        const productsObservable = this.productService.getProducts();
+        productsObservable.subscribe((productsData: any[]) => {
+          this.products = productsData;
+        });
+      }
+      else {
+        const productsObservable = this.productService.searchProducts(this.keywords);
+        productsObservable.subscribe((productsData: any[]) => {
+          this.products = productsData;
+        });
+      }
+    });
     this.loginUsername = this.tokenService.getSession()?.username;
     if(this.loginUsername!= null){
       this.isLogin = false;

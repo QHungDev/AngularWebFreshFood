@@ -33,6 +33,7 @@
                   <th class="center">ID</th>
                   <th class="center">Title</th>
                   <th>Description</th>
+                  <th class="center">Sell Today</th>
                   <th class="center">Price</th>
                   <th class="center">CreateTime</th>
                   <th class="center">Status</th>
@@ -53,6 +54,12 @@
                   <td class="center">{{product.productID}}</td>
                   <td class="center">{{product.title}}</td>
                   <td>{{product.description}}</td>
+                  <td class="center">
+                    <label class="switchToggle">
+                      <input (click)="changeSellToday(product.productID)" type="checkbox" [checked]="product.isSellToday">
+                      <span class="slider aqua round"></span>
+                    </label>
+                  </td>
                   <td class="center">{{product.price|currency:'VND':''}} VND</td>
                   <td class="center">{{product.createTime  | date: 'dd/MM/yyyy'}}</td>
                   <td class="center">

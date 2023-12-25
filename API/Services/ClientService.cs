@@ -139,6 +139,27 @@ namespace API.Services
             }
         }
 
+        public async Task<Client> UpdatePoint(int id, double point, double bonus)
+        {
+            var existItem = await _context.Clients.Where(x => x.ClientID == id).FirstOrDefaultAsync();
+
+            if (existItem == null || existItem.Email == "basicclient")
+                return null;
+
+            existItem.Point = existItem.Point + point - bonus;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return existItem;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
         public async Task<Client> ForgotPassword(ClientUpdate item)
         {
             var existItem = await _context.Clients.Where(x => x.Email == item.Email).FirstOrDefaultAsync();

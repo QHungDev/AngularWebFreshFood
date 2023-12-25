@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body ">
+        <div class="table-scrollable">
+          <!-- Filter -->
+          <div class="row p-4">
+
+            <!-- <div class="col-md-12">
+              <div class="dataTables_filter mb-2">
+                <label class="w-100">
+                  <input type="search" class="form-control form-control-sm"
+                         placeholder="Search..." aria-controls="example4"
+                         [(ngModel)]="keywords"
+                         (keyup.enter)="searchProduct($event)">
+                </label>
+              </div>
+            </div> -->
+          </div>
+
+          <!-- Content -->
+          <table class="table table-hover table-checkable order-column full-width">
+            <thead>
+              <tr>
+                <th class="center">STT</th>
+                <th class="center">Avatar</th>
+                <th class="center">Title</th>
+                <th class="center">Sale Price</th>
+                <th class="center">Quantity Available</th>
+                <th class="center">Supplier</th>
+                <th class="center">Quantity Supply</th>
+                <th class="center">Unit Price</th>
+                <th class="center">Total</th>
+                <th class="center">Create By</th>
+                <th class="center">Create Time</th>
+                <th class="center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd gradeX" *ngFor="let requestSupplyData of requestSupplyListData; let i = index">
+                <td class="center">{{(i+1).toString().padStart(2, "0")}}</td>
+                <td class="patient-img center">
+                  <img src="{{requestSupplyData.avatar}}" alt="">
+                </td>
+                <td class="center">{{requestSupplyData.title}}</td>
+                <td class="center">{{requestSupplyData.price|currency:'VND':''}} VND</td>
+                <td [class]='requestSupplyData.quantity <= 20 ? "center text-danger" : requestSupplyData.quantity <= 30 ? "center text-primary" : "center text-success"'>{{requestSupplyData.quantity}}</td>
+                <td class="center">{{requestSupplyData.supplier}}</td>
+                <td class="center">{{requestSupplyData.quantityRequestSupply}}</td>
+                <td class="center">{{requestSupplyData.unitPrice|currency:'VND':''}} VND</td>
+                <td style="font-weight: bold; color: brown;" class="center">{{requestSupplyData.total|currency:'VND':''}} VND</td>
+                <td class="center">{{requestSupplyData.createBy}}</td>
+                <td class="center">{{requestSupplyData.createTime | date: 'dd/MM/yyyy'}}</td>
+                <td class="center">
+                  <button
+                     (click)="approve(requestSupplyData.id)"
+                     class="btn btn-success btn-xs">
+                    <i class="fa fa-check"></i> Duyệt đơn
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Pagging -->
+          <div class="pagging text-center">
+            <div>
+              <div class="dataTables_info" id="example4_info" role="status" aria-live="polite">Showing 1 to 10 of 18 entries</div>
+            </div>
+            <div>
+              <div class="dataTables_paginate paging_simple_numbers" id="example4_paginate">
+                <ul class="pagination justify-content-center">
+                  <li class="paginate_button page-item previous disabled" id="example4_previous"><a href="#" aria-controls="example4" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                  <li class="paginate_button page-item active"><a href="#" aria-controls="example4" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                  <li class="paginate_button page-item "><a href="#" aria-controls="example4" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                  <li class="paginate_button page-item next" id="example4_next"><a href="#" aria-controls="example4" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

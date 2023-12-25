@@ -35,9 +35,16 @@ namespace Models
         public virtual DbSet<ProductComment> ProductComments { get; set; }
         public virtual DbSet<ProductMainCategory> ProductMainCategories { get; set; }
         public virtual DbSet<ProductVote> ProductVotes { get; set; }
+        public virtual DbSet<RequestSupply> RequestSupplies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<RequestSupply>(entity =>
+            {
+                entity.HasKey(e => e.ID)
+                    .HasName("PK_RequestSupply");
+            });
+
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.HasKey(e => e.Username)

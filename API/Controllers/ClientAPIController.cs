@@ -78,6 +78,22 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpPut("UpdatePoint/{id}/{point}/{bonus}")]
+        public async Task<IActionResult> UpdatePoint(int id, double point, double bonus)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.UpdatePoint(id, point, bonus);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
+        }
+
         [HttpPut("forgotPassword")]
         public async Task<IActionResult> ForgotPassword(ClientUpdate item)
         {

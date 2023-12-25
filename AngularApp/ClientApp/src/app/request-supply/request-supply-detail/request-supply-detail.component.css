@@ -1,0 +1,16 @@
+.input-product:read-only {
+  background-color: #7493b278;
+  opacity: 1;
+  font-weight: bold;
+  color: #000;
+  cursor: not-allowed;
+}
+
+.input-amount:read-only {
+  background-color: #b27e7478;
+  opacity: 1;
+  font-weight: bold;
+  color: red;
+  cursor: not-allowed;
+  text-align: center;
+}

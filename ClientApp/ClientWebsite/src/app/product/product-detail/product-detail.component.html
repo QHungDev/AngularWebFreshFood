@@ -1,140 +1,230 @@
 <form [formGroup]="form" (ngSubmit)="addtoCart(postProductRequest)" novalidate class="form-horizontal">
-<div class="detail container">
+  <div class="detail container">
     <div class="row entry-summary">
-        <div class="col-5">
-            <div class="img-detail">
-                <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails img-box ">
-                    <a href="">
-                        <img width="350" height="350" src="{{postProductRequest.avatar}}" />
-                    </a>
-                </div>
+      <div class="col-5">
+        <div class="img-detail">
+          <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails img-box ">
+            <a href="">
+              <img width="350" height="350" src="{{postProductRequest.avatar}}" />
+            </a>
+          </div>
 
-                <ul class="thumbnails">
-                    <li>
-                        <!-- <a href=''>
+          <ul class="thumbnails">
+            <li>
+              <!-- <a href=''>
                             <img [src]="showImg(postProductRequest.thumb)" alt="" />
                         </a> -->
-                    </li>
-                </ul>
-            </div>
+            </li>
+          </ul>
         </div>
-        <div class="col-7">
-            <div class="summary">
-                <div class="number-view-box">
-                    <span style="font-size: 14px" class="view-box">
-                        <i class="fa fa-eye-slash"></i>
-                        lượt view
-                    </span>
-                    <span class="view-box">
-                        <i class="fa fa-thumbs-o-up"></i>
-                        2 đánh giá
-                    </span>
-                    <span class="view-box">
-                        đã bán
-                    </span>
-                </div>
-                <div class="the-title">
-                    <h2 [ngModel]="postProductRequest.title"
-                        formControlName="title">
-                        {{postProductRequest.title}}
-                    </h2>
-                </div>
-                <div class="price-box">
-                    <label class="tittle">Giá: </label>
-                    <span style="text-decoration: line-through;" class="product-old-price">{{postProductRequest.oldPrice|currency:'VND':''}}&nbsp;₫</span>
-                    <strong class="price-order">{{postProductRequest.price|currency:'VND':''}}&nbsp;₫</strong>
-                </div>
-                <div class="transport-box">
-                    <label class="tittle">Vận Chuyển: </label>
-                    <span style="font-size: 14px" class="transport-truck">
-                        <img src="../../assets/img/logo/truck.png" />
-                        Miễn Phí Vận Chuyển
-                    </span>
-                    <div class="ship-to">
-                        <i class="fa fa-truck"></i>
-                        Vận Chuyển Tới
-                        <span>
-                            Thủ Dầu Một, Bình Dương
-                            <i class="fa fa-angle-down"></i>
-                        </span>
-                    </div>
-                    <div class="ship-price">
-                        Phí Vận Chuyển
-                        <span>
-                            20.000 đ - 25.000 đ
-                            <i class="fa fa-angle-down"></i>
-                        </span>
-                    </div>
-                </div>
+      </div>
+      <div class="col-7">
+        <div class="summary">
+          <div class="number-view-box">
+            <span style="font-size: 14px" class="view-box">
+              <i class="fa fa-eye-slash"></i>
+              52 lượt view
+            </span>
+            <span class="view-box">
+              <i class="fa fa-thumbs-o-up"></i>
+              2 đánh giá
+            </span>
+            <span class="view-box">
+              17 đã bán
+            </span>
+          </div>
+          <div class="the-title">
+            <h2 [ngModel]="postProductRequest.title" formControlName="title">
+              {{postProductRequest.title}}
+            </h2>
+          </div>
+          <div class="price-box">
+            <label class="tittle">Giá: </label>
+            <span style="text-decoration: line-through;" class="product-old-price">{{saleOff(postProductRequest.price,
+              postProductRequest.oldPrice, postProductRequest.isSellToday)[1]|currency:'VND':''}}&nbsp;₫</span>
+            <strong class="price-order">{{saleOff(postProductRequest.price, postProductRequest.oldPrice,
+              postProductRequest.isSellToday)[0]|currency:'VND':''}}&nbsp;₫</strong>
+            <span class="sale">
+              -{{saleOff(postProductRequest.price, postProductRequest.oldPrice, postProductRequest.isSellToday)[2]}}%
+              <i *ngIf="postProductRequest.isSellToday && !showSellToday"
+                style="color: #e49f24; -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: rgb(241, 10, 10);"
+                class="fa fa-bolt"></i>
+            </span>
+          </div>
+          <div class="transport-box">
+            <label class="tittle">Vận Chuyển: </label>
+            <span style="font-size: 14px" class="transport-truck">
+              <img src="../../assets/img/logo/truck.png" />
+              Miễn Phí Vận Chuyển
+            </span>
+            <div class="ship-to">
+              <i class="fa fa-truck"></i>
+              Vận Chuyển Tới
+              <span>
+                Thủ Dầu Một, Bình Dương
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </div>
+            <div class="ship-price">
+              Phí Vận Chuyển
+              <span>
+                20.000 đ - 25.000 đ
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </div>
+          </div>
 
-                    <div class="number-box">
-                        <label class="mini-tittle">Số lượng: </label>
-                        <div class="group-quantity">
-                            <a OnClick="LinkButton_Down_Click" (click)="subtraction()" class="btn-down">
-                                <i class="fa fa-minus"></i>
-                            </a>
-                            <input readonly id="input_Quantity" type="text" value="{{quantityProduct}}" />
-                            <a ID="LinkButton_Up" OnClick="LinkButton_Up_Click" (click)="addition()" class="btn-up">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        </div>
-                        <span class="view-box">
-                            Còn {{postProductRequest.quantity}} sản phẩm
-                        </span>
-                    </div>
-                    <div class="discount-box">
-                        <label class="tittle">Mã Giảm Giá: </label>
-                        <span class="discount-code">
-                            Giảm 5k
-                        </span>
-                        <span class="discount-code">
-                            Giảm 2%
-                        </span>
-                    </div>
-                    <div >
-                        <button type="submit" class="btn btn-success mt-4">
-                          <i class="fa fa-cart-plus mr-2"></i>
-                          Thêm vào giỏ hàng
-                        </button>
-                        <!-- <button type="submit" class="btn btn-outline-success btn-text btn-add-cart"><i
+          <div class="number-box">
+            <label class="mini-tittle">Số lượng: </label>
+            <div class="group-quantity">
+              <a OnClick="LinkButton_Down_Click" (click)="subtraction()" class="btn-down">
+                <i class="fa fa-minus"></i>
+              </a>
+              <input readonly id="input_Quantity" type="text" value="{{quantityProduct}}" />
+              <a ID="LinkButton_Up" OnClick="LinkButton_Up_Click" (click)="addition()" class="btn-up">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+            <span class="view-box">
+              Còn {{postProductRequest.quantity}} sản phẩm
+            </span>
+          </div>
+          <div class="discount-box">
+            <label class="tittle">Mã Giảm Giá: </label>
+            <span class="discount-code">
+              Giảm 5k
+            </span>
+            <span class="discount-code">
+              Giảm 2%
+            </span>
+          </div>
+          <div>
+            <div class="float-left" style="width: 35%;">
+              <button type="submit" class="btn btn-success mt-4">
+                <i class="fa fa-cart-plus mr-2"></i>
+                Thêm vào giỏ hàng
+              </button>
+            </div>
+            <div *ngIf="showSellToday" class="float-right" style="width: 65%;">
+              <div style="line-height: 42px; width: 50%;" class="pt-2 mt-4">
+                <progressbar style="background-color: #ddb0b0; position: relative;" [max]="timeMax" [value]="time"
+                  type="danger" [striped]="true" [animate]="true">
+                  <div class="countTime">
+                    <span class="countTimeText">
+                      {{countTime}}
+                    </span>
+                    <i style="color: #0A4FA8; font-weight: bold;" class="fa fa-sun-o fa-spin"></i>
+                  </div>
+                </progressbar>
+              </div>
+            </div>
+            <!-- <button type="submit" class="btn btn-outline-success btn-text btn-add-cart"><i
                                 class="fa fa-cart-plus mr-2"></i>
                             <label>Thêm vào giỏ hàng</label> <i class="icon-shopping-cart"></i>
 
                         </button> -->
-                    </div>
-                    <div class="back-box">
-                        <span class="view-box">
-                            <i class="fa fa-repeat"></i>
-                            <span class="view-box">Đổi, trả sản phẩm trong 24 giờ</span>
-                            <a href="#">(Xem chi tiết)</a>
-                        </span>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="back-box">
+            <span class="view-box">
+              <i class="fa fa-repeat"></i>
+              <span class="view-box">Đổi, trả sản phẩm trong 24 giờ</span>
+              <a href="#">(Xem chi tiết)</a>
+            </span>
+          </div>
         </div>
-
-        <div class="description-box">
-            <div class="tab-description-review">
-                <ul>
-                    <li onclick="changeContent(this, 'p1')" class="li active">
-                        <span>Sản Phẩm</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-            <div class="description">
-                <div id="p1" class="input-login-register pb-3">
-                    <div class="the-title">
-                        <h4>
-                            Mô tả
-                        </h4>
-                        <img src="../../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
-                    </div>
-                    <p innerHTML="{{postProductRequest.content}}">
-
-                    </p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</form>
+    <div class="description-box">
+      <div class="tab-description-review">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+              aria-selected="true">Sản Phẩm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+              aria-selected="false">Bình Luận</a>
+          </li>
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="the-title">
+              <h4>
+                {{postProductRequest.title}}
+              </h4>
+            </div>
+            <p innerHTML="{{postProductRequest.content}}">
+            </p>
+          </div>
+
+          <div style="padding-bottom: 1px;" class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="the-title mb-0">
+              <h4>
+                Bình Luận
+              </h4>
+            </div>
+            <div class="cmt-box">
+              <div style="font-size: 22px; color: #e49f24; padding-left: 5px;">
+                <rating formControlName="ratingProduct" [(ngModel)]="rate" [max]="maxRate" [readonly]="false" (onHover)="hoveringOver($event)" (onLeave)="resetStar()"
+                  [titles]="['Tệ','Tạm Được','Bình Thường','Tốt','Rất Tốt']" ></rating>
+                <span style="font-size: 14px; font-weight: 700;" class="label"
+                  [ngClass]="{'text-danger': overStar==1,'text-secondary': overStar==2,'text-primary': overStar==3,'text-info': overStar==4,'text-success': overStar==5}"
+                  [ngStyle]="{display: overStar ? 'inline' : 'none'}"> {{titleRating}}</span>
+              </div>
+              <!--<div class="discount-box">
+                <div class="container">
+                  <div class="feedback">
+                     <div class="rating">
+                      <input type="radio" name="rating" id="rating-5">
+                      <label for="rating-5"></label>
+                      <input type="radio" name="rating" id="rating-4">
+                      <label for="rating-4"></label>
+                      <input type="radio" name="rating" id="rating-3">
+                      <label for="rating-3"></label>
+                      <input type="radio" name="rating" id="rating-2">
+                      <label for="rating-2"></label>
+                      <input type="radio" name="rating" id="rating-1">
+                      <label for="rating-1"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+              <div class="form-group">
+                <textarea formControlName="comment" style="border: 1px solid #17a2b8;" class="form-control" placeholder="Để lại đánh giá của bạn về sản phẩm này..."
+                  rows="3"></textarea>
+                <button (click)="sendComment()" type="button" title="Gửi bình luận" class="btn btn-outline-info pull-right">
+                  <i class="fa fa-paper-plane"></i>
+                </button>
+              </div>
+              <ul class="cmt-list">
+
+                <li style="min-width: 51%;" class="cmt ml-0" *ngFor="let itemComment of productComment; let i = index">
+                  <div style="font-size: 16px; color:rgba(228, 158, 36, 0.623); padding-left: 2px;">
+                    <span *ngFor="let item of [].constructor(itemComment.rate); let i = index">★</span>
+                  </div>
+                  <span class="pull-left">{{splitName(itemComment.clientName)}}</span>
+
+                  <div class="cmt-body">
+                    <span class="text-muted pull-right">
+                      <small class="text-muted">{{itemComment.createTime | date: 'dd/MM/yyyy'}}</small>
+                    </span>
+                    <strong style="font-family: system-ui,  'Open Sans', 'Helvetica Neue', sans-serif; text-transform: uppercase;">
+                      {{itemComment.clientName}}
+                    </strong>
+                    <p style="margin-left: 45px;">
+                      {{itemComment.content}}
+                    </p>
+                  </div>
+                </li>
+                <li>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

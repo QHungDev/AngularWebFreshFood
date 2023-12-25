@@ -83,6 +83,115 @@
 		<div class="col-2"></div>
 	</div>
 
+  <div *ngIf="showSellToday" class="product container" style="background-color: #3e88461c;">
+		<div class="the-title" style="padding-top: 40px; margin-bottom: 25px;">
+			<h2>
+				Mặt hàng bán trong ngày
+			</h2>
+      <span>
+        Sẽ kết thúc sau: <i style="font-size: 16px; font-weight: bold; color: #ff003a;">{{countTime}}</i> <i style="color: #e49f24;" class="ml-1 fa fa-sun-o fa-spin"></i>
+      <br>
+      </span>
+			<img class="img-fluid" src="../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+		</div>
+		<div class="product-item" >
+      <ul>
+        <div class="row">
+          <a>
+            <li *ngFor="let product of productSellToday; let i = index" class="item">
+            <a href="#"(click)="detailProduct($event, product)" class="product-image">
+              <img class="img-fluid"  src="{{product.avatar}}" />
+            </a>
+            <div class="info-box">
+              <p class="product-name mb-1">
+                <a href="#" (click)="detailProduct($event, product)">{{product.title}}</a>
+              </p>
+              <div class="price-box">
+                <span style="line-height: 42px;">
+                  <!-- e397975c -->
+                  <progressbar style="background-color: #ddb0b0; position: relative;" [max]="timeMax" [value]="time" type="danger" [striped]="true" [animate]="true">
+                    <div class="countTimeText">{{countTime}}</div>
+                  </progressbar>
+                </span>
+                <!-- <span class="old-price">
+                  {{product.oldPrice|currency:'VND':''}}&nbsp;₫
+                </span> -->
+                <span class="price">
+                  {{product.price|currency:'VND':''}}&nbsp;₫
+                </span>
+                <!-- <span class="sale">{{percent(product.price,product.oldPrice)}}%</span> -->
+                <a (click)="detailProduct($event, product)" class="btn btn-success">
+                  <i class="fa fa-shopping-cart"></i>
+                  Thêm vào giỏ
+                </a>
+
+              </div>
+            </div>
+            </li>
+          </a>
+          <div class="col-12">
+            <span style="font-weight: 500; font-style: italic; color: #00000073;">
+              Các mặt hàng trên có thể sẽ ngừng cung cấp hoặc được giảm giá sau {{sellTodayEndTime.hours}}h{{sellTodayEndTime.minutes == 0 ? "" : sellTodayEndTime.minutes}} hằng ngày.
+            </span>
+          </div>
+        </div>
+      </ul>
+    </div>
+	</div>
+
+  <div *ngIf="!showSellToday" class="product container" style="background-color: #3e88461c;">
+		<div class="the-title" style="padding-top: 40px; margin-bottom: 25px;">
+			<h2>
+				Mặt hàng giảm giá cuối ngày
+			</h2>
+      <!-- <span>
+        Sẽ kết thúc sau: <i style="font-size: 16px; font-weight: bold; color: #ff003a;">{{countTime}}</i> <i style="color: #e49f24;" class="ml-1 fa fa-sun-o fa-spin"></i>
+      <br>
+      </span> -->
+			<img class="img-fluid" src="../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+		</div>
+		<div class="product-item" >
+      <ul>
+        <div class="row">
+          <a>
+            <li *ngFor="let product of productSellToday; let i = index" class="item">
+            <a href="#"(click)="detailProduct($event, product)" class="product-image">
+              <img class="img-fluid"  src="{{product.avatar}}" />
+            </a>
+            <div class="info-box">
+              <p class="product-name mb-1">
+                <a href="#" (click)="detailProduct($event, product)">{{product.title}}</a>
+              </p>
+              <div class="price-box">
+                <!-- <span style="line-height: 42px;">
+                  <progressbar style="background-color: #ddb0b0; position: relative;" [max]="timeMax" [value]="time" type="danger" [striped]="true" [animate]="true">
+                    <div class="countTimeText">{{countTime}}</div>
+                  </progressbar>
+                </span> -->
+                <span class="old-price">
+                  {{product.price|currency:'VND':''}}&nbsp;₫
+                </span>
+                <span class="price">
+                  {{discount(product.price)|currency:'VND':''}}&nbsp;₫
+                </span>
+                <span class="sale">
+                  -50%
+                  <i style="color: #e49f24; -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: rgb(241, 10, 10);" class="fa fa-bolt"></i>
+                </span>
+                <a (click)="detailProduct($event, product)" class="btn btn-success">
+                  <i class="fa fa-shopping-cart"></i>
+                  Thêm vào giỏ
+                </a>
+
+              </div>
+            </div>
+            </li>
+          </a>
+        </div>
+      </ul>
+    </div>
+	</div>
+
 	<div class="product container">
 		<div class="the-title">
 			<h2>
@@ -94,7 +203,7 @@
 				<ul>
 					<div >
 					<a>
-						<li *ngFor="let product of products; let i = index" class="item">
+						<li *ngFor="let product of productsWithCreateTime; let i = index" class="item">
 						<a href="#"(click)="detailProduct($event, product)" class="product-image">
 							<img class="img-fluid"  src="{{product.avatar}}" />
 						</a>
@@ -109,7 +218,7 @@
 								<span class="price">
                   {{product.price|currency:'VND':''}}&nbsp;₫
 								</span>
-								<span class="sale">{{percent(product.price,product.oldPrice)}}%</span>
+								<span class="sale">-{{percent(product.price,product.oldPrice)}}%</span>
 								<a (click)="addition(product.productID)" class="btn btn-success">
 									<i class="fa fa-shopping-cart"></i>
 									Thêm vào giỏ
@@ -161,7 +270,7 @@
 				<ul>
 					<div >
 					<a>
-						<li *ngFor="let product of products; let i = index" class="item">
+						<li *ngFor="let product of productsWithQuantity; let i = index" class="item">
 						<a href="#"(click)="detailProduct($event, product)" class="product-image">
 							<img class="img-fluid"  src="{{product.avatar}}" />
 						</a>
@@ -176,7 +285,7 @@
 								<span class="price">
                   {{product.price|currency:'VND':''}}&nbsp;₫
 								</span>
-								<span class="sale">{{percent(product.price,product.oldPrice)}}%</span>
+								<span class="sale">-{{percent(product.price,product.oldPrice)}}%</span>
 								<a (click)="addition(product.productID)" class="btn btn-success">
 									<i class="fa fa-shopping-cart"></i>
 									Thêm vào giỏ

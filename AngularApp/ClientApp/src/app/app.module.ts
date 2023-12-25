@@ -32,6 +32,11 @@ import { ArticleDetailComponent } from './article/article-detail/article-detail.
 import { ArticleIndexComponent } from './article/article-index/article-index.component';
 import { ProductMainCategoryDetailComponent } from './product-main-category/product-main-category-detail/product-main-category-detail.component';
 import { ProductMainCategoryIndexComponent } from './product-main-category/product-main-category-index/product-main-category-index.component';
+import { RequestSupplyIndexComponent } from './request-supply/request-supply-index/request-supply-index.component';
+import { RequestSupplyDetailComponent } from './request-supply/request-supply-detail/request-supply-detail.component';
+import { OnlyNumberDirective } from './request-supply/request-supply-detail/only-number.directive';
+import { RequestSupplyApproveIndexComponent } from './request-supply-approve/request-supply-approve-index/request-supply-approve-index.component';
+import { ChatComponent } from './chat/chat.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +64,12 @@ import { ProductMainCategoryIndexComponent } from './product-main-category/produ
     ProductCategoryIndexComponent,
     ProductCategoryDetailComponent,
     ProductMainCategoryIndexComponent,
-    ProductMainCategoryDetailComponent
+    ProductMainCategoryDetailComponent,
+    RequestSupplyIndexComponent,
+    RequestSupplyDetailComponent,
+    RequestSupplyApproveIndexComponent,
+    OnlyNumberDirective,
+    ChatComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -135,12 +145,31 @@ import { ProductMainCategoryIndexComponent } from './product-main-category/produ
           { path: 'detail/:orderID', component: ArticleDetailComponent, canActivate: [AuthencationGuard] },
         ]
       },
+      {
+        path: 'request-supply', component: SiteLayoutComponent, children: [
+          { path: '', component: RequestSupplyIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index', component: RequestSupplyIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail', component: RequestSupplyDetailComponent, canActivate: [AuthencationGuard] },
+          { path: 'detail/:ID', component: ArticleDetailComponent, canActivate: [AuthencationGuard] },
+        ]
+      },
+      {
+        path: 'request-supply-approve', component: SiteLayoutComponent, children: [
+          { path: '', component: RequestSupplyApproveIndexComponent, canActivate: [AuthencationGuard] },
+          { path: 'index', component: RequestSupplyApproveIndexComponent, canActivate: [AuthencationGuard] },
+        ]
+      },
 
       //Security layout routers
       {
         path: '', component: SecurityLayoutComponent, children: [
           { path: 'login', component: LoginComponent },
           { path: 'forgot-password', component: ForgotPasswordComponent }
+        ]
+      },
+      {
+        path: '', component: SecurityLayoutComponent, children: [
+          { path: 'chat', component: ChatComponent },
         ]
       },
       {

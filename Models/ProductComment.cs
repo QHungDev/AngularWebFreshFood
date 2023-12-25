@@ -20,6 +20,7 @@ namespace Models
         public DateTime? CreateTime { get; set; }
         public int? ClientID { get; set; }
         public int? ProductID { get; set; }
+        public int? Rate { get; set; }
 
         [ForeignKey("ClientID")]
         [InverseProperty("ProductComments")]
@@ -27,5 +28,20 @@ namespace Models
         [ForeignKey("ProductID")]
         [InverseProperty("ProductComments")]
         public virtual Product Product { get; set; }
+    }
+
+    public partial class ProductCommentList
+    {
+        public int ProductCommentID { get; set; }
+        [Column(TypeName = "ntext")]
+        public string Content { get; set; }
+        public bool? Status { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? CreateTime { get; set; }
+        public int? ClientID { get; set; }
+        public string ClientName { get; set; }
+        public int? ProductID { get; set; }
+        public int? Rate { get; set; }
+        
     }
 }

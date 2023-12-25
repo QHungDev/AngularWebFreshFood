@@ -39,5 +39,8 @@ export class ClientService {
   sendEmailAuthenticCode(item: any): Observable<any> {
     return this.httpClient.post<any>(`${environment.apiUrl}/send-email/sendEmailAuthenticCode`, item);
   }
+  updateClientPoint(id: any, point: any, bonus: any): Observable<any> {
+    return this.httpClient.put<any>(`${environment.apiUrl}/client/UpdatePoint/${id}/${point}/${bonus}`, {});
+  }
 }
 

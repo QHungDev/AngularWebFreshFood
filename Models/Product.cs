@@ -43,6 +43,7 @@ namespace Models
         public string ImageList { get; set; }
         public int? Position { get; set; }
         public bool? Status { get; set; }
+        public bool? IsSellToday { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? CreateTime { get; set; }
         public int? ProductCategoryID { get; set; }

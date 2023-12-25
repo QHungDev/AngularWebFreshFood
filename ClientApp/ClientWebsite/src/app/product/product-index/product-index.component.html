@@ -1,0 +1,40 @@
+<div class="product container">
+  <div class="the-title">
+    <h2>
+      Kết quả tìm kiếm...
+    </h2>
+    <img class="img-fluid" src="../../assets/img/hinh-anh-trang-chu/logo-leaf.png" />
+  </div>
+  <div class="product-item">
+      <ul>
+        <div>
+        <a *ngFor="let product of products; let i = index">
+          <li class="item">
+          <a href="#"(click)="detailProduct($event, product)" class="product-image">
+            <img class="img-fluid"  src="{{product.avatar}}" />
+          </a>
+          <div class="info-box">
+            <p class="product-name mb-1">
+              <a href="#" (click)="detailProduct($event, product)">{{product.title}}</a>
+            </p>
+            <div class="price-box">
+              <span class="old-price">
+                {{product.oldPrice|currency:'VND':''}}&nbsp;₫
+                              </span>
+              <span class="price">
+                {{product.price|currency:'VND':''}}&nbsp;₫
+              </span>
+              <span class="sale">-{{percent(product.price,product.oldPrice)}}%</span>
+              <a (click)="addition(product.productID)" class="btn btn-success">
+                <i class="fa fa-shopping-cart"></i>
+                Thêm vào giỏ
+              </a>
+
+            </div>
+          </div>
+        </li>
+        </a>
+        </div>
+      </ul>
+    </div>
+</div>

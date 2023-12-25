@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { RatingModule } from 'ngx-bootstrap/rating';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -39,6 +41,11 @@ import { BillSuccessComponent } from './bill/bill-success/bill-success.component
 import { ClientInfoComponent } from './client-info/client-info.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthenticCodeComponent } from './authentic-code/authentic-code.component';
+import { OnlyNumberDirective } from './bill/bill-detail/only-number.directive';
+import { ContactComponent } from './contact/contact.component';
+import { ChatComponent } from './chat/chat.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +66,11 @@ import { AuthenticCodeComponent } from './authentic-code/authentic-code.componen
     BillSuccessComponent,
     ClientInfoComponent,
     ForgotPasswordComponent,
-    AuthenticCodeComponent
+    AuthenticCodeComponent,
+    OnlyNumberDirective,
+    ContactComponent,
+    ChatComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -74,6 +85,8 @@ import { AuthenticCodeComponent } from './authentic-code/authentic-code.componen
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     CarouselModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    RatingModule.forRoot(),
     // ToastNoAnimationModule.forRoot(),
     ToastrModule.forRoot(),
     RouterModule.forRoot([
@@ -111,6 +124,16 @@ import { AuthenticCodeComponent } from './authentic-code/authentic-code.componen
           { path: 'index/:orderID', component: NewsIndexComponent },
           { path: 'detail', component: NewsDetailComponent},
           { path: 'detail/:orderID', component: NewsDetailComponent}
+        ]
+      },
+      {
+        path: 'contact', component: SiteLayoutComponent, children: [
+          { path: '', component: ContactComponent, },
+        ]
+      },
+      {
+        path: 'chat', component: SiteLayoutComponent, children: [
+          { path: '', component: ChatComponent, },
         ]
       },
       {
@@ -157,7 +180,7 @@ import { AuthenticCodeComponent } from './authentic-code/authentic-code.componen
 
       //None layout routers
 
-    ])
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]

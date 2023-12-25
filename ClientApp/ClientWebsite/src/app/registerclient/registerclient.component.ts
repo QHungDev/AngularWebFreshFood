@@ -23,6 +23,7 @@ export class RegisterclientComponent implements OnInit {
     Status: true,
     CreateTime: new Date(),
     ClientCategoryID: "",
+    Point: 0
   };
   clientID = '';
   constructor( public formBuilder: FormBuilder, private http: HttpClient,
@@ -59,6 +60,7 @@ export class RegisterclientComponent implements OnInit {
       this.postRegisterClientRequest.Address = address;
       this.postRegisterClientRequest.CreateTime = new Date();
       this.postRegisterClientRequest.ClientCategoryID = 1;
+      this.postRegisterClientRequest.Point = 0;
       if (this.postRegisterClientRequest.ClientCategoryID && this.postRegisterClientRequest.ClientCategoryID !== "" && this.postRegisterClientRequest.ClientCategoryID !== undefined) {
         this.clientService.addClient(this.postRegisterClientRequest).subscribe({
           next: (data => {

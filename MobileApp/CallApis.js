@@ -5,7 +5,7 @@ import {allstyles} from './AllStyles';
 
 const CallApis = () => {
   const getData = () => {
-    getApiCall('https://jsonplaceholder.typicode.com/posts').then(res => {
+    getApiCall('http://localhost:7265/api/product/get').then(res => {
       console.log(res);
     });
   };
@@ -17,7 +17,7 @@ const CallApis = () => {
       image: 'https://i.pravatar.cc',
       category: 'electronic',
     };
-    postApiCall('https://fakestoreapi.com/products', data).then(res => {
+    postApiCall('http://localhost:7265/api/product/get', data).then(res => {
       console.log(res);
     });
   };

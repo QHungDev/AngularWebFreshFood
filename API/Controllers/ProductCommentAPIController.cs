@@ -16,21 +16,52 @@ namespace API.Controllers
         }
 
         [HttpPost("post")]
-        public IActionResult Post(ProductComment item)
+        public async Task<IActionResult> Post(ProductComment item)
         {
-            return Ok();
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Insert(item);
+
+            if (response == null)
+                return UnprocessableEntity();
+
+            return Ok(response);
         }
 
         [HttpGet("get")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var response = await _service.SelectAll();
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
         }
 
         [HttpGet("get/{id}")]
-        public IActionResult Get(int ID)
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok();
+            var response = await _service.FindItem(id);
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
+        }
+
+        [HttpGet("getAllByProduct/{id}")]
+        public async Task<IActionResult> GetAllByProduct(int id)
+        {
+            var response = await _service.GetAllByProduct(id);
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
         }
 
         [HttpPut("put")]

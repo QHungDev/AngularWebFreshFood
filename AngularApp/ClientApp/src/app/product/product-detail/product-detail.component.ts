@@ -42,7 +42,8 @@ export class ProductDetailComponent implements OnInit {
     CreateBy: "",
     CreateTime: new Date(),
     Status: true,
-    ProductCategoryID: ""
+    ProductCategoryID: "",
+    IsSellToday: false,
   };
   productID = '';
 
@@ -166,7 +167,6 @@ export class ProductDetailComponent implements OnInit {
 
       //Update
       if (this.postProductRequest.ProductCategoryID && this.postProductRequest.ProductCategoryID !== "" && this.postProductRequest.ProductCategoryID !== undefined) {
-
         if (!this.selectedFile) {
           forkJoin([updateProductforkJoin]).subscribe({
             next: (data => {

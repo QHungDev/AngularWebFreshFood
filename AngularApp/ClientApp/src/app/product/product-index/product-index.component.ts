@@ -31,7 +31,6 @@ export class ProductIndexComponent implements OnInit {
         const productsObservable = this.productService.getProducts();
         productsObservable.subscribe((productsData: any[]) => {
           this.products = productsData;
-          console.log("abc",this.products);
         });
       }
       else {
@@ -46,39 +45,39 @@ export class ProductIndexComponent implements OnInit {
   showImg(imgName: any) {
     //var str = "FileUploads/Product/Avatar/f0f34b03-9f95-4efe-946a-39eb0d467af2.jpg"
     var name = imgName.split('/')[4]
-    
+
     var imgUrl = 'https://localhost:7265/api/product/' + name;
-    
+
     return imgUrl;
   }
-  
+
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
-    
+
     reader.addEventListener("load", () => {
        this.imageToShow = reader.result;
     }, false);
- 
+
     if (image) {
        reader.readAsDataURL(image);
     }
    }
-   
- 
+
+
    getImageFromService() {
        this.isImageLoading = true;
-       
+
        this.productService.getImage(this.imgUrl).subscribe(data => {
          this.createImageFromBlob(data);
          this.isImageLoading = false;
-         
+
        }, error => {
          this.isImageLoading = false;
          console.log(error);
-         
+
        });
    }
-   
+
   searchProduct(e: Event): void {
     e.preventDefault();
     this.router.navigate(['/product/index'], { queryParams: { title: this.keywords } });
@@ -106,4 +105,18 @@ export class ProductIndexComponent implements OnInit {
       });
     }
   }
+
+  changeSellToday(id: any) {
+    this.productService.changeSellToday(id).subscribe(
+      {
+        next: (data => {
+          window.location.reload();
+        }),
+        error: ((error: ErrorResponse) => {
+          alert(error.Error);
+        })
+      }
+    )
+  }
+
 }
